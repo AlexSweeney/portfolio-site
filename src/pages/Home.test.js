@@ -1,80 +1,91 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
+import { fonts, colors } from './../styles/styles.js';
 import Home from './Home.jsx';
+import { hexToRGB } from './../utils/testUtils.js';
 
-let header;
-let subheading;
-let background;
+// ============================================ Vars ============================================ //
+let home;
+let heading;
+let subheading; 
 
+// ============================================ Setup / teardown ================================ //
 beforeEach(() => {
   render(<Home/>)
-  header = document.querySelector('.header');
-  subheading = document.querySelector('.sub-heaing');
-  background = document.querySelector('.background');
+  home = document.querySelector('.home');
+  heading = document.querySelector('.heading');
+  subheading = document.querySelector('.subheading'); 
 })
 
 afterEach(() => {
   cleanup()
 })
 
+// ============================================ tests =========================================== //
 describe('<Home/>', () => {
   describe('render', () => {
     it('should render', () => {
-      expect(header).not.toEqual(null)
+      expect(home).not.toEqual(null)
     })
   })
 
   describe('content', () => {
     describe('.heading', () => {
       it('should say "Alex Sweeney"', () => {
-        expect(header.textContent).toEqual('Alex Sweeney')
+        expect(heading.textContent).toEqual('Alex Sweeney')
       })
     })
 
     describe('.sub-heading', () => {
       it('should say "front end developer"', () => {
-        expect(subheader.textContent).toEqual('front end developer')
+        expect(subheading.textContent).toEqual('front end developer')
       })
     })
   })
 
   describe('layout', () => {
-    describe('background', () => {
+    describe('home', () => {
       it(`should have style: {
         display: flex,
         justify-content: center,
         align-items: center,
       }`, () => {
-        expect(background.style.display).toEqual('flex')
-        expect(background.style.justifyContent).toEqual('center')
-        expect(background.style.alignItems).toEqual('center')
+        expect(home.style.display).toEqual('flex')
+        expect(home.style.justifyContent).toEqual('center')
+        expect(home.style.alignItems).toEqual('center')
       })
     })
   })
 
   describe('style', () => {
-    describe('.background', () => {
+    describe('.home', () => {
       it('should have background: styles.colors.background.dark', () => {
-        expect(background.style.background).toEqual(colors.background.dark)
+        const res = hexToRGB(colors.background.dark);
+
+        expect(home.style.background).toEqual(res)
       })
     })
 
     describe('.heading', () => {
       it('should have color: styles.colors.font.dark', () => {
-        expect(heading.style.color).toEqual(colors.font.dark)
+        const res = hexToRGB(colors.font.dark);
+
+        expect(heading.style.color).toEqual(res)
       })
 
-      it('should have fontFamily: styles.fonts.head', () => {
+      it('should have fontFamily: styles.fonts.head', () => { 
         expect(heading.style.fontFamily).toEqual(fonts.head)
       })
     })
 
     describe('.sub-heading', () => {
-      it('should have color: styles.colors.font.highlight', () => {
-        expect(subheading.style.color).toEqual(fonts.highlight)
+      it('should have color: styles.colors.font.highlight', () => { 
+        const res = hexToRGB(colors.font.highlight);
+
+        expect(subheading.style.color).toEqual(res)
       })
 
-      it('should have fontFamily: styles.fonts.body', () => {
+      it('should have fontFamily: styles.fonts.body', () => { 
         expect(subheading.style.fontFamily).toEqual(fonts.body)
       })
     })
