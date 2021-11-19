@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';  
-import { colors } from '../styles/colors';
-import { fonts } from '../styles/fonts';
+import { colors, fonts } from '../styles/styles.js'; 
 import './Header.css';
 
 export default function Header({
 	logoChars = "", 
 	navLinks = [], 
 	setBurgerIsOpen = () => {},
-}) {
-	// console.log('setBurgerIsOpen', setBurgerIsOpen())
+}) { 
 	// ====================================================== Consts ======================================================== //
 	const [burgerIsSelected, setBurgerIsSelected] = useState(false);
 	const [burgerClass, setBurgerClass] = useState('');
@@ -20,8 +18,11 @@ export default function Header({
 	const headerStyle = {
 		display: 'flex',
 		justifyContent: 'space-between',
+		alignItems: 'center', 
+		padding: '32px',
+    boxSizing: 'border-box',
 		background: colors.background.dark,
-	}	 
+	};
 
 	const logoStyle = {
 		color: colors.font.light,
@@ -29,12 +30,16 @@ export default function Header({
 	};
 
 	const navStyle = {
-		display: desktopMatch ? 'block' : 'none',
+		display: desktopMatch ? 'flex' : 'none', 
+    width: '100%',
+    justifyContent: 'flex-end',
 	};
 
 	const navLinkStyle = {
 		color: colors.font.light,
 		fontFamily: fonts.body,
+		marginLeft: '32px',
+		textDecoration: 'none',
 	};
 
 	const burgerStyle = { 
