@@ -6,11 +6,17 @@ export default function BurgerMenu({ links }) {
     background: colors.background.lighter,
     display: 'flex',
     flexDirection: 'column', 
+    height: '100vh',
   };
 
   const burgerMenuLink = {
     fontFamily: fonts.body,
     color: colors.font.darker,
+    display: 'flex',
+    justifyContent: 'center',
+    textDecoration: 'none',
+    padding: '32px 0',
+    fontSize: '36px',
   };
 
   return (

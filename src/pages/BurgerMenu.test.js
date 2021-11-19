@@ -48,24 +48,46 @@ describe('<BurgerMenu/>', () => {
       it(`.burgerMenu should have style = {
         display: flex,
         flexDirection: column,  
+        height: 100vh,
       }`, () => {
         expect(burgerMenu.style.display).toEqual('flex')
         expect(burgerMenu.style.flexDirection).toEqual('column') 
+        expect(burgerMenu.style.height).toEqual('100vh')
       })
     })
 
     describe('font', () => {
-      it('.link should have fontFamily: styles.fonts.body', () => {
+      it('.burger-menu-link should have fontFamily: styles.fonts.body', () => {
         links.forEach(link => {
           expect(link.style.fontFamily).toEqual(fonts.body)
         })
       })
 
-      it('.link should have color: styles.colors.font.darker', () => {
+      it('.burger-menu-link should have color: styles.colors.font.darker', () => {
         const res = hexToRGB(colors.font.darker);
 
         links.forEach(link => {
           expect(link.style.color).toEqual(res)
+        })
+      })
+
+      it('.burger-menu-link should have fontSize: 36px', () => {
+        links.forEach(link => {
+          expect(link.style.fontSize).toEqual('36px')
+        })
+      })
+    })
+
+    describe('.burger-menu-link', () => {
+      it(`should have style = {
+        display: 'flex',
+        justifyContent: 'center',
+        padding: '32px 0',
+      }`, () => {
+        links.forEach(link => {
+          expect(link.style.display).toEqual('flex')
+          expect(link.style.justifyContent).toEqual('center')
+          expect(link.style.padding).toEqual('32px 0px')
         })
       })
     })
