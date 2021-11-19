@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, }
 
 describe('<Header/>', () => {
 	describe('desktop view', () => {
