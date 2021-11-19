@@ -13,5 +13,7 @@ export const colors = {
 
   font: {
     light: '#FFFFFF',
+    dark: '#DBD9D9',
+    highlight: '#FF5050',
   }
 };
