@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';  
+import { colors } from '../colors';
 import './Header.css';
 
-export default function Header({logoChars = "", navLinks = []}) {
+export default function Header({logoChars = "", navLinks = []}, setBurgerIsOpen = () => {}) {
 	const [burgerIsSelected, setBurgerIsSelected] = useState(false);
 	const [burgerClass, setBurgerClass] = useState('');
 
@@ -12,6 +13,7 @@ export default function Header({logoChars = "", navLinks = []}) {
 	const headerStyle = {
 		display: 'flex',
 		justifyContent: 'space-between',
+		background: colors.background.dark,
 	}	 
 
 	const navStyle = {

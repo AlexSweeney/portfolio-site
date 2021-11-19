@@ -2,14 +2,15 @@ import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 import { fireEvent } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event'
-import colours from '../colors.js';
+import { colors } from './../colors.js';
 import Header from './Header.jsx';
 
 // ==================================== Consts & vars ==================================== //
 const logoChars = 'ASWD';
 const navLinkNames = ['link-1', 'link-2', 'link-3']; 
-
-let isDesktop;
+ 
+let isDesktop; 
+let setBurgerIsOpen;
 
 let header;
 let textLogo;
@@ -40,7 +41,8 @@ function getParts() {
 	burgerBars = burger && burger.querySelectorAll('.burger-bar');
 }
 
-// ==================================== Mock ==================================== //
+// ==================================== Mock ======================================= //
+// matches = used by media query
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation(query => ({
@@ -56,17 +58,21 @@ Object.defineProperty(window, 'matchMedia', {
 });
 
 // ==================================== Teardown ==================================== //
+beforeEach(() => {
+	setBurgerIsOpen = jest.fn();
+})
+
 afterEach(() => {
 	cleanup() 
 })
 
 // ==================================== Tests ======================================= //
-describe('<Header logoChars={""} navLinks={[""]}/>', () => {
+describe('<Header logoChars={""} navLinks={[""]} setBurgerIsOpen={() => {}}/>', () => {
 	describe('render', () => {
 		describe('layout', () => {
 			describe('desktop', () => {
 				it('should render', () => { 
-							renderDesktop()
+					renderDesktop()
 	
 					expect(header).toBeTruthy()
 				})
@@ -81,8 +87,10 @@ describe('<Header logoChars={""} navLinks={[""]}/>', () => {
 			})
 		})
 		
-		describe('color', () => {
+		describe.only('color', () => {
 			it('should have background of colors.background.dark', () => {
+				renderDesktop()
+				
 				expect(header.style.background).toEqual(colors.background.dark)
 			})
 		})
@@ -155,7 +163,9 @@ describe('<Header logoChars={""} navLinks={[""]}/>', () => {
 		
 		describe('color', () => {
 			it('should have color: colors.font.light', () => {
-
+				navLinks.forEach(navLink => {
+					expect(navLink.style.color).toEqual(colors.font.light)
+				})
 			})
 		})
 	})
@@ -195,26 +205,50 @@ describe('<Header logoChars={""} navLinks={[""]}/>', () => {
 			})
 			
 			describe('touch', () => {
-				it('should add ".burger-selected" when touched once', () => {
-					renderPhone()
+				describe('first touch', () => {
+					it('should add ".burger-selected"', () => {
+						renderPhone()
+	
+						fireEvent.touchStart(burger) 
+						expect(burger.className).toContain("burger-selected")
+					})
 
-					fireEvent.touchStart(burger) 
-					expect(burger.className).toContain("burger-selected")
+					it('should call .props.setBurgerIsOpen with true', () => {
+						renderPhone()
+
+						fireEvent.touchStart(burger) 
+						expect(setBurgerIsOpen).toHaveBeenCalledTimes(1)
+						expect(setBurgerIsOpen).toHaveBeenCalledWith(true)
+					})
 				})
-	
-				it('should remove ".burger-selected" when touched twice', () => {
-					renderPhone()
-	
-					fireEvent.touchStart(burger)
-					fireEvent.touchStart(burger)
-					expect(burger.className).not.toContain("burger-selected")
+				
+				describe('second touch', () => {
+					it('should remove ".burger-selected" when touched twice', () => {
+						renderPhone()
+		
+						fireEvent.touchStart(burger)
+						fireEvent.touchStart(burger)
+						expect(burger.className).not.toContain("burger-selected")
+					})
+
+					it('should call .props.setBurgerIsOpen with false', () => {
+						renderPhone()
+
+						fireEvent.touchStart(burger) 
+						expect(setBurgerIsOpen).toHaveBeenCalledTimes(1)
+						expect(setBurgerIsOpen).toHaveBeenCalledWith(true)
+
+						fireEvent.touchStart(burger) 
+						expect(setBurgerIsOpen).toHaveBeenCalledTimes(2)
+						expect(setBurgerIsOpen).toHaveBeenCalledWith(false)
+					})
 				})
 			}) 
 		}) 
 
 		describe('color', () => {
-			it('should have color: colors.font.dark', () => {
-				
+			it('should have background: background.font.light', () => {
+				expect(burger.style.background).toEqual(colors.background.light)
 			})
 		})
 	})
