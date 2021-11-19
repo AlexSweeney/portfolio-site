@@ -1,16 +1,16 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
-import { fireEvent } from '@testing-library/dom';
-import userEvent from '@testing-library/user-event'
+import { fireEvent } from '@testing-library/dom'; 
 import { colors } from './../colors.js';
 import Header from './Header.jsx';
+import { hexToRGB } from './../utils/testUtils.js';
 
 // ==================================== Consts & vars ==================================== //
 const logoChars = 'ASWD';
 const navLinkNames = ['link-1', 'link-2', 'link-3']; 
- 
-let isDesktop; 
+
 let setBurgerIsOpen;
+let isDesktop;
 
 let header;
 let textLogo;
@@ -22,13 +22,18 @@ let burgerBars;
 // ==================================== Utils Fns ==================================== //
 function renderDesktop() { 
 	isDesktop = true;
-  render(<Header logoChars={logoChars} navLinks={navLinkNames}/>)
+	setBurgerIsOpen = () => {return 'test'};
+	
+
+  render(<Header logoChars={logoChars} navLinks={navLinkNames} setBurgerIsOpen={setBurgerIsOpen}/>)
 	getParts()
 }
 
 function renderPhone() { 
 	isDesktop = false;
-  render(<Header logoChars={logoChars} navLinks={navLinkNames}/>)
+	setBurgerIsOpen = jest.fn();
+
+  render(<Header logoChars={logoChars} navLinks={navLinkNames} setBurgerIsOpen={setBurgerIsOpen}/>)
 	getParts()
 }
 
@@ -58,10 +63,6 @@ Object.defineProperty(window, 'matchMedia', {
 });
 
 // ==================================== Teardown ==================================== //
-beforeEach(() => {
-	setBurgerIsOpen = jest.fn();
-})
-
 afterEach(() => {
 	cleanup() 
 })
@@ -87,11 +88,12 @@ describe('<Header logoChars={""} navLinks={[""]} setBurgerIsOpen={() => {}}/>', 
 			})
 		})
 		
-		describe.only('color', () => {
+		describe('color', () => {
 			it('should have background of colors.background.dark', () => {
 				renderDesktop()
 				
-				expect(header.style.background).toEqual(colors.background.dark)
+				const res = hexToRGB(colors.background.dark);
+				expect(header.style.background).toEqual(res)
 			})
 		})
 	})
@@ -129,7 +131,10 @@ describe('<Header logoChars={""} navLinks={[""]} setBurgerIsOpen={() => {}}/>', 
 		
 		describe('color', () => {
 			it('should have color: colors.font.light', () => {
-				expect(textLogo.style.color).toEqual(colors.font.light)
+				renderDesktop()
+
+				const res = hexToRGB(colors.font.light);
+				expect(textLogo.style.color).toEqual(res)
 			})
 		})
 	})
@@ -163,92 +168,104 @@ describe('<Header logoChars={""} navLinks={[""]} setBurgerIsOpen={() => {}}/>', 
 		
 		describe('color', () => {
 			it('should have color: colors.font.light', () => {
+				renderDesktop()
+
+				const res = hexToRGB(colors.font.light);
+
 				navLinks.forEach(navLink => {
-					expect(navLink.style.color).toEqual(colors.font.light)
+					expect(navLink.style.color).toEqual(res)
 				})
 			})
 		})
 	})
 
 	describe('burger', () => {
-		describe('desktop', () => {
-			it('.burger should have .style.display = "none" ', () => {
-				renderDesktop()
-
-				expect(burger.style.display).toEqual('none')
-			})
-		})
-
-		describe('phone', () => {
-			describe('render', () => {
-				it('.burger should have .style = {display: flex, flexDirection: column, justifyContent: spaceBetween, }', () => {
-					renderPhone()
+		describe('layout', () => {
+			describe('desktop', () => {
+				it('.burger should have .style.display = "none" ', () => {
+					renderDesktop()
 	
-					expect(burger.style.display).toEqual('flex')
-					expect(burger.style.flexDirection).toEqual('column')
-					expect(burger.style.flexDirection).toEqual('column')
-				})
-	
-				it('should have 3 .burger-bar children', () => {
-					renderPhone()
-				
-					expect(burgerBars.length).toEqual(3)
-				})
-
-				it('.burger-bar should have .style = {height: 25%}', () => {
-					renderPhone()
-
-					burgerBars.forEach(burgerBar => {
-						expect(burgerBar.style.height).toEqual('25%')
-					})
+					expect(burger.style.display).toEqual('none')
 				})
 			})
-			
-			describe('touch', () => {
-				describe('first touch', () => {
-					it('should add ".burger-selected"', () => {
-						renderPhone()
 	
-						fireEvent.touchStart(burger) 
-						expect(burger.className).toContain("burger-selected")
-					})
-
-					it('should call .props.setBurgerIsOpen with true', () => {
-						renderPhone()
-
-						fireEvent.touchStart(burger) 
-						expect(setBurgerIsOpen).toHaveBeenCalledTimes(1)
-						expect(setBurgerIsOpen).toHaveBeenCalledWith(true)
-					})
-				})
-				
-				describe('second touch', () => {
-					it('should remove ".burger-selected" when touched twice', () => {
+			describe('phone', () => {
+				describe('render', () => {
+					it('.burger should have .style = {display: flex, flexDirection: column, justifyContent: spaceBetween, }', () => {
 						renderPhone()
 		
-						fireEvent.touchStart(burger)
-						fireEvent.touchStart(burger)
-						expect(burger.className).not.toContain("burger-selected")
+						expect(burger.style.display).toEqual('flex')
+						expect(burger.style.flexDirection).toEqual('column')
+						expect(burger.style.flexDirection).toEqual('column')
 					})
-
-					it('should call .props.setBurgerIsOpen with false', () => {
+		
+					it('should have 3 .burger-bar children', () => {
 						renderPhone()
-
-						fireEvent.touchStart(burger) 
-						expect(setBurgerIsOpen).toHaveBeenCalledTimes(1)
-						expect(setBurgerIsOpen).toHaveBeenCalledWith(true)
-
-						fireEvent.touchStart(burger) 
-						expect(setBurgerIsOpen).toHaveBeenCalledTimes(2)
-						expect(setBurgerIsOpen).toHaveBeenCalledWith(false)
+					
+						expect(burgerBars.length).toEqual(3)
+					})
+	
+					it('.burger-bar should have .style = {height: 25%}', () => {
+						renderPhone()
+	
+						burgerBars.forEach(burgerBar => {
+							expect(burgerBar.style.height).toEqual('25%')
+						})
 					})
 				})
+				
+				describe('touch', () => {
+					describe('first touch', () => {
+						it('should add ".burger-selected"', () => {
+							renderPhone()
+		
+							fireEvent.touchStart(burger) 
+							expect(burger.className).toContain("burger-selected")
+						})
+	
+						it('should call .props.setBurgerIsOpen with true', () => {
+							renderPhone()
+	
+							fireEvent.touchStart(burger) 
+							expect(setBurgerIsOpen).toHaveBeenCalledTimes(1)
+							expect(setBurgerIsOpen).toHaveBeenCalledWith(true)
+						})
+					})
+					
+					describe('second touch', () => {
+						it('should remove ".burger-selected"', () => {
+							renderPhone()
+			
+							fireEvent.touchStart(burger)
+							fireEvent.touchStart(burger)
+							expect(burger.className).not.toContain("burger-selected")
+						})
+	
+						it('should call .props.setBurgerIsOpen with false', () => {
+							renderPhone()
+	
+							fireEvent.touchStart(burger) 
+							expect(setBurgerIsOpen).toHaveBeenCalledTimes(1)
+							expect(setBurgerIsOpen).toHaveBeenCalledWith(true)
+	
+							fireEvent.touchStart(burger) 
+							expect(setBurgerIsOpen).toHaveBeenCalledTimes(2)
+							expect(setBurgerIsOpen).toHaveBeenCalledWith(false)
+						})
+					})
+				}) 
 			}) 
-		}) 
-
+		})
+		 
 		describe('color', () => {
-			it('should have background: background.font.light', () => {
-				expect(burger.style.background).toEqual(colors.background.light)
+			it('.burger-bar should have background: colors.background.light', () => {
+				renderDesktop()
+
+				const res = hexToRGB(colors.background.light);
+
+				burgerBars.forEach(burgerBar => {
+					expect(burgerBar.style.background).toEqual(res)
+				}) 
 			})
 		})
 	})

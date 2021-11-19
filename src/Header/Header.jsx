@@ -2,7 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { colors } from '../colors';
 import './Header.css';
 
-export default function Header({logoChars = "", navLinks = []}, setBurgerIsOpen = () => {}) {
+export default function Header({
+	logoChars = "", 
+	navLinks = [], 
+	setBurgerIsOpen = () => {},
+}) {
+	// console.log('setBurgerIsOpen', setBurgerIsOpen())
+	// ====================================================== Consts ======================================================== //
 	const [burgerIsSelected, setBurgerIsSelected] = useState(false);
 	const [burgerClass, setBurgerClass] = useState('');
 
@@ -16,9 +22,17 @@ export default function Header({logoChars = "", navLinks = []}, setBurgerIsOpen 
 		background: colors.background.dark,
 	}	 
 
+	const logoStyle = {
+		color: colors.font.light,
+	};
+
 	const navStyle = {
 		display: desktopMatch ? 'block' : 'none',
-	}
+	};
+
+	const navLinkStyle = {
+		color: colors.font.light,
+	};
 
 	const burgerStyle = { 
 		display: desktopMatch ? 'none' : 'flex',
@@ -28,11 +42,14 @@ export default function Header({logoChars = "", navLinks = []}, setBurgerIsOpen 
 
 	const burgerBarStyle = {
 		height: '25%',
-	}
+		background: colors.background.light,
+	};
 
 	// ====================================================== Event Handlers =============================================== //
 	function onTouchBurger() {
-		setBurgerIsSelected(oldVal => !oldVal)
+		const selected = !burgerIsSelected;
+		setBurgerIsSelected(selected)
+		setBurgerIsOpen(selected)
 	}
 
 	function updateBurgerClass(selected) {
@@ -49,14 +66,14 @@ export default function Header({logoChars = "", navLinks = []}, setBurgerIsOpen 
 	// ====================================================== Output  ====================================================== //
 	return (
 		<header className="header" style={headerStyle}>
-			<div className="text-logo">
+			<div className="text-logo" style={logoStyle}>
 				{logoChars}
 			</div>
 
 			<nav className="header-nav" style={navStyle}>
 				{
 					navLinks.map((navLink, i) => {
-						return <a href="" key={`nav-link-${i}`}>{navLink}</a>
+						return <a href="" key={`nav-link-${i}`} style={navLinkStyle}>{navLink}</a>
 					})
 				}
 			</nav>

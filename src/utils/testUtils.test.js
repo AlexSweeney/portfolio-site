@@ -2,7 +2,6 @@ import {
 	hexToRGB, 
 } from './../utils/testUtils.js';
 
-
 /* ======================================= Tests ========================================== */
 it('hexToRGB()', () => {
 	const whiteHex = '#ffffff';
