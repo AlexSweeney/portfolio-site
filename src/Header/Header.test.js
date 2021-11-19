@@ -2,6 +2,7 @@ import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 import { fireEvent } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event'
+import colours from '../colors.js';
 import Header from './Header.jsx';
 
 // ==================================== Consts & vars ==================================== //
@@ -62,77 +63,101 @@ afterEach(() => {
 // ==================================== Tests ======================================= //
 describe('<Header logoChars={""} navLinks={[""]}/>', () => {
 	describe('render', () => {
-		describe('desktop', () => {
-			it('should render', () => { 
-        		renderDesktop()
-
-				expect(header).toBeTruthy()
+		describe('layout', () => {
+			describe('desktop', () => {
+				it('should render', () => { 
+							renderDesktop()
+	
+					expect(header).toBeTruthy()
+				})
+			})
+	
+			describe('phone', () => {
+				it('should render', () => {
+					renderPhone()
+	
+					expect(header).toBeTruthy()
+				})
 			})
 		})
-
-		describe('phone', () => {
-			it('should render', () => {
-				renderPhone()
-
-        expect(header).toBeTruthy()
+		
+		describe('color', () => {
+			it('should have background of colors.background.dark', () => {
+				expect(header.style.background).toEqual(colors.background.dark)
 			})
 		})
 	})
 	
 	describe('text logo', () => {
-		describe('desktop', () => {
-			it('should render text logo', () => {
-				renderDesktop()
-
-				expect(textLogo).not.toEqual(null)
+		describe('layout', () => {
+			describe('desktop', () => {
+				it('should render text logo', () => {
+					renderDesktop()
+	
+					expect(textLogo).not.toEqual(null)
+				})
+	
+				it('text logo should have characters passed in props.logoChars', () => {
+					renderDesktop()
+					
+					expect(textLogo.textContent).toEqual(logoChars)
+				})
 			})
-
-			it('text logo should have characters passed in props.logoChars', () => {
-        renderDesktop()
-        
-				expect(textLogo.textContent).toEqual(logoChars)
+	
+			describe('phone', () => {
+				it('should render text logo', () => {
+					renderPhone()
+					
+					expect(textLogo).not.toEqual(null)
+				})
+	
+				it('text logo should have characters passed in props.logoChars', () => {
+					renderPhone()
+					
+					expect(textLogo.textContent).toEqual(logoChars)
+				})
+			}) 
+		})
+		
+		describe('color', () => {
+			it('should have color: colors.font.light', () => {
+				expect(textLogo.style.color).toEqual(colors.font.light)
 			})
 		})
-
-		describe('phone', () => {
-			it('should render text logo', () => {
-				renderPhone()
-				
-        expect(textLogo).not.toEqual(null)
-			})
-
-			it('text logo should have characters passed in props.logoChars', () => {
-				renderPhone()
-				
-        expect(textLogo.textContent).toEqual(logoChars)
-			})
-		}) 
 	})
 
 	describe('nav links', () => { 
-		describe('desktop', () => {
-			it('nav should have style.display = "block"', () => {
-				renderDesktop()
-
-				expect(nav.style.display).toEqual('block')
-			})
-
-			it('should render a nav link for each item from props.navLinks', () => {
-				renderDesktop()
-
-				navLinks.forEach((navLink, i) => {
-					expect(navLink.textContent).toEqual(navLinkNames[i])
+		describe('layout', () => {
+			describe('desktop', () => {
+				it('nav should have style.display = "block"', () => {
+					renderDesktop()
+	
+					expect(nav.style.display).toEqual('block')
+				})
+	
+				it('should render a nav link for each item from props.navLinks', () => {
+					renderDesktop()
+	
+					navLinks.forEach((navLink, i) => {
+						expect(navLink.textContent).toEqual(navLinkNames[i])
+					})
 				})
 			})
+	
+			describe('phone', () => {
+				it('nav should have style.display = "none"', () => {
+					renderPhone()
+	
+					expect(nav.style.display).toEqual('none')
+				})
+			}) 
 		})
+		
+		describe('color', () => {
+			it('should have color: colors.font.light', () => {
 
-		describe('phone', () => {
-			it('nav should have style.display = "none"', () => {
-				renderPhone()
-
-				expect(nav.style.display).toEqual('none')
 			})
-		}) 
+		})
 	})
 
 	describe('burger', () => {
@@ -186,5 +211,11 @@ describe('<Header logoChars={""} navLinks={[""]}/>', () => {
 				})
 			}) 
 		}) 
+
+		describe('color', () => {
+			it('should have color: colors.font.dark', () => {
+				
+			})
+		})
 	})
 })

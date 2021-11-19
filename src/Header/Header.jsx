@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'; 
+import React, { useEffect, useState } from 'react';  
 import './Header.css';
 
 export default function Header({logoChars = "", navLinks = []}) {
@@ -8,10 +8,10 @@ export default function Header({logoChars = "", navLinks = []}) {
 	// gets value on first render => for testing in console must refresh page
 	const desktopMatch = window.matchMedia('(min-width: 426px)').matches;
 
-	// ================== Styles 
+	// ====================================================== Styles ======================================================== //
 	const headerStyle = {
 		display: 'flex',
-		justifyContent: 'space-between', 
+		justifyContent: 'space-between',
 	}	 
 
 	const navStyle = {
