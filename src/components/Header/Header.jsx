@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';  
-import { colors, fonts } from '../styles/styles.js'; 
-import './Header.css';
+import { colors, fonts } from './../../styles/styles.js';
 
 export default function Header({
 	logoChars = "", 

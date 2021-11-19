@@ -4,9 +4,11 @@ import { colors, fonts } from './../styles/styles.js';
 export default function Home() {
   const homeStyle = {
     display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    background: colors.background.dark,
+    background: colors.background.darker,
+    height: '100vh',
   };
 
   const headingStyle = {

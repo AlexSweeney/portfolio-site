@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 import { fireEvent } from '@testing-library/dom'; 
-import { colors, fonts } from '../styles/styles'; 
-import Header from './Header.jsx';
-import { hexToRGB } from './../utils/testUtils.js';
+import { colors, fonts } from './../../styles/styles.js';
+import Header from './Header.jsx'; 
+import { hexToRGB } from '../../utils/testUtils.js';
 
 // ==================================== Consts & vars ==================================== //
 const logoChars = 'ASWD';

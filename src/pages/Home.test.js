@@ -2,7 +2,7 @@ import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 import { fonts, colors } from './../styles/styles.js';
 import Home from './Home.jsx';
-import { hexToRGB } from './../utils/testUtils.js';
+import { hexToRGB } from './../utils/testUtils.js'; 
 
 // ============================================ Vars ============================================ //
 let home;
@@ -21,7 +21,7 @@ afterEach(() => {
   cleanup()
 })
 
-// ============================================ tests =========================================== //
+// ============================================ tests ========================================== //
 describe('<Home/>', () => {
   describe('render', () => {
     it('should render', () => {
@@ -47,20 +47,24 @@ describe('<Home/>', () => {
     describe('home', () => {
       it(`should have style: {
         display: flex,
+        flexDirection: column,
         justify-content: center,
         align-items: center,
+        height: 100vh,
       }`, () => {
         expect(home.style.display).toEqual('flex')
+        expect(home.style.flexDirection).toEqual('column')
         expect(home.style.justifyContent).toEqual('center')
         expect(home.style.alignItems).toEqual('center')
+        expect(home.style.height).toEqual('100vh')
       })
     })
   })
 
   describe('style', () => {
     describe('.home', () => {
-      it('should have background: styles.colors.background.dark', () => {
-        const res = hexToRGB(colors.background.dark);
+      it('should have background: styles.colors.background.darker', () => {
+        const res = hexToRGB(colors.background.darker);
 
         expect(home.style.background).toEqual(res)
       })
