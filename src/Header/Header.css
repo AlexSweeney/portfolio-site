@@ -1,0 +1,14 @@
+.header {
+  height: 100px;
+  background: yellow;
+}
+
+.burger-bar {
+  width: 100%; 
+  background: blue;
+}
+
+.burger {
+  height: 50px;
+  width: 50px;
+}
