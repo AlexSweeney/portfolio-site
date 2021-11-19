@@ -316,8 +316,6 @@ describe('<Header logoChars={""} navLinks={[""]} setBurgerIsOpen={() => {}}/>', 
 				}) 
 			}) 
 		})
-		 
-		
 	})
 
 	describe('.burger-bar', () => {
