@@ -27,8 +27,7 @@ export default function BurgerMenu({ links }) {
             href="" 
             className="burger-menu-link"  
             style={burgerMenuLink}
-            key={`buger-menu-link-${i}`}
-            >{link}</a>
+            key={`buger-menu-link-${i}`}>{link}</a>
         })
       }
     </section>
