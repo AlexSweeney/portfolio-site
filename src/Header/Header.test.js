@@ -1,7 +1,8 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 import { fireEvent } from '@testing-library/dom'; 
-import { colors } from './../colors.js';
+import { colors } from '../styles/colors.js';
+import { fonts } from '../styles/fonts.js';
 import Header from './Header.jsx';
 import { hexToRGB } from './../utils/testUtils.js';
 

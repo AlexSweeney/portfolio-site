@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';  
-import { colors } from '../colors';
+import { colors } from '../styles/colors';
+import { fonts } from '../styles/fonts';
 import './Header.css';
 
 export default function Header({
@@ -24,6 +25,7 @@ export default function Header({
 
 	const logoStyle = {
 		color: colors.font.light,
+		fontFamily: fonts.logo,
 	};
 
 	const navStyle = {
@@ -32,6 +34,7 @@ export default function Header({
 
 	const navLinkStyle = {
 		color: colors.font.light,
+		fontFamily: fonts.body,
 	};
 
 	const burgerStyle = { 
