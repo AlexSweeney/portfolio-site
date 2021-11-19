@@ -137,6 +137,14 @@ describe('<Header logoChars={""} navLinks={[""]} setBurgerIsOpen={() => {}}/>', 
 				expect(textLogo.style.color).toEqual(res)
 			})
 		})
+
+		describe('font', () => {
+			it('should have fontFamily : fonts.logo', () => {
+				renderDesktop()
+
+				expect(textLogo.style.fontFamily).toEqual(fonts.logo)
+			})
+		})
 	})
 
 	describe('nav links', () => { 
@@ -175,6 +183,16 @@ describe('<Header logoChars={""} navLinks={[""]} setBurgerIsOpen={() => {}}/>', 
 				navLinks.forEach(navLink => {
 					expect(navLink.style.color).toEqual(res)
 				})
+			})
+		})
+
+		describe('font', () => {
+			it('should have fontFamily : fonts.body', () => {
+				renderDesktop()
+
+				navLinks.forEach(navLink => {
+					expect(navLink.style.fontFamily).toEqual(fonts.body)
+				}) 
 			})
 		})
 	})
