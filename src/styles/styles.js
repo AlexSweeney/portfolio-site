@@ -10,6 +10,7 @@ export const colors = {
     darker: '#333333', 
     light: '#C4C4C4',
     lighter: '#DFDFDF',
+    highlight: '#000743',
   },
 
   font: {

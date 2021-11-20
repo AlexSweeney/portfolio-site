@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Header from './components/Header/Header.jsx';
 import Home from "./pages/Home.jsx";
 import BurgerMenu from "./pages/BurgerMenu.jsx";
+import SubjectBar from "./components/Subject-Bar/SubjectBar.jsx";
 
 const navLinks = ['link-1', 'link-2', 'link-3'];
 
@@ -26,7 +27,7 @@ const topics = {
 
 ReactDOM.render(
     <React.StrictMode> 
-        <BurgerMenu links={navLinks}/>
+        <SubjectBar subjects={navLinks}></SubjectBar>
     </React.StrictMode>,
     document.getElementById('root')
 )
