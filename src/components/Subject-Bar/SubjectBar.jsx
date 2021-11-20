@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState } from "react"; 
 import { colors, fonts } from "../../styles/styles";
 
-export default function SubjectBar({ subjects, setSelectedSubject }) {
+export default function SubjectBar({ subjects, selectedSubject, setSelectedSubject }) {
+  // ====================================================== Consts ======================================================== //
+  const desktopMatch = window.matchMedia('(min-width: 426px)').matches;
+  const [showAll, setShowAll] = useState(false);
+
+  // ====================================================== Styles ======================================================== //
   const subjectBarStyle = {
     display: 'flex',
     flexDirection: 'column',
     background: colors.background.highlight,
     opacity: '0.9',
-    height: '100vh',
+    height: desktopMatch ? '100vh' : '',
   };
 
   const subjectStyle = {
@@ -17,19 +22,23 @@ export default function SubjectBar({ subjects, setSelectedSubject }) {
     textDecoration: 'none',
   };
 
-  function onClickSubject(subject) {
+  function onSelectSubject(subject) {  
     setSelectedSubject(subject)
+    setShowAll(oldVal => !oldVal)
   }
 
   return (
     <section className="subject-bar" style={subjectBarStyle}>
       {
-        subjects.map((subject, i) => {
-          return <a href="" 
+        subjects.map((subject, i) => { 
+          if((subject === selectedSubject) || showAll || desktopMatch) {
+            return <a href="" 
             key={`subject-${i}`} 
             className="subject" 
             style={subjectStyle} 
-            onClick={() => { onClickSubject(subject) }}>{subject}</a>
+            onClick={() => { onSelectSubject(subject) }}
+            onTouchStart={() => { onSelectSubject(subject) }}>{subject}</a>
+          }
         })
       }
     </section>
