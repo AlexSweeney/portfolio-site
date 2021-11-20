@@ -1,13 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from 'react-dom';
 import Header from './components/Header/Header.jsx';
 import Home from "./pages/Home.jsx";
 import BurgerMenu from "./pages/BurgerMenu.jsx";
 import SubjectBar from "./components/Subject-Bar/SubjectBar.jsx";
 
-const navLinks = ['link-1', 'link-2', 'link-3'];
-const selectedSubject = 'link-1';
-const setSelectedSubject = () => {};
+
 const topics = {
     designPatterns: {
         'test driven development' : [
@@ -26,9 +24,21 @@ const topics = {
     }
 }
 
+function Wrapper() {
+    const navLinks = ['link-1', 'link-2', 'link-3'];
+    const [selectedSubject, setSelectedSubject] = useState(navLinks[0]);
+
+    return (
+        <SubjectBar 
+            subjects={navLinks} 
+            selectedSubject={selectedSubject} 
+            setSelectedSubject={setSelectedSubject}/>
+    )
+}
+
 ReactDOM.render(
     <React.StrictMode> 
-        <SubjectBar subjects={navLinks} selectedSubject={selectedSubject} setSelectedSubject={setSelectedSubject}></SubjectBar>
+        <Wrapper/>
     </React.StrictMode>,
     document.getElementById('root')
 )
