@@ -36,6 +36,8 @@ function Wrapper() {
     )
 }
 
+/* <Header logoChars = {"ASWD"} navLinks = {navLinks}/> */
+
 ReactDOM.render(
     <React.StrictMode> 
         <Wrapper/>
@@ -43,4 +45,3 @@ ReactDOM.render(
     document.getElementById('root')
 )
 
-/* <Header logoChars = {"ASWD"} navLinks = {navLinks}/> */

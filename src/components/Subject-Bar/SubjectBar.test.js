@@ -6,7 +6,6 @@ import SubjectBar from './SubjectBar.jsx';
 import { colors, fonts } from './../../styles/styles.js';
 import { hexToRGB } from './../../utils/testUtils.js';
 
-
 // ==================================== Consts & vars ==================================== //
 const thisSubjects = ['subject-1', 'subject-2', 'subject-3'];
 
