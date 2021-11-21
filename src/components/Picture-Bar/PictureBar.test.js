@@ -1,29 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import { render, cleanup } from '@testing-library/react';
 import { fireEvent } from "@testing-library/dom";
 import PictureBar from './PictureBar.jsx';
 
+// ==================================== Consts / Vars ================================ //
 const thisPictures = [<div className="picture-1"></div>, <div className="picture-2"></div>, <div className="picture-3"></div>];
+let selectedPicture;
+let setSelectedPicture;
+
 let isDesktop;
+let pictureBar;
+let pictures;
 
 // ==================================== Util fns ==================================== //
+function PictureBarWrapper() {
+  [selectedPicture, setSelectedPicture] = useState(thisPictures[0]);
+
+  return (
+    <PictureBar 
+      pictures={thisPictures} 
+      selectedPicture={selectedPicture} 
+      setSelectedPicture={setSelectedPicture}/>
+  )
+}
+
 function renderDesktop() { 
 	isDesktop = true;  
 
-  render(<PictureBar pictures={thisPictures}/>) 
+  render(<PictureBarWrapper/>) 
 	getParts()
 }
 
 function renderPhone() { 
 	isDesktop = false; 
   
-  render(<PictureBar pictures={thisPictures}/>) 
+  render(<PictureBarWrapper/>) 
 	getParts()
 }
 
 function getParts() {
   pictureBar = document.querySelector('.picture-bar');
-  pictures = document.querySelectorAll('.subject');
+  pictures = document.querySelectorAll('.picture-container');
 }
 
 // ==================================== Mock ======================================= //
@@ -58,11 +75,14 @@ describe('<PictureBar pictures=[]/>', () => {
       }) 
 
       describe('content', () => {
-        it('should render each picture element in props.pictures', () => {
+        it('should render each picture inside picture container element in props.pictures', () => {
           renderDesktop()
 
-          pictures.forEach((picture, i) => {
-            expect(picture).toEqual(thisPictures[i])
+          expect(pictures.length).toEqual(thisPictures.length) 
+ 
+          pictures.forEach((picture, i) => {   
+            expect(picture.className).toEqual('picture-container')
+            expect(picture.children[0].className).toEqual(thisPictures[i].props.className)
           })
         })
       })
@@ -94,56 +114,59 @@ describe('<PictureBar pictures=[]/>', () => {
       })
 
       describe('content', () => {
-        it('should only render props.selectedImage', () => {
+        it('should only render .pictureContainer with props.selectedPicture', () => {
+          renderPhone() 
+
           expect(pictures.length).toEqual(1)
 
-          expect(pictures[0]).toEqual(selectedImage)
+          expect(pictures[0].className).toEqual('picture-container') 
+          expect(pictures[0].children[0].className).toEqual(selectedPicture.props.className)
         })
       }) 
 
-      describe('layout', () => {
-        it(`should have style = {
-          width: 100%,
-          height: 100%,
-        }`, () => {
-          expect(pictureBar.style.width).toEqual('100%')
-          expect(pictureBar.style.height).toEqual('100%')
-        })
-      })
-
       describe('on touch', () => {
         describe('first touch', () => {
-          it('should render image for each picture in props.pictures', () => {
+          it('should render .pictureContainer for each picture in props.pictures', () => {
+            renderPhone()
+
             fireEvent.touchStart(pictures[0])
+            pictures = document.querySelectorAll('.picture-container');
 
             expect(pictures.length).toEqual(thisPictures.length)
 
-            pictures.forEach((picture, i) => {
-              expect(picture).toEqual(thisPictures[i])
+            pictures.forEach((picture, i) => {   
+              expect(picture.className).toEqual('picture-container')
+              expect(picture.children[0].className).toEqual(thisPictures[i].props.className)
             })
           })
         })
 
         describe('second touch', () => {
-          it('should change selectedImage to touched image', () => {
+          it('should change props.selectedPicture to touched image', () => {
+            renderPhone()
             // open menu
             fireEvent.touchStart(pictures[0])
 
             // select new pic
+            pictures = document.querySelectorAll('.picture-container');
             fireEvent.touchStart(pictures[1])
 
-            expect(selectedImage).toEqual(thisPictures[1])
+            expect(selectedPicture.props.className).toEqual(thisPictures[1].props.className)
           })
 
           it('should only render props.selectedImage', () => {
+            renderPhone()
+            
             // open menu
             fireEvent.touchStart(pictures[0])
 
             // select new pic
+            pictures = document.querySelectorAll('.picture-container');
             fireEvent.touchStart(pictures[1])
 
-            expect(pictures.length).toEqual(1)
-            expect(pictures[0]).toEqual(thisPictures[1])
+            // check 
+            pictures = document.querySelectorAll('.picture-container');
+            expect(pictures.length).toEqual(1) 
           })
         })
       })
