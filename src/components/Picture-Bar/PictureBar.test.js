@@ -1,24 +1,28 @@
 import React from "react";
+import { render, cleanup } from '@testing-library/react';
+import { fireEvent } from "@testing-library/dom";
 import PictureBar from './PictureBar.jsx';
 
 const thisPictures = [<div className="picture-1"></div>, <div className="picture-2"></div>, <div className="picture-3"></div>];
+let isDesktop;
 
 // ==================================== Util fns ==================================== //
 function renderDesktop() { 
 	isDesktop = true;  
 
-  render(<PictureBar pictures={pictures}/>) 
+  render(<PictureBar pictures={thisPictures}/>) 
 	getParts()
 }
 
 function renderPhone() { 
 	isDesktop = false; 
   
-  render(<PictureBar pictures={pictures}/>) 
+  render(<PictureBar pictures={thisPictures}/>) 
 	getParts()
 }
 
 function getParts() {
+  pictureBar = document.querySelector('.picture-bar');
   pictures = document.querySelectorAll('.subject');
 }
 
@@ -45,13 +49,13 @@ afterEach(() => {
 
 // ==================================== Tests ======================================= //
 describe('<PictureBar pictures=[]/>', () => {
-  describe('desktop', () => {
-    describe('on render', () => [
+  describe('desktop', () => { 
+    describe('on render', () => {
       it('should render', () => {
         renderDesktop()
 
         expect(pictureBar).not.toEqual(null)
-      })
+      }) 
 
       describe('content', () => {
         it('should render each picture element in props.pictures', () => {
@@ -62,23 +66,23 @@ describe('<PictureBar pictures=[]/>', () => {
           })
         })
       })
+    })
       
-      describe('layout', () => {
-        it(`should have style : {
-          display: flex,
-          flex-direction: column,
-          justify-content: space-evenly,
-          height: 100%,
-        }`, () => {
-          renderDesktop()
+    describe('layout', () => {
+      it(`should have style : {
+        display: flex,
+        flex-direction: column,
+        justify-content: space-evenly,
+        height: 100%,
+      }`, () => {
+        renderDesktop()
 
-          expect(pictureBar.style.display).toEqual('flex')
-          expect(pictureBar.style.flexDirection).toEqual('column')
-          expect(pictureBar.style.justifyContent).toEqual('space-evenly')
-          expect(pictureBar.style.height).toEqual('100%')
-        })
+        expect(pictureBar.style.display).toEqual('flex')
+        expect(pictureBar.style.flexDirection).toEqual('column')
+        expect(pictureBar.style.justifyContent).toEqual('space-evenly')
+        expect(pictureBar.style.height).toEqual('100%')
       })
-    ]) 
+    }) 
   })
   
   describe('phone', () => {
@@ -144,5 +148,5 @@ describe('<PictureBar pictures=[]/>', () => {
         })
       })
     })
-  })  
+  })   
 })
