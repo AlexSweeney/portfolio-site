@@ -70,6 +70,7 @@ afterEach(() => {
   cleanup()
 })
 
+// ==================================== Tests ======================================= //
 describe('<SubjectBar subjects={[]} selectedSubject={""}  setSelectedSubject={""}/>', () => {
   describe('desktop', () => {
     describe('on render', () => {
