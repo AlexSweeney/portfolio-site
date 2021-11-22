@@ -33,6 +33,20 @@ describe('<TechnicalSkills data={data}/>', () => {
       })
     })
 
+    describe('content', () => {
+      it('should render .subject-bar', () => {
+
+      })
+
+      it('should render .topic-bar', () => {
+
+      })
+
+      it('should render .picture-bar', () => {
+
+      })
+    })
+
     describe('.technical-skills', () => {
       describe('layout', () => {
         it(`should have style = {
@@ -143,74 +157,180 @@ describe('<TechnicalSkills data={data}/>', () => {
 
   describe('phone', () => {
     describe('.technical-skills', () => {
-      describe('content', () => {
+      describe('render', () => {
+        it('should render', () => {
 
+        })
+      })
+      
+      describe('content', () => {
+        it('should render .subject-bar', () => {
+
+        })
+  
+        it('should render .topic-bar', () => {
+  
+        })
+  
+        it('should render .picture-bar', () => {
+  
+        })
       })
 
       describe('layout', () => {
+        it(`should have style = {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }`, () => {
 
-      })
-
-      describe('style', () => {
-
-      })
-
-      describe('on click', () => {
-        
-      })
+        })
+      })  
     })
    
     describe('.subject-bar', () => {
       describe('content', () => {
+        it('should only display selectedSubject', () => {
 
+        })
       })
 
       describe('layout', () => {
+        it(`should have style = {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }`, () => {
 
+        })
       })
 
       describe('style', () => {
+        describe('background', () => {
+          it('should have background = colors.background.highlight', () => {
 
+          })
+
+          it('should have opacity: 0.9', () => {
+
+          })
+        })
+
+        describe('text', () => {
+          it('should have fontFamily = fonts.head', () => {
+
+          })
+
+          it('should have color = colors.font.light', () => {
+
+          })
+        })
       })
 
-      describe('on click', () => {
-        
+      describe('on touch', () => {
+        it('should display all subjects', () => {
+
+        })
+      })
+
+      describe('on second touch', () => {
+        it('should change props.selctedSubject to touched subject', () => {
+
+        })
+
+        it('should only show props.selectedSubject', () => {
+
+        })
       })
     })
   
     describe('.topic-bar', () => {
       describe('content', () => {
+        it('should only display props.selectedTopic', () => {
 
+        })
       })
 
       describe('layout', () => {
+        it(`should have style = {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }`, () => {
 
+        })
       })
 
       describe('style', () => {
+        describe('background', () => {
+          it('should have background = colors.background.highlight', () => {
 
+          })
+
+          it('should have opacity: 0.9', () => {
+
+          })
+        })
+
+        describe('text', () => {
+          it('should have fontFamily = fonts.head', () => {
+
+          })
+
+          it('should have color = colors.font.light', () => {
+
+          })
+        })
       })
 
-      describe('on click', () => {
-        
+      describe('on touch', () => {
+        it('should display all topics', () => {
+
+        })
+      })
+
+      describe('on second touch', () => {
+        it('should change props.selectedTopic to touched topic', () => {
+
+        })
+
+        it('should only show props.selectedTopic', () => {
+
+        })
       })
     })
   
     describe('.picture-bar', () => {
       describe('content', () => {
+        it('should only show props.selectedPicture', () => {
 
+        })
       })
 
       describe('layout', () => {
+        it(`should have style = {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }`, () => {
 
+        })
+      }) 
+
+      describe('on touch', () => {
+        it('should display all pictures', () => {
+
+        })
       })
 
-      describe('style', () => {
+      describe('on second touch', () => {
+        it('should change props.selectedPicture to touched picture', () => {
 
-      })
+        })
 
-      describe('on click', () => {
-        
+        it('should only show props.selectedPicture', () => {
+
+        })
       })
     })
   }) 
