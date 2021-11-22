@@ -2,27 +2,27 @@ import React, { useEffect, useState } from "react";
 import { render, cleanup } from '@testing-library/react';
 import { screen, fireEvent } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
-import SubjectBar from './SubjectBar.jsx';
-import { colors, fonts } from './../../styles/styles.js';
-import { hexToRGB } from './../../utils/testUtils.js';
+import OptionsBar from './OptionsBar.jsx';
+import { colors, fonts } from '../../styles/styles.js';
+import { hexToRGB } from '../../utils/testUtils.js';
 
 // ==================================== Consts & vars ==================================== //
 const thisSubjects = ['subject-1', 'subject-2', 'subject-3'];
 
 let isDesktop;
 
-let subjectBar;
+let optionsBar;
 let subjects;
 
 let selectedSubject;
 let setSelectedSubject;
 
 // ==================================== Utils Fns ==================================== //
-function SubjectBarWithWrapper() {
+function OptionsBarWithWrapper() {
   [selectedSubject, setSelectedSubject] = useState(thisSubjects[0]);
 
   return (
-    <SubjectBar 
+    <OptionsBar 
       subjects={thisSubjects} 
       selectedSubject={selectedSubject} 
       setSelectedSubject={setSelectedSubject}
@@ -33,19 +33,19 @@ function SubjectBarWithWrapper() {
 function renderDesktop() { 
 	isDesktop = true;  
 
-  render(<SubjectBarWithWrapper/>) 
+  render(<OptionsBarWithWrapper/>) 
 	getParts()
 }
 
 function renderPhone() { 
 	isDesktop = false; 
   
-  render(<SubjectBarWithWrapper/>) 
+  render(<optionsBarWithWrapper/>) 
 	getParts()
 }
 
 function getParts() {
-  subjectBar = document.querySelector('.subject-bar');
+  optionsBar = document.querySelector('.subject-bar');
   subjects = document.querySelectorAll('.subject');
 }
 
@@ -71,14 +71,19 @@ afterEach(() => {
 })
 
 // ==================================== Tests ======================================= //
-describe('<SubjectBar subjects={[]} selectedSubject={""}  setSelectedSubject={""}/>', () => {
+describe('<OptionsBar subjects={[]} selectedSubject={""}  setSelectedSubject={""}/>', () => {
+  test.todo('classname arg')
+  test.todo('style arg')
+  test.todo('remove background test')
+  test.todo('add selected class on click')
+
   describe('desktop', () => {
     describe('on render', () => {
       describe('.subject-bar', () => {
         it('should render', () => {
           renderDesktop()
 
-          expect(subjectBar).not.toEqual(null)
+          expect(optionsBar).not.toEqual(null)
         })
       })
       
@@ -101,19 +106,19 @@ describe('<SubjectBar subjects={[]} selectedSubject={""}  setSelectedSubject={""
               renderDesktop()
 
               const res = hexToRGB(colors.background.highlight);
-              expect(subjectBar.style.background).toEqual(res)
+              expect(optionsBar.style.background).toEqual(res)
             })
 
             it('should have style.height = 100vh', () => {
               renderDesktop()
 
-              expect(subjectBar.style.height).toEqual('100vh')
+              expect(optionsBar.style.height).toEqual('100vh')
             })
   
             it('should have style.opacity = 0.9', () => {
               renderDesktop()
 
-              expect(subjectBar.style.opacity).toEqual('0.9')
+              expect(optionsBar.style.opacity).toEqual('0.9')
             })
           }) 
         })
@@ -127,9 +132,9 @@ describe('<SubjectBar subjects={[]} selectedSubject={""}  setSelectedSubject={""
             }`, () => {
               renderPhone()
 
-              expect(subjectBar.style.display).toEqual('flex')
-              expect(subjectBar.style.flexDirection).toEqual('column')
-              expect(subjectBar.style.height).toEqual('')
+              expect(optionsBar.style.display).toEqual('flex')
+              expect(optionsBar.style.flexDirection).toEqual('column')
+              expect(optionsBar.style.height).toEqual('')
             })
           }) 
         })
@@ -171,8 +176,8 @@ describe('<SubjectBar subjects={[]} selectedSubject={""}  setSelectedSubject={""
           }`, () => {
             renderDesktop()
 
-            expect(subjectBar.style.display).toEqual('flex')
-            expect(subjectBar.style.flexDirection).toEqual('column')
+            expect(optionsBar.style.display).toEqual('flex')
+            expect(optionsBar.style.flexDirection).toEqual('column')
           })
 
           it('.subject should have padding: 32px', () => {
