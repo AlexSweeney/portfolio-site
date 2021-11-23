@@ -66,7 +66,7 @@ afterEach(() => {
 })
 
 describe('<Project picture=[<img/>] picStyle={} textStyle={}>Text</Project>', () => {
-  describe.only('desktop', () => {
+  describe('desktop', () => {
     describe('on render', () => {
       describe('render', () => {
         test('it should render', () => {
@@ -150,12 +150,22 @@ describe('<Project picture=[<img/>] picStyle={} textStyle={}>Text</Project>', ()
 
   describe('phone', () => {
     describe('on render', () => {
-      test('it should render', () => {
-        renderPhone()
-
-        expect(project).not.toEqual(null)
-      })
+      describe('render', () => {
+        test('it should render', () => {
+          renderPhone()
   
+          expect(project).not.toEqual(null)
+        })
+
+        test('it should render children', () => {
+          renderPhone()
+  
+          expect(header).not.toEqual(null)
+          expect(text).not.toEqual(null)
+          expect(picture).not.toEqual(null)
+        }) 
+      })
+      
       describe('layout', () => {
         describe('text', () => {
           it(`should have style = {
@@ -167,7 +177,7 @@ describe('<Project picture=[<img/>] picStyle={} textStyle={}>Text</Project>', ()
 
             expect(text.style.display).toEqual('flex')
             expect(text.style.justifyContent).toEqual('center')
-            expect(text.style.alignItems).toEqual('flexStart')
+            expect(text.style.alignItems).toEqual('flex-start')
           })
         })
   
@@ -179,32 +189,26 @@ describe('<Project picture=[<img/>] picStyle={} textStyle={}>Text</Project>', ()
           }`, () => {
             renderPhone()
 
-            expect(text.style.position).toEqual('absolute')
-            expect(text.style.left).toEqual(picStyle.left)
-            expect(text.style.top).toEqual(picStyle.top)
+            expect(picture.style.position).toEqual('absolute')
+            expect(picture.style.left).toEqual(picStyle.left)
+            expect(picture.style.top).toEqual(picStyle.top)
           })
         })
       })
   
-      describe('text', () => {
-        test('it should display children', () => {
-          renderPhone()
-
-          expect(header).not.toEqual(null)
-          expect(text).not.toEqual(null)
-        })
-        
+      describe('text', () => { 
         describe('.header', () => {
           test('it should have fontFamily = fonts.head', () => {
             renderPhone()
 
-            expect(header.fontFamily).toEqual(fonts.head)
+            expect(header.style.fontFamily).toEqual(fonts.head)
           })
 
           test('it should have color = colors.font.light', () => {
             renderPhone()
-
-            expect(text.color).toEqual(colors.font.light)
+            
+            const res = hexToRGB(colors.font.light);
+            expect(header.style.color).toEqual(res)
           })
         })
 
@@ -212,13 +216,14 @@ describe('<Project picture=[<img/>] picStyle={} textStyle={}>Text</Project>', ()
           test('it should have fontFamily = fonts.body', () => {
             renderPhone()
 
-            expect(body.fontFamily).toEqual(fonts.body)
+            expect(text.style.fontFamily).toEqual(fonts.body)
           })
 
           test('it should have color = colors.font.light', () => {
             renderPhone()
 
-            expect(body.color).toEqual(colors.font.light)
+            const res = hexToRGB(colors.font.light);
+            expect(text.style.color).toEqual(res)
           })
         }) 
       }) 

@@ -2,12 +2,18 @@ import React from 'react';
 import { fonts, colors } from './../../styles/styles.js';
 
 export default function Project({ picture, textStyle, picStyle, children}) {
+  const desktopMatch = window.matchMedia('(min-width: 426px)').matches;
+
   const headerContainerStyle = {
     fontFamily: fonts.head,
     color: colors.font.light,
   }; 
 
   const textContainerStyle = {
+    display: desktopMatch ? '' : 'flex',
+    justifyContent: desktopMatch ? '' : 'center',
+    alignItems: desktopMatch ? '' : 'flex-start',
+
     position: 'absolute',
     left: textStyle.left,
     top: textStyle.top,
