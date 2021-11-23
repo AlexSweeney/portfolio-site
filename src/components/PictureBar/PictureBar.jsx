@@ -1,6 +1,6 @@
 import React, { useState } from "react"; 
 
-export default function PictureBar({ pictures, selectedPicture, setSelectedPicture }) {
+export default function PictureBar({ pictures, selectedPicture, setSelectedPicture, style }) {
   // ==================================== Consts / Vars =============================== //
   const desktopMatch = window.matchMedia('(min-width: 426px)').matches;
   const [showAll, setShowAll] = useState(false); 
@@ -11,12 +11,17 @@ export default function PictureBar({ pictures, selectedPicture, setSelectedPictu
     flexDirection: 'column',
     justifyContent: 'space-evenly',
     height: '100%',
+    ...style,
   };
 
   // ==================================== Event Handlers ============================== //
   function onSelectPicture(picture) { 
     setShowAll(oldVal => !oldVal)
     setSelectedPicture(picture)
+  }
+
+  function getSelectedClass(picture) {
+    return picture === selectedPicture ? 'selected-picture-container' : '';
   }
 
   // ==================================== Styles ====================================== //
@@ -26,7 +31,7 @@ export default function PictureBar({ pictures, selectedPicture, setSelectedPictu
         pictures.map((picture, i) => {
           if(desktopMatch || picture === selectedPicture || showAll === true)  {
             return <div 
-              className="picture-container" 
+              className={`picture-container ${getSelectedClass(picture)}`} 
               key={`picture-container-${i}`}
               onTouchStart={() => onSelectPicture(picture)}
             >{picture}</div>

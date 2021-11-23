@@ -65,6 +65,9 @@ afterEach(() => {
 })
 
 // ==================================== Tests ======================================= //
+test.todo('test - add selected picture class')
+test.todo('test - passed styles')
+
 describe('<PictureBar pictures=[]/>', () => {
   describe('desktop', () => { 
     describe('on render', () => {

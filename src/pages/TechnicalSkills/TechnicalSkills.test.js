@@ -61,7 +61,7 @@ function getParts() {
   topics = topicBar && topicBar.querySelectorAll('.topic');
 
   pictureBar = document.querySelector('.picture-bar');
-  pictures = pictureBar && pictureBar.querySelectorAll('.picture');
+  pictures = pictureBar && pictureBar.querySelectorAll('.picture-container');
 }
 
 // ==================================== Mock ======================================= //
@@ -274,8 +274,8 @@ describe('<TechnicalSkills data={data}/>', () => {
 
           const targetPictures = ['project-1', 'project-2'];
 
-          pictures.forEach((picture, i) => {
-            expect(picture.className).toEqual(targetPictures[i])
+          pictures.forEach((picture, i) => { 
+            expect(picture.textContent).toEqual(targetPictures[i])
           })
         })
       })
@@ -294,7 +294,7 @@ describe('<TechnicalSkills data={data}/>', () => {
     })
   })
 
-  describe.skip('phone', () => {
+  describe('phone', () => {
     describe('.technical-skills', () => {
       describe('render', () => {
         it('should render', () => {
@@ -328,13 +328,13 @@ describe('<TechnicalSkills data={data}/>', () => {
         it(`should have style = {
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
+          justify-content: space-evenly;
         }`, () => {
           renderPhone()
 
-          expect(pictureBar.style.display).toEqual('flex')
-          expect(pictureBar.style.flexDirection).toEqual('column')
-          expect(pictureBar.style.justifyContent).toEqual('space-between')
+          expect(technicalSkills.style.display).toEqual('flex')
+          expect(technicalSkills.style.flexDirection).toEqual('column')
+          expect(technicalSkills.style.justifyContent).toEqual('space-evenly')
         })
       })  
     })
@@ -367,14 +367,15 @@ describe('<TechnicalSkills data={data}/>', () => {
         describe('background', () => {
           it('should have background = colors.background.highlight', () => {
             renderPhone()
+            const res = hexToRGB(colors.background.highlight);
 
-            expect(subjectBar.style.background).toEqual(colors.background.highlight)
+            expect(subjectBar.style.background).toEqual(res)
           })  
 
           it('should have opacity: 0.9', () => {
             renderPhone()
-
-            expect(subjectBar.style.opactiy).toEqual('0.9')
+            
+            expect(subjectBar.style.opacity).toEqual('0.9')
           })
         })
 
@@ -387,8 +388,9 @@ describe('<TechnicalSkills data={data}/>', () => {
 
           it('should have color = colors.font.light', () => {
             renderPhone()
+            const res = hexToRGB(colors.font.light);
 
-            expect(subjectBar.style.color).toEqual(colors.font.light)
+            expect(subjectBar.style.color).toEqual(res)
           })
         })
       })
@@ -465,23 +467,7 @@ describe('<TechnicalSkills data={data}/>', () => {
         })
       })
 
-      describe('style', () => {
-        describe('background', () => {
-          it('should have background = colors.background.highlight', () => {
-            renderPhone()
-
-            const res = hexToRGB(colors.background.highlight);
-
-            expect(topicBar.style.background).toEqual(res)
-          })
-
-          it('should have opacity: 0.9', () => {
-            renderPhone()
-
-            expect(topicBar.style.opacity).toEqual('0.9')
-          })
-        })
-
+      describe('style', () => {  
         describe('text', () => {
           it('should have fontFamily = fonts.head', () => {
             renderPhone()
@@ -502,17 +488,18 @@ describe('<TechnicalSkills data={data}/>', () => {
         it('should display all topics', () => {
           renderPhone()
 
-          // touch
+          // touch 
           fireEvent.touchStart(topics[0])
           topics = document.querySelectorAll('.topic');
 
-          // check
-          const thisTopics = Object.keys(data[0].topics);
-
-          expect(topics.length).toEqual(thisTopics.length)
+          // check  
+          const subjectNames = Object.keys(data);
+          const topicNames = Object.keys(data[subjectNames[0]]);
+  
+          expect(topics.length).toEqual(topicNames.length)
 
           topics.forEach((topic, i) => {
-            expect(topic.textContent).toEqual(thisTopics[i])
+            expect(topic.textContent).toEqual(topicNames[i])
           })
         })
       })
@@ -556,9 +543,9 @@ describe('<TechnicalSkills data={data}/>', () => {
       describe('content', () => {
         it('should only show selectedPicture', () => {
           renderPhone()
-
+          
           expect(pictures.length).toEqual(1)
-          expect(pictures[0].className).toContain('selected-picture')
+          expect(pictures[0].className).toContain('selected-picture-container')
         })
       })
 
@@ -582,15 +569,17 @@ describe('<TechnicalSkills data={data}/>', () => {
 
           // touch
           fireEvent.touchStart(pictures[0])
-          pictures = document.querySelectorAll('.picture');
+          pictures = document.querySelectorAll('.picture-container');
 
           // check
-          const thisPictures = data[0].topics[0];
+          const subjectNames = Object.keys(data);
+          const topicNames = Object.keys(data[subjectNames[0]]);
+          const thisPictures = data[subjectNames[0]][topicNames[0]]; 
 
           expect(pictures.length).toEqual(thisPictures.length)
 
           pictures.forEach((picture, i) => {
-            expect(picture).toEqual(thisPictures[i])
+            expect(picture.textContent).toEqual(thisPictures[i])
           })
         })
       })
@@ -601,12 +590,12 @@ describe('<TechnicalSkills data={data}/>', () => {
 
           // touch
           fireEvent.touchStart(pictures[0])
-          pictures = document.querySelectorAll('.picture');
+          pictures = document.querySelectorAll('.picture-container');
 
           // touch
           const targetPicture = pictures[1];
           fireEvent.touchStart(targetPicture)
-          pictures = document.querySelectorAll('.picture');
+          pictures = document.querySelectorAll('.picture-container');
 
           // check
           expect(pictures[0]).toEqual(targetPicture)
@@ -617,12 +606,12 @@ describe('<TechnicalSkills data={data}/>', () => {
 
           // touch
           fireEvent.touchStart(pictures[0])
-          pictures = document.querySelectorAll('.picture');
+          pictures = document.querySelectorAll('.picture-container');
 
           // touch
           const targetPicture = pictures[1];
           fireEvent.touchStart(targetPicture)
-          pictures = document.querySelectorAll('.picture');
+          pictures = document.querySelectorAll('.picture-container');
 
           // check
           expect(pictures.length).toEqual(1)

@@ -22,7 +22,7 @@ export default function OptionsBar({ options, selectedOption, setSelectedOption,
   };
 
   // ====================================================== Fns ========================================================= //
-  function onSelectOption(option) {  
+  function onSelectOption(option) {   
     setSelectedOption(option)
     setShowAll(oldVal => !oldVal)
   }
