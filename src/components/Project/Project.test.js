@@ -1,7 +1,10 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
+import { fonts, colors } from './../../styles/styles.js';
+import { hexToRGB } from './../../utils/testUtils.js'; 
 import Project from './Project.jsx';
 
+// ==================================== Consts & Vars =============================== //
 const projectText = <><h3 className="project-header">Text Header</h3><p className="project-text">test text</p></>;
 const picStyle = {
   left: '36px',
@@ -17,6 +20,7 @@ let isDesktop;
 let project;
 let header;
 let text;
+let picture;
 
 // ==================================== Mock ======================================= //
 // matches = used by media query
@@ -38,21 +42,22 @@ Object.defineProperty(window, 'matchMedia', {
 function renderDesktop() { 
 	isDesktop = true;  
 
-  render(<Project picStyle={picStyle}>{projectText}</Project>) 
+  render(<Project picStyle={picStyle} textStyle={textStyle}>{projectText}</Project>) 
 	getParts()
 }
 
 function renderPhone() { 
 	isDesktop = false; 
   
-  render(<Project>{projectText}</Project>) 
+  render(<Project picStyle={picStyle} textStyle={textStyle}>{projectText}</Project>) 
 	getParts()
 }
 
 function getParts() {
   project = document.querySelector('.project');
-  header = project && project.querySelector('.project-header');
-  text = project && project.querySelector('.project-text');
+  header = project && project.querySelector('.header-container');
+  text = project && project.querySelector('.text-container');
+  picture = project && project.querySelector('.picture-container');
 }
 
 // ==================================== Teardown ==================================== //
@@ -61,14 +66,24 @@ afterEach(() => {
 })
 
 describe('<Project picture=[<img/>] picStyle={} textStyle={}>Text</Project>', () => {
-  describe('desktop', () => {
+  describe.only('desktop', () => {
     describe('on render', () => {
-      test('it should render', () => {
-        renderDesktop()
-
-        expect(project).not.toEqual(null)
-      })
+      describe('render', () => {
+        test('it should render', () => {
+          renderDesktop()
   
+          expect(project).not.toEqual(null)
+        })
+  
+        test('it should render children', () => {
+          renderDesktop()
+  
+          expect(header).not.toEqual(null)
+          expect(text).not.toEqual(null)
+          expect(picture).not.toEqual(null)
+        }) 
+      })
+      
       describe('layout', () => {
         describe('text', () => {
           it(`should have style = {
@@ -91,47 +106,42 @@ describe('<Project picture=[<img/>] picStyle={} textStyle={}>Text</Project>', ()
             top: props.picStyle.top,
           }`, () => {
             renderDesktop()
-
-            expect(text.style.position).toEqual('absolute')
-            expect(text.style.left).toEqual(picStyle.left)
-            expect(text.style.top).toEqual(picStyle.top)
+ 
+            expect(picture.style.position).toEqual('absolute')
+            expect(picture.style.left).toEqual(picStyle.left)
+            expect(picture.style.top).toEqual(picStyle.top)
           })
         })
       })
   
       describe('text', () => {
-        test('it should display children', () => {
-          renderDesktop()
-
-          expect(header).not.toEqual(null)
-          expect(text).not.toEqual(null)
-        })
-        
         describe('.header', () => {
           test('it should have fontFamily = fonts.head', () => {
             renderDesktop()
 
-            expect(header.fontFamily).toEqual(fonts.head)
+            expect(header.style.fontFamily).toEqual(fonts.head)
           })
 
           test('it should have color = colors.font.light', () => {
             renderDesktop()
 
-            expect(text.color).toEqual(colors.font.light)
+            const res = hexToRGB(colors.font.light);
+            expect(header.style.color).toEqual(res)
           })
         })
 
-        describe('.body', () => {
+        describe('.text', () => {
           test('it should have fontFamily = fonts.body', () => {
             renderDesktop()
 
-            expect(body.fontFamily).toEqual(fonts.body)
+            expect(text.style.fontFamily).toEqual(fonts.body)
           })
 
           test('it should have color = colors.font.light', () => {
             renderDesktop()
 
-            expect(body.color).toEqual(colors.font.light)
+            const res = hexToRGB(colors.font.light);
+            expect(text.style.color).toEqual(res)
           })
         }) 
       }) 
@@ -207,7 +217,7 @@ describe('<Project picture=[<img/>] picStyle={} textStyle={}>Text</Project>', ()
 
           test('it should have color = colors.font.light', () => {
             renderPhone()
-            
+
             expect(body.color).toEqual(colors.font.light)
           })
         }) 
