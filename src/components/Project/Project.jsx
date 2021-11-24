@@ -1,7 +1,7 @@
 import React from 'react';
 import { fonts, colors } from './../../styles/styles.js';
 
-export default function Project({ picture, textStyle, picStyle, children}) {
+export default function Project({ picture, textStyle, picStyle, children, i}) {
   const desktopMatch = window.matchMedia('(min-width: 426px)').matches;
 
   const headerContainerStyle = {
@@ -31,7 +31,7 @@ export default function Project({ picture, textStyle, picStyle, children}) {
   const text = children.props.children.filter(obj => obj.props.className.includes('project-text'));
 
   return (
-    <section className="project">
+    <section className="project" key={`project-${i}`}>
       <div className="text-container" style={textContainerStyle}>
         <div className="header-container" style={headerContainerStyle}>
           {header}

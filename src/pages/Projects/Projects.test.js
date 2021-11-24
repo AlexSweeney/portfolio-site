@@ -5,9 +5,10 @@ import { colors } from '../../styles/styles';
 import { hexToRGB } from '../../utils/testUtils';
 
 // ==================================== Consts ====================================== //
-const thisProjs = [<div className="project">Project-1</div>, <div className="project">Project-2</div>];
+const thisProjs = [<div className="project" key="project-1">Project-1</div>, <div className="project" key="project-2">Project-2</div>];
 let projectView;
 let projects;
+let isDesktop;
 
 // ==================================== Mock ======================================= //
 // matches = used by media query
@@ -41,7 +42,7 @@ function renderPhone() {
 }
 
 function getParts() {
-  projectView = document.querySelector('.project-view');
+  projectView = document.querySelector('.projects');
   projects = document.querySelectorAll('.project')
 }
 
@@ -67,8 +68,8 @@ describe('<Projects projs={[]}/>', () => {
 
         expect(projects.length).toEqual(thisProjs.length)
 
-        projects.forEach((project, i) => {
-          expect(project).toEqual(thisProjs[i])
+        projects.forEach((project, i) => { 
+          expect(project.textContent).toEqual(thisProjs[i].props.children)
         })
       })
     })
@@ -79,19 +80,19 @@ describe('<Projects projs={[]}/>', () => {
           renderDesktop()
 
           const res = hexToRGB(colors.background.dark);
-          expect(projectView.background).toEqual(res)
+          expect(projectView.style.background).toEqual(res)
         })
       })
 
       describe('layout', () => {
-        it(`should have style = {
+        it.only(`should have style = {
           display: flex;
           flex-direction: column;
         }`, () => {
           renderDesktop()
 
-          expect(projectView.display).toEqual('flex')
-          expect(projectView.flexDirection).toEqual('column')
+          expect(projectView.style.display).toEqual('flex')
+          expect(projectView.style.flexDirection).toEqual('column')
         })
       })
     })
