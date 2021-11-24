@@ -85,7 +85,7 @@ describe('<Projects projs={[]}/>', () => {
       })
 
       describe('layout', () => {
-        it.only(`should have style = {
+        it(`should have style = {
           display: flex;
           flex-direction: column;
         }`, () => {
@@ -113,8 +113,8 @@ describe('<Projects projs={[]}/>', () => {
 
         expect(projects.length).toEqual(thisProjs.length)
 
-        projects.forEach((project, i) => {
-          expect(project).toEqual(thisProjs[i])
+        projects.forEach((project, i) => { 
+          expect(project.textContent).toEqual(thisProjs[i].props.children)
         })
       })
     })
@@ -136,8 +136,8 @@ describe('<Projects projs={[]}/>', () => {
         }`, () => {
           renderPhone()
 
-          expect(projectView.display).toEqual('flex')
-          expect(projectView.flexDirection).toEqual('column')
+          expect(projectView.style.display).toEqual('flex')
+          expect(projectView.style.flexDirection).toEqual('column')
         })
       })
     })
