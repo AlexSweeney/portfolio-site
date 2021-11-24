@@ -1,14 +1,14 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
-import { fonts, colors } from './../styles/styles.js';
+import { fonts, colors } from './../../styles/styles.js';
 import Contact from './Contact.jsx';
-import { hexToRGB } from './../utils/testUtils.js'; 
+import { hexToRGB } from '../../utils/testUtils.js'; 
 
 // ============================================ Vars ============================================ //
 let home;
 let heading;
 let subheading; 
-let link;
+let links;
 
 let thisLinks = [<div className='link' key={'link-1'}>Link-1</div>, <div className='link' key={'link-1'}>Link-2</div>];
 
@@ -72,6 +72,14 @@ describe('<Home/>', () => {
         expect(home.style.alignItems).toEqual('center')
         expect(home.style.height).toEqual('100vh')
       })
+    })
+
+    describe('.link', () => {
+      it('should have margin = 0 16px', () => [
+        links.forEach(link => {
+          expect(link.style.margin).toEqual('0 16px')
+        })
+      ])
     })
   })
 
