@@ -147,6 +147,7 @@ describe('<PictureBar pictures=[]/>', () => {
         describe('second touch', () => {
           it('should change props.selectedPicture to touched image', () => {
             renderPhone()
+            
             // open menu
             fireEvent.touchStart(pictures[0])
 

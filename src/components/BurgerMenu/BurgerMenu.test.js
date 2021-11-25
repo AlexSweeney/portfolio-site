@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 import BurgerMenu from './BurgerMenu.jsx';
-import { colors, fonts } from '../styles/styles.js';
-import { hexToRGB } from '../utils/testUtils';
+import { colors, fonts } from '../../styles/styles.js';
+import { hexToRGB } from '../../utils/testUtils';
 
 const linkNames = ['link-1', 'link-2', 'link-3'];
 let burgerMenu;
