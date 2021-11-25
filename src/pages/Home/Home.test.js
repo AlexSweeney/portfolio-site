@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
-import { fonts, colors } from './../styles/styles.js';
+import { fonts, colors } from '../../styles/styles.js';
 import Home from './Home.jsx';
-import { hexToRGB } from './../utils/testUtils.js'; 
+import { hexToRGB } from '../../utils/testUtils.js'; 
 
 // ============================================ Vars ============================================ //
 let home;

@@ -1,5 +1,5 @@
 import React from "react";
-import { colors, fonts } from './../styles/styles.js';
+import { colors, fonts } from '../../styles/styles.js';
 
 export default function Home() {
   const homeStyle = {
