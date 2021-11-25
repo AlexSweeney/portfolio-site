@@ -7,25 +7,32 @@ import { colors, fonts } from '../../styles/styles.js';
 import { hexToRGB } from '../../utils/testUtils.js';
 
 // ==================================== Consts & vars ==================================== //
-const thisSubjects = ['subject-1', 'subject-2', 'subject-3'];
+const thisOptions = ['subject-1', 'subject-2', 'subject-3'];
+const thisClassName = 'test';
+const thisStyle = {
+  color: 'red',
+  background: 'green',
+};
 
 let isDesktop;
 
 let optionsBar;
-let subjects;
+let options;
 
-let selectedSubject;
-let setSelectedSubject;
+let selectedOption;
+let setSelectedOption;
 
 // ==================================== Utils Fns ==================================== //
 function OptionsBarWithWrapper() {
-  [selectedSubject, setSelectedSubject] = useState(thisSubjects[0]);
+  [selectedOption, setSelectedOption] = useState(thisOptions[0]);
 
   return (
     <OptionsBar 
-      subjects={thisSubjects} 
-      selectedSubject={selectedSubject} 
-      setSelectedSubject={setSelectedSubject}
+      options={thisOptions} 
+      selectedOption={selectedOption} 
+      setSelectedOption={setSelectedOption}
+      className={thisClassName}
+      style={thisStyle}
     />
   )
 } 
@@ -40,13 +47,13 @@ function renderDesktop() {
 function renderPhone() { 
 	isDesktop = false; 
   
-  render(<optionsBarWithWrapper/>) 
+  render(<OptionsBarWithWrapper/>) 
 	getParts()
 }
 
 function getParts() {
-  optionsBar = document.querySelector('.subject-bar');
-  subjects = document.querySelectorAll('.subject');
+  optionsBar = document.querySelector(`.${thisClassName}-bar`);
+  options = document.querySelectorAll(`.${thisClassName}`);
 }
 
 // ==================================== Mock ======================================= //
@@ -71,54 +78,57 @@ afterEach(() => {
 })
 
 // ==================================== Tests ======================================= //
-describe('<OptionsBar subjects={[]} selectedSubject={""}  setSelectedSubject={""}/>', () => {
-  test.todo('classname arg')
+describe('<OptionsBar/>', () => {
+  test.todo('className, arg')
   test.todo('style arg')
   test.todo('remove background test')
   test.todo('add selected class on click')
 
-  describe('desktop', () => {
+  describe.only('desktop', () => {
     describe('on render', () => {
-      describe('.subject-bar', () => {
-        it('should render', () => {
+      describe('render', () => {
+        it('should render with className = `${props.className}-bar`', () => {
           renderDesktop()
-
-          expect(optionsBar).not.toEqual(null)
+          
+          const thisOptionsBar = document.querySelector(`.${thisClassName}-bar`);
+          
+          expect(thisOptionsBar).not.toEqual(null)
         })
       })
       
       describe('content', () => {
-        describe('.subject', () => {
-          it('should show text for each subject', () => {
+        describe('.options', () => {
+          it('should show text for each option in props.option, with className = `${props.className}`', () => {
             renderDesktop()
 
-            subjects.forEach((subject, i) => {
-              expect(subject.textContent).toEqual(thisSubjects[i])
+            const thisOptionElements = document.querySelectorAll(`.${thisClassName}`);
+
+            expect(thisOptionElements.length).toEqual(thisOptions.length)
+
+            thisOptionElements.forEach((option, i) => {
+              expect(option.textContent).toEqual(thisOptions[i])
             })
           })
         }) 
       })
 
       describe('style', () => {
+        describe('props.styles', () => {
+          it('should add styles from props.styles', () => {
+            renderDesktop()
+
+            Object.keys(thisStyle).forEach(key => {
+              expect(optionsBar.style[key]).toEqual(thisStyle[key])
+            })
+          })
+        })
+
         describe('background', () => {
           describe('.subject-bar', () => {
-            it('should have style.background = colors.background.highlight', () => {
-              renderDesktop()
-
-              const res = hexToRGB(colors.background.highlight);
-              expect(optionsBar.style.background).toEqual(res)
-            })
-
             it('should have style.height = 100vh', () => {
               renderDesktop()
 
               expect(optionsBar.style.height).toEqual('100vh')
-            })
-  
-            it('should have style.opacity = 0.9', () => {
-              renderDesktop()
-
-              expect(optionsBar.style.opacity).toEqual('0.9')
             })
           }) 
         })
@@ -192,12 +202,18 @@ describe('<OptionsBar subjects={[]} selectedSubject={""}  setSelectedSubject={""
     })
     
     describe('on click', () => {
-      it('should set selectedSubject to clicked subject', () => {
+      it('should add class `selected-${className}` to clicked option, and remove from all other options', () => {
         renderDesktop()
 
-        userEvent.click(subjects[1])
+        userEvent.click(options[1])
 
-        expect(selectedSubject).toEqual(thisSubjects[1]) 
+        options.forEach((option, i) => {
+          if(i === 1) {
+            expect(option.className).toContain(`selected-${thisClassName}`)
+          } else {
+            expect(option.className).not.toContain(`selected-${thisClassName}`)
+          }
+        }) 
       })
     })
   })
