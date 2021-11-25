@@ -84,7 +84,7 @@ describe('<PictureBar pictures=[]/>', () => {
           expect(pictures.length).toEqual(thisPictures.length) 
  
           pictures.forEach((picture, i) => {   
-            expect(picture.className).toEqual('picture-container')
+            expect(picture.className).toContain('picture-container')
             expect(picture.children[0].className).toEqual(thisPictures[i].props.className)
           })
         })
@@ -122,7 +122,7 @@ describe('<PictureBar pictures=[]/>', () => {
 
           expect(pictures.length).toEqual(1)
 
-          expect(pictures[0].className).toEqual('picture-container') 
+          expect(pictures[0].className).toContain('picture-container') 
           expect(pictures[0].children[0].className).toEqual(selectedPicture.props.className)
         })
       }) 
@@ -138,7 +138,7 @@ describe('<PictureBar pictures=[]/>', () => {
             expect(pictures.length).toEqual(thisPictures.length)
 
             pictures.forEach((picture, i) => {   
-              expect(picture.className).toEqual('picture-container')
+              expect(picture.className).toContain('picture-container')
               expect(picture.children[0].className).toEqual(thisPictures[i].props.className)
             })
           })
