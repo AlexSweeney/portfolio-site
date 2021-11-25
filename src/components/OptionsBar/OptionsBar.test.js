@@ -78,13 +78,8 @@ afterEach(() => {
 })
 
 // ==================================== Tests ======================================= //
-describe('<OptionsBar/>', () => {
-  test.todo('className, arg')
-  test.todo('style arg')
-  test.todo('remove background test')
-  test.todo('add selected class on click')
-
-  describe.only('desktop', () => {
+describe('<OptionsBar/>', () => { 
+  describe('desktop', () => {
     describe('on render', () => {
       describe('render', () => {
         it('should render with className = `${props.className}-bar`', () => {
@@ -113,91 +108,58 @@ describe('<OptionsBar/>', () => {
       })
 
       describe('style', () => {
-        describe('props.styles', () => {
-          it('should add styles from props.styles', () => {
-            renderDesktop()
-
-            Object.keys(thisStyle).forEach(key => {
-              expect(optionsBar.style[key]).toEqual(thisStyle[key])
+        describe('options bar', () => {
+          describe('props.styles', () => {
+            it('should add styles from props.styles', () => {
+              renderDesktop()
+  
+              Object.keys(thisStyle).forEach(key => {
+                expect(optionsBar.style[key]).toEqual(thisStyle[key])
+              })
             })
           })
-        })
 
-        describe('background', () => {
-          describe('.subject-bar', () => {
-            it('should have style.height = 100vh', () => {
-              renderDesktop()
-
-              expect(optionsBar.style.height).toEqual('100vh')
-            })
-          }) 
-        })
-
-        describe('layout', () => {
-          describe('.subject-bar', () => {
+          describe('layout', () => {
             it(`should have style = {
               display: 'flex',
               flexDirection: 'column',
-              height: '',
+              height: '100vh',
             }`, () => {
-              renderPhone()
+              renderDesktop()
 
               expect(optionsBar.style.display).toEqual('flex')
               expect(optionsBar.style.flexDirection).toEqual('column')
-              expect(optionsBar.style.height).toEqual('')
-            })
-          }) 
-        })
-
-        describe('font', () => {
-          describe('.subject', () => {
-            it('should have style.fontFamily = fonts.head', () => {
-              renderDesktop()
-
-              subjects.forEach(subject => {
-                expect(subject.style.fontFamily).toEqual(fonts.head)
-              }) 
-            })
-
-            it('should have style.color = colors.font.light', () => {
-              renderDesktop()
-
-              const res = hexToRGB(colors.font.light);
-
-              subjects.forEach(subject => {
-                expect(subject.style.color).toEqual(res)
-              }) 
-            })
-
-            it('should have style.textDecoration = "none"', () => {
-              renderDesktop()
-
-              subjects.forEach(subject => {
-                expect(subject.style.textDecoration).toEqual('none')
-              }) 
-            })
-          }) 
-        })
-
-        describe('layout', () => {
-          it(`should have style = {
-            display: flex,
-            flexDirection: column, 
-          }`, () => {
-            renderDesktop()
-
-            expect(optionsBar.style.display).toEqual('flex')
-            expect(optionsBar.style.flexDirection).toEqual('column')
-          })
-
-          it('.subject should have padding: 32px', () => {
-            renderDesktop()
-
-            subjects.forEach(subject => {
-              expect(subject.style.padding).toEqual('32px')
+              expect(optionsBar.style.height).toEqual('100vh')
             }) 
           })
-        })
+        }) 
+
+        describe('option', () => {
+          it(`should have style = {
+            fontFamily = fonts.head,
+            color: colors.font.light,
+            textDecoration: 'none',
+          }`, () => {
+            renderDesktop()
+            const res = hexToRGB(colors.font.light);
+
+            options.forEach(option => {
+              expect(option.style.fontFamily).toEqual(fonts.head)
+              expect(option.style.color).toEqual(res)
+              expect(option.style.textDecoration).toEqual('none')
+            }) 
+          }) 
+
+          describe('layout', () => { 
+            it('should have padding: 32px', () => {
+              renderDesktop()
+  
+              options.forEach(option => {
+                expect(option.style.padding).toEqual('32px')
+              }) 
+            })
+          })
+        }) 
       })
     })
     
@@ -220,63 +182,120 @@ describe('<OptionsBar/>', () => {
 
   describe('phone', () => {
     describe('on render', () => {
-      it('should display only selected subject', () => { 
+      it('should render with className = `${props.className}-bar`', () => {
+        renderPhone()
+        
+        const thisOptionsBar = document.querySelector(`.${thisClassName}-bar`);
+        
+        expect(thisOptionsBar).not.toEqual(null)
+      })
+    })
+
+    describe('style', () => {
+      describe('optionsBar', () => {
+        it(`should have style = {
+          display: 'flex',
+          flexDirection: 'column',
+          height: '',
+        }`, () => {
+          renderPhone()
+
+          expect(optionsBar.style.display).toEqual('flex')
+          expect(optionsBar.style.flexDirection).toEqual('column')
+          expect(optionsBar.style.height).toEqual('')
+        })
+  
+        it('should add styles from props.styles', () => {
+          renderPhone()
+  
+          Object.keys(thisStyle).forEach(key => {
+            expect(optionsBar.style[key]).toEqual(thisStyle[key])
+          })
+        })
+      }) 
+
+      describe('option', () => {
+        describe('layout', () => {
+          it('should have padding = 32px', () => {
+            renderPhone()
+
+            options.forEach(option => {
+              expect(option.style.padding).toEqual('32px')
+            })
+          })
+        })
+
+        describe('font', () => {
+          it(`should have style = {
+            fontFamily: fonts.head, 
+            color: colors.font.light,
+            textDecoration: 'none',
+          }`, () => {
+            renderPhone()
+
+            const res = hexToRGB(colors.font.light);
+
+            options.forEach(option => {
+              expect(option.style.fontFamily).toEqual(fonts.head)
+              expect(option.style.color).toEqual(res)
+              expect(option.style.textDecoration).toEqual('none')
+            })
+          })
+        }) 
+      })
+    })
+
+    describe('content', () => {
+      it('should only display selected option', () => { 
+        renderPhone()
+ 
+        thisOptions.forEach(option => { 
+          if(option === selectedOption) {
+            expect(screen.queryByText(`${option}`)).not.toEqual(null)
+          } else {
+            expect(screen.queryByText(`${option}`)).toEqual(null)
+          } 
+        })
+      })
+
+      it('selected option should have className = `${props.className}`', () => {
         renderPhone()
 
-        expect(screen.queryByText(`${selectedSubject}`)).not.toEqual(null)
-
-        subjects.forEach(subject => {
-          expect(screen.queryByText(`${subject}`)).toEqual(null)
-        })
+        expect(screen.queryByText(`${selectedOption}`).className).toContain(`${thisClassName}`)
       })
     })
     
     describe('on touch', () => {
-      it('should display all subjects', () => {
-        renderPhone()
-
-        // touch
-        fireEvent.touchStart(subjects[0])  
-
-        // check
-        thisSubjects.forEach(subject => {
-          expect(screen.queryByText(`${subject}`)).not.toEqual(null)
+      describe('on first touch', () => {
+        it('should display all options', () => {
+          renderPhone()
+  
+          // touch
+          fireEvent.touchStart(options[0])  
+  
+          // check
+          thisOptions.forEach(option => {
+            expect(screen.queryByText(`${option}`)).not.toEqual(null)
+          })
         })
       })
-    })
-
-    describe('on second touch', () => {
-      it('should change selectedSubject', () => {
-        renderPhone() 
-
-        // open menu
-        fireEvent.touchStart(subjects[0])
-        
-        // select new option
-        getParts()
-        fireEvent.touchStart(subjects[1])
-
-        // test
-        expect(selectedSubject).toEqual(subjects[1].textContent)
-      })
-
-      it('should close all subjects except for clicked subject', () => {
-        renderPhone()
-
-        // open menu
-        fireEvent.touchStart(subjects[0])
       
-        // select new option
-        getParts()
-        fireEvent.touchStart(subjects[1])
-
-        // test
-        thisSubjects.forEach((subject, i) => {
-          if(i === 1) { 
-            expect(screen.queryByText(`${subject}`)).not.toEqual(null)
-          } else {
-            expect(screen.queryByText(`${subject}`)).toEqual(null)
-          } 
+      describe('on second touch', () => {
+        it('should add selected class "`selected-${className}`" to touched option and hide all other options', () => {
+          renderPhone() 
+  
+          // open menu
+          fireEvent.touchStart(options[0])
+          
+          // select new option
+          getParts()
+          const newOption = options[1];
+          fireEvent.touchStart(newOption)
+  
+          // test
+          getParts()
+          expect(options.length).toEqual(1)
+          expect(options[0]).toEqual(newOption)
         })
       }) 
     }) 
