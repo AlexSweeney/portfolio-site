@@ -5,6 +5,11 @@ import PictureBar from './PictureBar.jsx';
 
 // ==================================== Consts / Vars ================================ //
 const thisPictures = [<div className="picture-1"></div>, <div className="picture-2"></div>, <div className="picture-3"></div>];
+const thisStyle = {
+  color: 'red',
+  background: 'yellow',
+};
+
 let selectedPicture;
 let setSelectedPicture;
 
@@ -20,7 +25,8 @@ function PictureBarWrapper() {
     <PictureBar 
       pictures={thisPictures} 
       selectedPicture={selectedPicture} 
-      setSelectedPicture={setSelectedPicture}/>
+      setSelectedPicture={setSelectedPicture}
+      style={thisStyle}/>
   )
 }
 
@@ -65,18 +71,17 @@ afterEach(() => {
 })
 
 // ==================================== Tests ======================================= //
-test.todo('test - add selected picture class')
-test.todo('test - passed styles')
-
-describe('<PictureBar pictures=[]/>', () => {
+describe('<PictureBar/>', () => {
   describe('desktop', () => { 
     describe('on render', () => {
-      it('should render', () => {
-        renderDesktop()
-
-        expect(pictureBar).not.toEqual(null)
-      }) 
-
+      describe('render', () => {
+        it('should render', () => {
+          renderDesktop()
+  
+          expect(pictureBar).not.toEqual(null)
+        }) 
+      })
+       
       describe('content', () => {
         it('should render each picture inside picture container element in props.pictures', () => {
           renderDesktop()
@@ -89,22 +94,30 @@ describe('<PictureBar pictures=[]/>', () => {
           })
         })
       })
-    })
-      
-    describe('layout', () => {
-      it(`should have style : {
-        display: flex,
-        flex-direction: column,
-        justify-content: space-evenly,
-        height: 100%,
-      }`, () => {
-        renderDesktop()
 
-        expect(pictureBar.style.display).toEqual('flex')
-        expect(pictureBar.style.flexDirection).toEqual('column')
-        expect(pictureBar.style.justifyContent).toEqual('space-evenly')
-        expect(pictureBar.style.height).toEqual('100%')
-      })
+      describe('layout', () => {
+        it(`should have style : {
+          display: flex,
+          flex-direction: column,
+          justify-content: space-evenly,
+          height: 100%,
+        }`, () => {
+          renderDesktop()
+  
+          expect(pictureBar.style.display).toEqual('flex')
+          expect(pictureBar.style.flexDirection).toEqual('column')
+          expect(pictureBar.style.justifyContent).toEqual('space-evenly')
+          expect(pictureBar.style.height).toEqual('100%')
+        })
+
+        it('should add styles from props.style', () => {
+          renderDesktop()
+
+          Object.keys(thisStyle).forEach(key => {
+            expect(pictureBar.style[key]).toEqual(thisStyle[key])
+          })
+        })
+      }) 
     }) 
   })
   
@@ -195,7 +208,22 @@ describe('<PictureBar pictures=[]/>', () => {
       }) 
       
       describe('on second touch', () => {
-        it('should set selectedPicture to touched picture and hide other pics', () => {
+        it('should add "selected-picture-container" class to touched picture container', () => {
+          renderPhone()
+
+          // open
+          fireEvent.touchStart(pictures[0])
+
+          // touch
+          pictures = document.querySelectorAll('.picture-container');
+          const newPic = pictures[1];
+          fireEvent.touchStart(newPic)
+
+          // check
+          expect(pictures[0].className).toContain('selected-picture-container')
+        })
+
+        it('should show touched picture and hide other pics', () => {
           renderPhone()
 
           // open
