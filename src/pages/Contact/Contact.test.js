@@ -8,9 +8,9 @@ import { hexToRGB } from '../../utils/testUtils.js';
 let home;
 let heading;
 let subheading; 
-let links;
-
-let thisLinks = [<div className='link' key={'link-1'}>Link-1</div>, <div className='link' key={'link-1'}>Link-2</div>];
+let githubLink;
+let linkedinLink;
+let links; 
 
 // ============================================ Setup / teardown ================================ //
 beforeEach(() => {
@@ -19,6 +19,8 @@ beforeEach(() => {
   heading = document.querySelector('.heading');
   subheading = document.querySelector('.subheading'); 
   links = document.querySelectorAll('.link');
+  githubLink = document.querySelector('.github-link');
+  linkedinLink = document.querySelector('.linkedin-link');
 })
 
 afterEach(() => {
@@ -47,11 +49,37 @@ describe('<Home/>', () => {
     })
 
     describe('.links', () => {
-      it('should render all links', () => {
-        expect(links.length).toEqual(thisLinks.length)
+      describe('github link', () => {
+        it('should render', () => {
+          expect(githubLink).not.toEqual(null)
+        })
 
-        links.forEach((link, i) => {
-          expect(link.textContent).toEqual(thisLinks[i].children)
+        it('should show github logo', () => {
+          const image = githubLink.querySelector('.github-icon');
+
+          expect(image).not.toEqual(null) 
+          expect(image.src).toEqual('http://localhost/GitHub-Mark-64px.png')
+        })
+
+        it('should link to "https://github.com/alexsweeney"', () => { 
+          expect(githubLink.href).toEqual('https://github.com/alexsweeney')
+        })
+      }) 
+
+      describe('linkedin link', () => {
+        it('should render', () => {
+          expect(linkedinLink).not.toEqual(null)
+        })
+
+        it('should show linkedin logo', () => {
+          const image = linkedinLink.querySelector('.linkedin-icon');
+
+          expect(image).not.toEqual(null)  
+          expect(image.src).toEqual('http://localhost/In-White-14@2x.png')
+        })
+
+        it('should link to "https://www.linkedin.com/in/alex-sweeney-b259721a/#"', () => { 
+          expect(linkedinLink.href).toEqual('https://www.linkedin.com/in/alex-sweeney-b259721a/#')
         })
       })
     })
@@ -75,11 +103,17 @@ describe('<Home/>', () => {
     })
 
     describe('.link', () => {
-      it('should have margin = 0 16px', () => [
+      it(`should have  style = {
+        margin: 0px 16px,
+        width: 172px,
+        height: 155px,
+      }`, () => {
         links.forEach(link => {
-          expect(link.style.margin).toEqual('0 16px')
+          expect(link.style.margin).toEqual('0px 16px')
+          expect(link.style.width).toEqual('172px')
+          expect(link.style.height).toEqual('155px')
         })
-      ])
+      })
     })
   })
 
@@ -115,5 +149,6 @@ describe('<Home/>', () => {
         expect(subheading.style.fontFamily).toEqual(fonts.body)
       })
     })
-  })
+  }) 
 })
+  
