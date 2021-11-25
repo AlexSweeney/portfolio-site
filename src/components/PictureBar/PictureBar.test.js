@@ -174,5 +174,44 @@ describe('<PictureBar pictures=[]/>', () => {
         })
       })
     })
+
+    describe('on touch', () => {
+      describe('on first touch', () => { 
+        it('should show all pictures', () => {
+          renderPhone()
+
+          // touch
+          fireEvent.touchStart(pictures[0])
+          
+          // check
+          pictures = document.querySelectorAll('.picture-container');
+          expect(pictures.length).toEqual(thisPictures.length)
+
+          pictures.forEach((picture, i) => { 
+            expect(picture.children[0].className).toContain(thisPictures[i].props.className)
+          })
+        }) 
+      }) 
+      
+      describe('on second touch', () => {
+        it('should set selectedPicture to touched picture and hide other pics', () => {
+          renderPhone()
+
+          // open
+          fireEvent.touchStart(pictures[0])
+
+          // touch
+          pictures = document.querySelectorAll('.picture-container');
+          const newPic = pictures[1];
+          fireEvent.touchStart(newPic)
+
+          // check
+          pictures = document.querySelectorAll('.picture-container');
+          expect(pictures.length).toEqual(1)
+
+          expect(pictures[0]).toEqual(newPic)
+        }) 
+      })
+    })
   })   
 })
