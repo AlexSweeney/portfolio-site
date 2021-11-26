@@ -349,7 +349,7 @@ describe('<Header/>', () => {
 
 				fireEvent.touchStart(burger)
 				fireEvent.touchStart(burger)
-				expect(burger.className).not.toContain("burger-selected")
+				expect(burger.className).not.toContain('burger-selected')
 			})
 
 			it('should call .props.setBurgerIsOpen with false', () => {
