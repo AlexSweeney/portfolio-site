@@ -77,15 +77,18 @@ export default function Header({
 			<div className="text-logo" style={logoStyle}>
 				{logoChars}
 			</div>
-		
-			<nav className="header-nav" style={navStyle}>
-				{
-					navLinks.map((navLink, i) => {
-						return <a href="" className="nav-link" key={`nav-link-${i}`} style={navLinkStyle}>{navLink}</a>
-					})
-				}
-			</nav>
-			
+
+			{
+				desktopMatch &&
+				<nav className="header-nav" style={navStyle}>
+					{
+						navLinks.map((navLink, i) => {
+							return <a href="" className="nav-link" key={`nav-link-${i}`} style={navLinkStyle}>{navLink}</a>
+						})
+					}
+				</nav>
+			}
+			 
 			{
 				phoneMatch &&
 				<div className={`burger ${burgerClass}`} style={burgerStyle} onTouchStart={onTouchBurger}>
