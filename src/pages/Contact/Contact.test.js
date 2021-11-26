@@ -31,7 +31,7 @@ afterEach(() => {
 describe('<Home/>', () => {
   describe('render', () => {
     it('should render', () => {
-      expect(home).not.toEqual(null)
+      expect(home).toBeTruthy()
     })
   })
 

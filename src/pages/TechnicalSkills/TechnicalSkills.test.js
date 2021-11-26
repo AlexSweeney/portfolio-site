@@ -92,7 +92,7 @@ describe('<TechnicalSkills data={data}/>', () => {
       it('should render', () => {
         renderDesktop()
 
-        expect(technicalSkills).not.toEqual(null)
+        expect(technicalSkills).toBeTruthy()
       })
     })
 
@@ -100,19 +100,19 @@ describe('<TechnicalSkills data={data}/>', () => {
       it('should render .subject-bar', () => {
         renderDesktop()
 
-        expect(subjectBar).not.toEqual(null)
+        expect(subjectBar).toBeTruthy()
       })
 
       it('should render .topic-bar', () => {
         renderDesktop()
 
-        expect(topicBar).not.toEqual(null)
+        expect(topicBar).toBeTruthy()
       })
 
       it('should render .picture-bar', () => {
         renderDesktop()
 
-        expect(pictureBar).not.toEqual(null)
+        expect(pictureBar).toBeTruthy()
       })
     })
 
@@ -300,7 +300,7 @@ describe('<TechnicalSkills data={data}/>', () => {
         it('should render', () => {
           renderPhone()
 
-          expect(technicalSkills).not.toEqual(null)
+          expect(technicalSkills).toBeTruthy()
         })
       })
       
@@ -308,19 +308,19 @@ describe('<TechnicalSkills data={data}/>', () => {
         it('should render .subject-bar', () => {
           renderPhone()
 
-          expect(subjectBar).not.toEqual(null)
+          expect(subjectBar).toBeTruthy()
         })
   
         it('should render .topic-bar', () => {
           renderPhone()
 
-          expect(topicBar).not.toEqual(null)
+          expect(topicBar).toBeTruthy()
         })
   
         it('should render .picture-bar', () => {
           renderPhone()
 
-          expect(pictureBar).not.toEqual(null)
+          expect(pictureBar).toBeTruthy()
         })
       })
 

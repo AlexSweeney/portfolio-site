@@ -87,7 +87,7 @@ describe('<OptionsBar/>', () => {
           
           const thisOptionsBar = document.querySelector(`.${thisClassName}-bar`);
           
-          expect(thisOptionsBar).not.toEqual(null)
+          expect(thisOptionsBar).toBeTruthy()
         })
       })
       
@@ -187,7 +187,7 @@ describe('<OptionsBar/>', () => {
         
         const thisOptionsBar = document.querySelector(`.${thisClassName}-bar`);
         
-        expect(thisOptionsBar).not.toEqual(null)
+        expect(thisOptionsBar).toBeTruthy()
       })
     })
 

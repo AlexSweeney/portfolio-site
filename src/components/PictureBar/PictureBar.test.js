@@ -78,7 +78,7 @@ describe('<PictureBar/>', () => {
         it('should render', () => {
           renderDesktop()
   
-          expect(pictureBar).not.toEqual(null)
+          expect(pictureBar).toBeTruthy()
         }) 
       })
        
@@ -126,7 +126,7 @@ describe('<PictureBar/>', () => {
       it('should render', () => {
         renderPhone()
 
-        expect(pictureBar).not.toEqual(null)
+        expect(pictureBar).toBeTruthy()
       })
 
       describe('content', () => {

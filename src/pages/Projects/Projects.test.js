@@ -58,7 +58,7 @@ describe('<Projects projs={[]}/>', () => {
       it('should render', () => {
         renderDesktop()
 
-        expect(projectView).not.toEqual(null)
+        expect(projectView).toBeTruthy()
       }) 
     })
 
@@ -103,7 +103,7 @@ describe('<Projects projs={[]}/>', () => {
       it('should render', () => {
         renderPhone()
 
-        expect(projectView).not.toEqual(null)
+        expect(projectView).toBeTruthy()
       }) 
     })
 

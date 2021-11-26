@@ -104,7 +104,7 @@ describe('<Header logoChars={""} navLinks={[""]} setBurgerIsOpen={() => {}}/>', 
 				it('should render text logo', () => {
 					renderDesktop()
 	
-					expect(textLogo).not.toEqual(null)
+					expect(textLogo).toBeTruthy()
 				})
 	
 				it('text logo should have characters passed in props.logoChars', () => {
@@ -118,7 +118,7 @@ describe('<Header logoChars={""} navLinks={[""]} setBurgerIsOpen={() => {}}/>', 
 				it('should render text logo', () => {
 					renderPhone()
 					
-					expect(textLogo).not.toEqual(null)
+					expect(textLogo).toBeTruthy()
 				})
 	
 				it('text logo should have characters passed in props.logoChars', () => {

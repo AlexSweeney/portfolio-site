@@ -66,22 +66,22 @@ afterEach(() => {
 })
 
 // ==================================== Tests ======================================= //
-describe('<Project picture=[<img/>] picStyle={} textStyle={}>Text</Project>', () => {
+describe('<Project/>', () => {
   describe('desktop', () => {
     describe('on render', () => {
       describe('render', () => {
         test('it should render', () => {
           renderDesktop()
   
-          expect(project).not.toEqual(null)
+          expect(project).toBeTruthy()
         })
   
         test('it should render children', () => {
           renderDesktop()
   
-          expect(header).not.toEqual(null)
-          expect(text).not.toEqual(null)
-          expect(picture).not.toEqual(null)
+          expect(header).toBeTruthy()
+          expect(text).toBeTruthy()
+          expect(picture).toBeTruthy()
         }) 
       })
       
@@ -155,15 +155,15 @@ describe('<Project picture=[<img/>] picStyle={} textStyle={}>Text</Project>', ()
         test('it should render', () => {
           renderPhone()
   
-          expect(project).not.toEqual(null)
+          expect(project).toBeTruthy()
         })
 
         test('it should render children', () => {
           renderPhone()
   
-          expect(header).not.toEqual(null)
-          expect(text).not.toEqual(null)
-          expect(picture).not.toEqual(null)
+          expect(header).toBeTruthy()
+          expect(text).toBeTruthy()
+          expect(picture).toBeTruthy()
         }) 
       })
       
