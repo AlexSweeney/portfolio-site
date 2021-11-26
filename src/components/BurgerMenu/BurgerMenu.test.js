@@ -23,7 +23,7 @@ afterEach(() => {
 describe('<BurgerMenu/>', () => {
   describe('render', () => {
     it('should render', () => {
-      expect(burgerMenu).not.toEqual(null)
+      expect(burgerMenu).toBeTruthy()
     })
   })
 

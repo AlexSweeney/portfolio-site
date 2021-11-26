@@ -12,6 +12,7 @@ export default function Header({
 
 	// gets value on first render => for testing in console must refresh page
 	const desktopMatch = window.matchMedia('(min-width: 426px)').matches;
+	const phoneMatch = !desktopMatch;
 
 	// ====================================================== Styles ======================================================== //
 	const headerStyle = {
@@ -29,7 +30,7 @@ export default function Header({
 	};
 
 	const navStyle = {
-		display: desktopMatch ? 'flex' : 'none', 
+		display: 'flex', 
     width: '100%',
     justifyContent: 'flex-end',
 	};
@@ -42,7 +43,7 @@ export default function Header({
 	};
 
 	const burgerStyle = { 
-		display: desktopMatch ? 'none' : 'flex',
+		display: 'flex',
 		flexDirection: 'column', 
 		justifyContent: 'space-between',
 	};
@@ -76,20 +77,23 @@ export default function Header({
 			<div className="text-logo" style={logoStyle}>
 				{logoChars}
 			</div>
-
+		
 			<nav className="header-nav" style={navStyle}>
 				{
 					navLinks.map((navLink, i) => {
-						return <a href="" key={`nav-link-${i}`} style={navLinkStyle}>{navLink}</a>
+						return <a href="" className="nav-link" key={`nav-link-${i}`} style={navLinkStyle}>{navLink}</a>
 					})
 				}
 			</nav>
 			
-			<div className={`burger ${burgerClass}`} style={burgerStyle} onTouchStart={onTouchBurger}>
-				<div className="burger-bar" style={burgerBarStyle}></div>
-				<div className="burger-bar" style={burgerBarStyle}></div>
-				<div className="burger-bar" style={burgerBarStyle}></div>
-			</div>
+			{
+				phoneMatch &&
+				<div className={`burger ${burgerClass}`} style={burgerStyle} onTouchStart={onTouchBurger}>
+					<div className="burger-bar" style={burgerBarStyle}></div>
+					<div className="burger-bar" style={burgerBarStyle}></div>
+					<div className="burger-bar" style={burgerBarStyle}></div>
+				</div>
+			}
 		</header>
 	)
 }
