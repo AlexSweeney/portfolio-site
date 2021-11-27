@@ -30,7 +30,7 @@ export default function Contact() {
   };
 
   return (
-    <section className="home" style={contactStyle}>
+    <section className="contact" style={contactStyle}>
       <h1 className="heading" style={headingStyle}>Alex Sweeney</h1>
       <h2 className="subheading" style={subheadingStyle}>front end developer</h2>
 

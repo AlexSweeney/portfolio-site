@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import OptionsBar from './../../components/OptionsBar/OptionsBar.jsx';
 import PictureBar from '../../components/PictureBar/PictureBar.jsx';
-import { colors, fonts } from '../../styles/styles.js';
-// import { data } from './../../data/technicalSkillsData.js';
+import { colors, fonts } from '../../styles/styles.js'; 
 
 export default function TechnicalSkills({data}) {
   const desktopMatch = window.matchMedia('(min-width: 426px)').matches;
@@ -24,6 +23,7 @@ export default function TechnicalSkills({data}) {
     display: 'flex',
     justifyContent:  desktopMatch ? 'space-between' : 'space-evenly',
     flexDirection: desktopMatch ? '' : 'column',
+    background: colors.background.darker,
   };
 
   const subjectsBarStyle = {

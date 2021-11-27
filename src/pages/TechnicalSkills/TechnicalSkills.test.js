@@ -119,11 +119,15 @@ describe('<TechnicalSkills data={data}/>', () => {
     describe('.technical-skills', () => {
       describe('layout', () => {
         it(`should have style = {
+          background: colors.background.dark,
           display: flex;
           justify-content: space-between;
         }`, () => {
           renderDesktop()
 
+          const res = hexToRGB(colors.background.darker)
+
+          expect(technicalSkills.style.background).toEqual(res)
           expect(technicalSkills.style.display).toEqual('flex')
           expect(technicalSkills.style.justifyContent).toEqual('space-between')
         })
@@ -324,19 +328,31 @@ describe('<TechnicalSkills data={data}/>', () => {
         })
       })
 
-      describe('layout', () => {
-        it(`should have style = {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-evenly;
-        }`, () => {
-          renderPhone()
+      describe('style', () => {
+        describe('background', () => {
+          it('should have background: colors.background.dark', () => {
+            renderPhone()
 
-          expect(technicalSkills.style.display).toEqual('flex')
-          expect(technicalSkills.style.flexDirection).toEqual('column')
-          expect(technicalSkills.style.justifyContent).toEqual('space-evenly')
+            const res = hexToRGB(colors.background.darker)
+
+            expect(technicalSkills.style.background).toEqual(res)
+          })
         })
-      })  
+
+        describe('layout', () => {
+          it(`should have style = {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+          }`, () => {
+            renderPhone()
+  
+            expect(technicalSkills.style.display).toEqual('flex')
+            expect(technicalSkills.style.flexDirection).toEqual('column')
+            expect(technicalSkills.style.justifyContent).toEqual('space-evenly')
+          })
+        })
+      }) 
     })
    
     describe('.subject-bar', () => {

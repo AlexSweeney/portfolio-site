@@ -1,9 +1,11 @@
 import React from "react";
 import { render, cleanup } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { screen } from '@testing-library/dom';
 import App from './App.jsx';
 
 // ==================================== Consts & Vars ================================ //
-const thisLinks = ['Home', 'Technical Skills', 'Project', 'Contact'];
+const thisLinks = ['Home', 'Technical Skills', 'Projects', 'Contact'];
 
 let isDesktop;
 
@@ -15,6 +17,12 @@ let links;
 let burger;
 
 let home; 
+let technicalSkills;
+let projects;
+let contact;
+
+let topicBar;
+let topics;
 
 // ==================================== Mock ======================================= //
 // matches = used by media query
@@ -55,7 +63,13 @@ function getParts() {
   links = header && header.querySelectorAll('.nav-link');
   burger = header && header.querySelector('.burger');
 
-  home = document.querySelector('.home');
+  home = document.querySelector('.home'); 
+  technicalSkills = document.querySelector('.technical-skills'); 
+  projects = document.querySelector('.projects'); 
+  contact = document.querySelector('.contact'); 
+
+  topicBar = document.querySelector('.topic-bar');
+  topics = document.querySelectorAll('.topic');
 }
 
 function resetParts() {
@@ -66,6 +80,12 @@ function resetParts() {
   links = null;
 
   home = null;
+  technicalSkills = null;
+  projects = null;
+  contact = null;
+
+  topicBar = null;
+  topics = null;
 }
 
 afterEach(() => {
@@ -120,23 +140,141 @@ describe('<App/>', () => {
             })
           })
 
-          // describe('burger', () => {
-          //   it('should not render', () => {
-          //     renderDesktop()
+          describe('burger', () => {
+            it('should not render', () => {
+              renderDesktop()
 
-          //     expect(burger).toBeFalsy()
-          //   })
-          // })
+              expect(burger).toBeFalsy()
+            })
+          })
         })
       })
     })
 
     describe('on click', () => {
+      describe('nav links', () => {
+        describe('on click Home', () => {
+          it('should only show Home page', () => {
+            renderDesktop()
+
+            userEvent.click(screen.getByText('Projects')) 
+            userEvent.click(screen.getByText('Home')) 
+            getParts()
+
+            expect(home).toBeTruthy()
+            expect(technicalSkills).toBeFalsy()
+            expect(projects).toBeFalsy()
+            expect(contact).toBeFalsy()
+          }) 
+        })
   
+        describe('on click Technical Skills', () => {
+          it('should only show Techincal Skills page', () => {
+            renderDesktop()
+
+            userEvent.click(screen.getByText('Technical Skills'))  
+            getParts()
+
+            expect(home).toBeFalsy()
+            expect(technicalSkills).toBeTruthy()
+            expect(projects).toBeFalsy()
+            expect(contact).toBeFalsy()
+          }) 
+        })
+
+        describe('on click Projects', () => {
+          it('should only show Projects page', () => {
+            renderDesktop()
+
+            userEvent.click(screen.getByText('Projects'))  
+            getParts()
+
+            expect(home).toBeFalsy()
+            expect(technicalSkills).toBeFalsy()
+            expect(projects).toBeTruthy()
+            expect(contact).toBeFalsy()
+          }) 
+        })
+
+        describe('on click Contact', () => {
+          it('should only show Contact page', () => {
+            renderDesktop()
+ 
+            userEvent.click(screen.getByText('Contact'))  
+            getParts()
+
+            expect(home).toBeFalsy()
+            expect(technicalSkills).toBeFalsy()
+            expect(projects).toBeFalsy()
+            expect(contact).toBeTruthy()
+          })
+        })
+      }) 
+
+      describe('Technical Skills', () => {
+        describe('subjects', () => {
+          describe('React', () => {
+            it('should show topics: hooks, functional components, react router, unit tests', () => {
+              renderDesktop()
+
+              userEvent.click(screen.getByText('Technical Skills'))
+
+              userEvent.click(screen.getByText('React'))
+ 
+              getParts()
+
+              const target = ['hooks', 'functional components', 'react router', 'unit tests'];
+
+              expect(topics.length).toEqual(target.length)
+              topics.forEach((topic, i) => {
+                expect(topic.textContent).toEqual(target[i])
+              })
+            })
+          })
+
+          describe('javascript', () => {
+            it('should show topics: async / await, session storage, promises, audio', () => {
+              renderDesktop()
+
+              userEvent.click(screen.getByText('Technical Skills'))
+
+              userEvent.click(screen.getByText('javascript'))
+
+              getParts() 
+              
+              const target = ['async / await', 'session storage', 'promises', 'audio'];
+
+              expect(topics.length).toEqual(target.length)
+              topics.forEach((topic, i) => {
+                expect(topic.textContent).toEqual(target[i])
+              })
+            }) 
+          })
+          
+          describe('design patterns', () => {
+            it('should show topics : test driven development, functional programming', () => {
+              renderDesktop()
+
+              userEvent.click(screen.getByText('Technical Skills'))
+
+              userEvent.click(screen.getByText('design patterns'))
+
+              getParts() 
+              
+              const target = ['test driven development', 'functional programming'];
+
+              expect(topics.length).toEqual(target.length)
+              topics.forEach((topic, i) => {
+                expect(topic.textContent).toEqual(target[i])
+              })
+            })
+          })
+        })
+      })
     })
   })
 
-  describe('phone', () => {
+  describe.only('phone', () => {
     describe('on render', () => {
       describe('render', () => {
         it('should render', () => {
@@ -167,24 +305,21 @@ describe('<App/>', () => {
             })
           })
 
-          // describe('nav-links', () => {
-          //   it('should not display nav links', () => {
-          //     renderPhone()
+          describe('nav-links', () => {
+            it('should not display nav links', () => {
+              renderPhone()
 
-          //     // expect(links.length).toEqual(0)
-          //     links.forEach(link => {
-          //       console.log(link.style.display)
-          //     })
-          //   })
-          // })
+              expect(links.length).toEqual(0)
+            })
+          })
 
-          // describe('burger', () => {
-          //   it('should have style.display = "flex"', () => {
-          //     renderPhone()
+          describe('burger', () => {
+            it('should have style.display = "flex"', () => {
+              renderPhone()
   
-          //     expect(burger.style.display).toEqual('flex')
-          //   })
-          // }) 
+              expect(burger.style.display).toEqual('flex')
+            })
+          }) 
         })
       })
     })

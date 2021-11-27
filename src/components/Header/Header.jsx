@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';  
+import { Link } from 'react-router-dom';
 import { colors, fonts } from './../../styles/styles.js';
 
 export default function Header({
@@ -83,7 +84,7 @@ export default function Header({
 				<nav className="header-nav" style={navStyle}>
 					{
 						navLinks.map((navLink, i) => {
-							return <a href="" className="nav-link" key={`nav-link-${i}`} style={navLinkStyle}>{navLink}</a>
+							return <Link to={navLink} className="nav-link" key={`nav-link-${i}`} style={navLinkStyle}>{navLink}</Link>
 						})
 					}
 				</nav>
