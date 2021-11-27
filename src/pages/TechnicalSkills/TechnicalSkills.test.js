@@ -8,19 +8,19 @@ import { colors, fonts } from "../../styles/styles.js";
 // ==================================== Consts & vars ==================================== //
 const data = {
   'subject-1' : { 
-    'topic-1-1': ['project-1', 'project-2'],
-    'topic-1-2': ['project-1', 'project-3'],
-    'topic-1-3': ['project-2'], 
+    'topic-1-1': [<div className="picture">project 1</div>, <div className="picture">project 2</div>],
+    'topic-1-2': [<div className="picture">project 1</div>, <div className="picture">project 3</div>],
+    'topic-1-3': [<div className="picture">project 2</div>], 
   },
   'subject-2' : { 
-    'topic-2-1': ['project-1', 'project-2'],
-    'topic-2-2': ['project-1', 'project-3'],
-    'topic-2-3': ['project-2'], 
+    'topic-2-1': [<div className="picture">project 1</div>, <div className="picture">project 2</div>],
+    'topic-2-2': [<div className="picture">project 1</div>, <div className="picture">project 3</div>],
+    'topic-2-3': [<div className="picture">project 2</div>], 
   },
   'subject-3' : { 
-    'topic-3-1': ['project-1', 'project-2'],
-    'topic-3-2': ['project-1', 'project-3'],
-    'topic-3-3': ['project-2'], 
+    'topic-3-1': [<div className="picture">project 1</div>, <div className="picture">project 2</div>],
+    'topic-3-2': [<div className="picture">project 1</div>, <div className="picture">project 3</div>],
+    'topic-3-3': [<div className="picture">project 2</div>], 
   }
 };
 
@@ -207,6 +207,22 @@ describe('<TechnicalSkills data={data}/>', () => {
             }
           })
         })
+
+        it('should show the correct topics', () => {
+          renderDesktop()
+
+          subjects.forEach((subject, i) => {
+            fireEvent.click(subject)
+
+            const topics = document.querySelectorAll('.topic')
+            const targetTopics = Object.keys(data[subject.textContent]);
+             
+            expect(topics.length).toEqual(targetTopics.length)
+            topics.forEach((topic, j) => {
+              expect(topic.textContent).toEqual(targetTopics[j])
+            })
+          })
+        })
       })
     })
   
@@ -266,6 +282,30 @@ describe('<TechnicalSkills data={data}/>', () => {
             } else {
               expect(topic.className).not.toContain('selected-topic')
             }
+          })
+        })
+
+        it.only('should show correct pictures', () => {
+          renderDesktop()
+
+          // click subjects
+          subjects.forEach((subject, i) => {  
+            fireEvent.click(subject)
+
+            const topics = document.querySelectorAll('.topic')
+
+            // click topics
+            topics.forEach((topic, j) => {  
+              fireEvent.click(topic)
+              
+              // check
+              const pictures = document.querySelectorAll('.picture');
+              const targetPictures = data[subject.textContent][topic.textContent];
+ 
+              pictures.forEach((picture, k) => { 
+                expect(picture.textContent).toEqual(targetPictures[k].props.children)
+              })
+            })
           })
         })
       })

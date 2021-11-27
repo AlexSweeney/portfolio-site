@@ -10,16 +10,13 @@ export default function TechnicalSkills({data}) {
   const [subjects, setSubjects] = useState(Object.keys(data));
   const [selectedSubject, setSelectedSubject] = useState(subjects[0]);
 
-  // const thisTopics = getTopics(selectedSubject);
-  // const [topics, setTopics] = useState(thisTopics);
-  // const [selectedTopic, setSelectedTopic] = useState(thisTopics[0]); 
+  const thisTopics = getTopics(selectedSubject);
+  const [topics, setTopics] = useState(thisTopics);
+  const [selectedTopic, setSelectedTopic] = useState(thisTopics[0]); 
 
-  // const thisPictures = getPictures(selectedSubject, thisTopics[0]);
-  // const [pictures, setPictures] = useState(thisPictures);
-  // const [selectedPicture, setSelectedPicture] = useState(thisPictures[0]);
-
-  console.log('tech skills render ---')
-  console.log('selectedSubject', selectedSubject)
+  const thisPictures = getPictures(selectedSubject, thisTopics[0]);
+  const [pictures, setPictures] = useState(thisPictures);
+  const [selectedPicture, setSelectedPicture] = useState(thisPictures[0]); 
 
   // ========================================= styles ======================================= // 
   const technicalSkillsStyle = {
@@ -52,37 +49,54 @@ export default function TechnicalSkills({data}) {
   };
 
   // ========================================= Event Handlers =============================== // 
-  function onClickSubject(subject) {
-    console.log('clicked subject', subject)
+  function onClickSubject(subject) { 
+    setSelectedSubject(subject)
   }
 
+  function onClickTopic(topic) {
+    setSelectedTopic(topic)
+  }
+
+  function onClickPicture(picture) {
+    setSelectedPicture(picture)
+  }
 
   // ========================================= fns ========================================== // 
-  function updateSelections(selectedSubject) {
-    console.log('changed selected subject', selectedSubject)
-    // // topics
-    // const topics = getTopics(selectedSubject);
-    // setTopics(topics)
-    // setSelectedTopic(topics[0])
+  function updateSubject(selectedSubject) {
+    // topics
+    const topics = getTopics(selectedSubject);
+    setTopics(topics)
+    setSelectedTopic(topics[0])
 
-    // // pictures
-    // const pictures = getPictures(selectedSubject, topics[0]);
-    // setPictures(pictures)
-    // setSelectedPicture(pictures[0])
+    // pictures
+    const pictures = getPictures(selectedSubject, topics[0]);
+    setPictures(pictures)
+    setSelectedPicture(pictures[0])
   }
 
-  // function getTopics(selectedSubject) {
-  //   return Object.keys(data[selectedSubject]);
-  // }
+  function updateTopic(selectedTopic) {
+    const pictures = getPictures(selectedSubject, selectedTopic);
+    
+    setPictures(pictures)
+    setSelectedPicture(pictures[0])
+  }
 
-  // function getPictures(selectedSubject, selectedTopic) { 
-  //   return data[selectedSubject][selectedTopic];
-  // }
+  function getTopics(selectedSubject) {
+    return Object.keys(data[selectedSubject]);
+  }
+
+  function getPictures(selectedSubject, selectedTopic) { 
+    return data[selectedSubject][selectedTopic];
+  }
 
   // ========================================= listen / trigger ============================== // 
   useEffect(() => {
-    // updateSelections(selectedSubject)
+    updateSubject(selectedSubject)
   }, [selectedSubject])
+
+  useEffect(() => {
+    updateTopic(selectedTopic)
+  }, [selectedTopic])
 
   // ========================================= output ======================================= // 
   return (
@@ -92,18 +106,16 @@ export default function TechnicalSkills({data}) {
         options={subjects} 
         handleClick={onClickSubject}  
         style={subjectsBarStyle}/>
-      {/* <OptionsBar 
+      <OptionsBar 
         className="topic"
         options={topics}
-        selectedOption={selectedTopic}
-        setSelectedOption={setSelectedTopic}
-        style={topicsBarStyle}/> */}
-      {/* <PictureBar 
+        handleClick={onClickTopic}
+        style={topicsBarStyle}/>
+      <PictureBar 
         className="picture-bar"
         pictures={pictures}
-        selectedPicture={selectedPicture}
-        setSelectedPicture={setSelectedPicture}
-        style={pictureBarStyle}/> */}
+        handleClick={onClickPicture}
+        style={pictureBarStyle}/>
     </section>
   )
 }
