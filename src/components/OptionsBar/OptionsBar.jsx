@@ -7,7 +7,7 @@ export default function OptionsBar({
   handleClick,
   className, 
   style 
-}) { 
+}) {  
   // ====================================================== Consts ======================================================== //
   const desktopMatch = window.matchMedia('(min-width: 426px)').matches;
   const [showAll, setShowAll] = useState(false); 
@@ -30,6 +30,7 @@ export default function OptionsBar({
   // ====================================================== Fns ========================================================= //
   function onSelectOption(option) {
     handleClick(option)
+    setShowAll(oldVal => !oldVal)
   }
 
   function getSelectedClass(option) {

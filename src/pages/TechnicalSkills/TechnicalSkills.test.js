@@ -285,7 +285,7 @@ describe('<TechnicalSkills data={data}/>', () => {
           })
         })
 
-        it.only('should show correct pictures', () => {
+        it('should show correct pictures', () => {
           renderDesktop()
 
           // click subjects
@@ -301,7 +301,9 @@ describe('<TechnicalSkills data={data}/>', () => {
               // check
               const pictures = document.querySelectorAll('.picture');
               const targetPictures = data[subject.textContent][topic.textContent];
- 
+              
+              expect(pictures.length).toEqual(targetPictures.length)
+
               pictures.forEach((picture, k) => { 
                 expect(picture.textContent).toEqual(targetPictures[k].props.children)
               })
@@ -313,10 +315,10 @@ describe('<TechnicalSkills data={data}/>', () => {
   
     describe('.picture-bar', () => {
       describe('content', () => {
-        it('should display pictures from data[selectedSubject][selectedTopic] = project-1, project-2', () => {
+        it('should display pictures from data[selectedSubject][selectedTopic] = project 1, project 2', () => {
           renderDesktop()
 
-          const targetPictures = ['project-1', 'project-2'];
+          const targetPictures = ['project 1', 'project 2'];
 
           pictures.forEach((picture, i) => { 
             expect(picture.textContent).toEqual(targetPictures[i])
@@ -635,7 +637,7 @@ describe('<TechnicalSkills data={data}/>', () => {
           expect(pictures.length).toEqual(thisPictures.length)
 
           pictures.forEach((picture, i) => {
-            expect(picture.textContent).toEqual(thisPictures[i])
+            expect(picture.textContent).toEqual(thisPictures[i].props.children)
           })
         })
       })

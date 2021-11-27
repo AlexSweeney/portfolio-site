@@ -1,6 +1,12 @@
 import React, { useState } from "react"; 
 
-export default function PictureBar({ pictures, selectedPicture, setSelectedPicture, style }) {
+export default function PictureBar({ 
+  pictures, 
+  selectedPicture, 
+  setSelectedPicture, 
+  handleClick,
+  style,
+}) {
   // ==================================== Consts / Vars =============================== //
   const desktopMatch = window.matchMedia('(min-width: 426px)').matches;
   const [showAll, setShowAll] = useState(false); 
@@ -17,7 +23,7 @@ export default function PictureBar({ pictures, selectedPicture, setSelectedPictu
   // ==================================== Event Handlers ============================== //
   function onSelectPicture(picture) { 
     setShowAll(oldVal => !oldVal)
-    setSelectedPicture(picture)
+    handleClick(picture)
   }
 
   function getSelectedClass(picture) {

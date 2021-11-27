@@ -76,7 +76,7 @@ export default function TechnicalSkills({data}) {
 
   function updateTopic(selectedTopic) {
     const pictures = getPictures(selectedSubject, selectedTopic);
-    
+
     setPictures(pictures)
     setSelectedPicture(pictures[0])
   }
@@ -104,16 +104,19 @@ export default function TechnicalSkills({data}) {
       <OptionsBar 
         className="subject" 
         options={subjects} 
+        selectedOption={selectedSubject}
         handleClick={onClickSubject}  
         style={subjectsBarStyle}/>
       <OptionsBar 
         className="topic"
         options={topics}
+        selectedOption={selectedTopic}
         handleClick={onClickTopic}
         style={topicsBarStyle}/>
       <PictureBar 
         className="picture-bar"
         pictures={pictures}
+        selectedPicture={selectedPicture}
         handleClick={onClickPicture}
         style={pictureBarStyle}/>
     </section>
