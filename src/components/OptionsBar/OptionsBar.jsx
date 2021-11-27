@@ -1,7 +1,13 @@
 import React, { useState } from "react"; 
 import { colors, fonts } from "../../styles/styles";
 
-export default function OptionsBar({ options, selectedOption, setSelectedOption, className, style }) { 
+export default function OptionsBar({ 
+  options, 
+  selectedOption,
+  handleClick,
+  className, 
+  style 
+}) { 
   // ====================================================== Consts ======================================================== //
   const desktopMatch = window.matchMedia('(min-width: 426px)').matches;
   const [showAll, setShowAll] = useState(false); 
@@ -22,9 +28,8 @@ export default function OptionsBar({ options, selectedOption, setSelectedOption,
   };
 
   // ====================================================== Fns ========================================================= //
-  function onSelectOption(option) {   
-    setSelectedOption(option)
-    setShowAll(oldVal => !oldVal)
+  function onSelectOption(option) {
+    handleClick(option)
   }
 
   function getSelectedClass(option) {
@@ -41,12 +46,13 @@ export default function OptionsBar({ options, selectedOption, setSelectedOption,
       {
         options.map((option, i) => { 
           if((option === selectedOption) || showAll || desktopMatch) {
-            return <a href="" 
+            return <h3
             key={`option-${i}`} 
             className={`${className} ${getSelectedClass(option)}`}
             style={optionStyle} 
             onClick={() => { onSelectOption(option) }}
-            onTouchStart={() => { onSelectOption(option) }}>{option}</a>
+            onTouchStart={() => { onSelectOption(option) }}
+            >{option}</h3>
           }
         })
       }

@@ -7,16 +7,19 @@ export default function TechnicalSkills({data}) {
   const desktopMatch = window.matchMedia('(min-width: 426px)').matches;
 
   // ========================================= data ========================================= // 
-  const subjects = Object.keys(data);
+  const [subjects, setSubjects] = useState(Object.keys(data));
   const [selectedSubject, setSelectedSubject] = useState(subjects[0]);
 
-  const thisTopics = getTopics(selectedSubject);
-  const [topics, setTopics] = useState(thisTopics);
-  const [selectedTopic, setSelectedTopic] = useState(thisTopics[0]); 
+  // const thisTopics = getTopics(selectedSubject);
+  // const [topics, setTopics] = useState(thisTopics);
+  // const [selectedTopic, setSelectedTopic] = useState(thisTopics[0]); 
 
-  const thisPictures = getPictures(selectedSubject, thisTopics[0]);
-  const [pictures, setPictures] = useState(thisPictures);
-  const [selectedPicture, setSelectedPicture] = useState(thisPictures[0]);
+  // const thisPictures = getPictures(selectedSubject, thisTopics[0]);
+  // const [pictures, setPictures] = useState(thisPictures);
+  // const [selectedPicture, setSelectedPicture] = useState(thisPictures[0]);
+
+  console.log('tech skills render ---')
+  console.log('selectedSubject', selectedSubject)
 
   // ========================================= styles ======================================= // 
   const technicalSkillsStyle = {
@@ -48,30 +51,37 @@ export default function TechnicalSkills({data}) {
     alignItems: desktopMatch ? '' : 'center',
   };
 
+  // ========================================= Event Handlers =============================== // 
+  function onClickSubject(subject) {
+    console.log('clicked subject', subject)
+  }
+
+
   // ========================================= fns ========================================== // 
   function updateSelections(selectedSubject) {
-    // topics
-    const topics = getTopics(selectedSubject);
-    setTopics(topics)
-    setSelectedTopic(topics[0])
+    console.log('changed selected subject', selectedSubject)
+    // // topics
+    // const topics = getTopics(selectedSubject);
+    // setTopics(topics)
+    // setSelectedTopic(topics[0])
 
-    // pictures
-    const pictures = getPictures(selectedSubject, topics[0]);
-    setPictures(pictures)
-    setSelectedPicture(pictures[0])
+    // // pictures
+    // const pictures = getPictures(selectedSubject, topics[0]);
+    // setPictures(pictures)
+    // setSelectedPicture(pictures[0])
   }
 
-  function getTopics(selectedSubject) {
-    return Object.keys(data[selectedSubject]);
-  }
+  // function getTopics(selectedSubject) {
+  //   return Object.keys(data[selectedSubject]);
+  // }
 
-  function getPictures(selectedSubject, selectedTopic) { 
-    return data[selectedSubject][selectedTopic];
-  }
+  // function getPictures(selectedSubject, selectedTopic) { 
+  //   return data[selectedSubject][selectedTopic];
+  // }
 
   // ========================================= listen / trigger ============================== // 
   useEffect(() => {
-    updateSelections(selectedSubject)
+    // updateSelections(selectedSubject)
   }, [selectedSubject])
 
   // ========================================= output ======================================= // 
@@ -80,21 +90,20 @@ export default function TechnicalSkills({data}) {
       <OptionsBar 
         className="subject" 
         options={subjects} 
-        selectedOption={selectedSubject} 
-        setSelectedOption={setSelectedSubject}
+        handleClick={onClickSubject}  
         style={subjectsBarStyle}/>
-      <OptionsBar 
+      {/* <OptionsBar 
         className="topic"
         options={topics}
         selectedOption={selectedTopic}
         setSelectedOption={setSelectedTopic}
-        style={topicsBarStyle}/>
-      <PictureBar 
+        style={topicsBarStyle}/> */}
+      {/* <PictureBar 
         className="picture-bar"
         pictures={pictures}
         selectedPicture={selectedPicture}
         setSelectedPicture={setSelectedPicture}
-        style={pictureBarStyle}/>
+        style={pictureBarStyle}/> */}
     </section>
   )
 }

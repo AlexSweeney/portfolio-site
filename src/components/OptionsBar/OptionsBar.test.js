@@ -22,6 +22,8 @@ let options;
 let selectedOption;
 let setSelectedOption;
 
+let handleClick;
+
 // ==================================== Utils Fns ==================================== //
 function OptionsBarWithWrapper() {
   [selectedOption, setSelectedOption] = useState(thisOptions[0]);
@@ -29,8 +31,8 @@ function OptionsBarWithWrapper() {
   return (
     <OptionsBar 
       options={thisOptions} 
-      selectedOption={selectedOption} 
       setSelectedOption={setSelectedOption}
+      handleClick={handleClick} 
       className={thisClassName}
       style={thisStyle}
     />
@@ -39,6 +41,7 @@ function OptionsBarWithWrapper() {
 
 function renderDesktop() { 
 	isDesktop = true;  
+  handleClick = jest.fn()
 
   render(<OptionsBarWithWrapper/>) 
 	getParts()
@@ -46,7 +49,8 @@ function renderDesktop() {
 
 function renderPhone() { 
 	isDesktop = false; 
-  
+  handleClick = jest.fn()
+
   render(<OptionsBarWithWrapper/>) 
 	getParts()
 }
@@ -164,18 +168,26 @@ describe('<OptionsBar/>', () => {
     })
     
     describe('on click', () => {
-      it('should add class `selected-${className}` to clicked option, and remove from all other options', () => {
+      // it('should add class `selected-${className}` to clicked option, and remove from all other options', () => {
+      //   renderDesktop()
+
+      //   userEvent.click(options[1])
+
+      //   options.forEach((option, i) => {
+      //     if(i === 1) {
+      //       expect(option.className).toContain(`selected-${thisClassName}`)
+      //     } else {
+      //       expect(option.className).not.toContain(`selected-${thisClassName}`)
+      //     }
+      //   }) 
+      // })
+
+      it.only('should class props.handleClick with option text', () => {
         renderDesktop()
 
         userEvent.click(options[1])
 
-        options.forEach((option, i) => {
-          if(i === 1) {
-            expect(option.className).toContain(`selected-${thisClassName}`)
-          } else {
-            expect(option.className).not.toContain(`selected-${thisClassName}`)
-          }
-        }) 
+        expect(handleClick).toHaveBeenCalledWith(options[1].textContent)
       })
     })
   })
