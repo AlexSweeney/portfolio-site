@@ -1,7 +1,7 @@
 import React from 'react';
 import { colors, fonts } from './../../styles/styles.js';
 
-export default function BurgerMenu({ links, show }) { 
+export default function BurgerMenu({ links, show, handleTouch }) { 
   const burgerMenuStyle = {
     background: colors.background.lighter,
     display: 'flex',
@@ -19,6 +19,10 @@ export default function BurgerMenu({ links, show }) {
     fontSize: '36px',
   };
 
+  function onTouchStartHandler(link) {
+    handleTouch(link)
+  }
+
   if(show) return (
     <section className="burger-menu" style={burgerMenuStyle}>
       {
@@ -26,7 +30,8 @@ export default function BurgerMenu({ links, show }) {
           return <h3  
             className="burger-menu-link"  
             style={burgerMenuLink}
-            key={`buger-menu-link-${i}`}>{link}</h3>
+            key={`buger-menu-link-${i}`}
+            onTouchStart={() => onTouchStartHandler(link)}>{link}</h3>
         })
       }
     </section>
