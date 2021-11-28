@@ -5,6 +5,7 @@ import Home from './pages/Home/Home.jsx';
 import TechnicalSkills from './pages/TechnicalSkills/TechnicalSkills.jsx';
 import Projects  from "./pages/Projects/Projects.jsx";
 import Contact from './pages/Contact/Contact.jsx';
+import BurgerMenu from "./components/BurgerMenu/BurgerMenu.jsx";
 
 export default function App() {
   const logoChars = 'ASWD';
@@ -36,6 +37,7 @@ export default function App() {
       <BrowserRouter>
         <Header logoChars={logoChars} navLinks={navLinks}/>
         
+        <BurgerMenu links={navLinks}/>
         <Routes>
           <Route exact path="/" element={<Home/>}/>
           <Route exact path="/Home" element={<Home/>}/>

@@ -15,6 +15,7 @@ let header;
 let textLogo;
 let links;
 let burger;
+let burgerMenu;
 
 let home; 
 let technicalSkills;
@@ -62,11 +63,13 @@ function getParts() {
   textLogo = header && header.querySelector('.text-logo');
   links = header && header.querySelectorAll('.nav-link');
   burger = header && header.querySelector('.burger');
+  
 
   home = document.querySelector('.home'); 
   technicalSkills = document.querySelector('.technical-skills'); 
   projects = document.querySelector('.projects'); 
   contact = document.querySelector('.contact'); 
+  burgerMenu = document.querySelector('.burger-menu');
 
   topicBar = document.querySelector('.topic-bar');
   topics = document.querySelectorAll('.topic');
@@ -325,7 +328,32 @@ describe('<App/>', () => {
     })
 
     describe('on touch', () => {
+      describe('touch burger', () => {
+        describe('on first touch', () => {
+          it('should show burger-menu', () => {
+            renderPhone()
 
+            userEvent.click(burger)
+
+            expect(burgerMenu).toBeTruthy()
+          })
+        })
+
+        describe('on second touch', () => {
+          it('should hide burger-menu', () => {
+            renderPhone()
+
+            userEvent.click(burger)
+            userEvent.click(burger)
+
+            expect(burgerMenu).toBeFalsy()
+          })
+        })
+      })
+
+      describe('on touch burger menu options', () => {
+
+      }) 
     })
   })
 })

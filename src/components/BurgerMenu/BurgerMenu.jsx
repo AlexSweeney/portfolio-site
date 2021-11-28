@@ -1,7 +1,7 @@
 import React from 'react';
 import { colors, fonts } from './../../styles/styles.js';
 
-export default function BurgerMenu({ links }) {
+export default function BurgerMenu({ links, show }) { 
   const burgerMenuStyle = {
     background: colors.background.lighter,
     display: 'flex',
@@ -19,17 +19,18 @@ export default function BurgerMenu({ links }) {
     fontSize: '36px',
   };
 
-  return (
+  if(show) return (
     <section className="burger-menu" style={burgerMenuStyle}>
       {
         links.map((link, i) => {
-          return <a 
-            href="" 
+          return <h3  
             className="burger-menu-link"  
             style={burgerMenuLink}
-            key={`buger-menu-link-${i}`}>{link}</a>
+            key={`buger-menu-link-${i}`}>{link}</h3>
         })
       }
     </section>
   )
+
+  if(!show) return null;
 }
