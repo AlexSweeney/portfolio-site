@@ -38,7 +38,7 @@ export default function App() {
   return (
     <section className="app">
       <BrowserRouter>
-        <Header logoChars={logoChars} navLinks={navLinks}/>
+        <Header logoChars={logoChars} navLinks={navLinks} setBurgerIsOpen={setShowBurgerMenu}/>
         
         <BurgerMenu links={navLinks} show={showBurgerMenu}/>
         <Routes>

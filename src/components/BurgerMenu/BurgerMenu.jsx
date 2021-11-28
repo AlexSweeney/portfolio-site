@@ -24,7 +24,7 @@ export default function BurgerMenu({ links, show }) {
       {
         links.map((link, i) => {
           return <h3  
-            className="burger-menu-link"  
+            className={`burger-menu-link burger-menu-link-${link}`}
             style={burgerMenuLink}
             key={`buger-menu-link-${i}`}>{link}</h3>
         })
