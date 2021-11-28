@@ -234,7 +234,7 @@ describe('<Header/>', () => {
 					}) 
 				}) 
 			})
-		})
+		}) 
 	})
 
 	describe('phone', () => {
@@ -341,28 +341,28 @@ describe('<Header/>', () => {
 					expect(setBurgerIsOpen).toHaveBeenCalledWith(true)
 				})
 			})
-		})
 
-		describe('second touch', () => {
-			it('should remove ".burger-selected"', () => {
-				renderPhone()
-
-				fireEvent.touchStart(burger)
-				fireEvent.touchStart(burger)
-				expect(burger.className).not.toContain('burger-selected')
-			})
-
-			it('should call .props.setBurgerIsOpen with false', () => {
-				renderPhone()
-
-				fireEvent.touchStart(burger) 
-				expect(setBurgerIsOpen).toHaveBeenCalledTimes(1)
-				expect(setBurgerIsOpen).toHaveBeenCalledWith(true)
-
-				fireEvent.touchStart(burger) 
-				expect(setBurgerIsOpen).toHaveBeenCalledTimes(2)
-				expect(setBurgerIsOpen).toHaveBeenCalledWith(false)
-			})
+			describe('second touch', () => {
+				it('should remove ".burger-selected"', () => {
+					renderPhone()
+	
+					fireEvent.touchStart(burger)
+					fireEvent.touchStart(burger)
+					expect(burger.className).not.toContain('burger-selected')
+				})
+	
+				it('should call .props.setBurgerIsOpen with false', () => {
+					renderPhone()
+	
+					fireEvent.touchStart(burger) 
+					expect(setBurgerIsOpen).toHaveBeenCalledTimes(1)
+					expect(setBurgerIsOpen).toHaveBeenCalledWith(true)
+	
+					fireEvent.touchStart(burger) 
+					expect(setBurgerIsOpen).toHaveBeenCalledTimes(2)
+					expect(setBurgerIsOpen).toHaveBeenCalledWith(false)
+				})
+			}) 
 		}) 
 	})
 }) 

@@ -35,12 +35,17 @@ export default function App() {
   
   const [showBurgerMenu, setShowBurgerMenu] = useState(false);
 
+  function onTouchBurgerLink(link) {
+    setShowBurgerMenu(false) 
+  }
+
   return (
     <section className="app">
       <BrowserRouter>
         <Header logoChars={logoChars} navLinks={navLinks} setBurgerIsOpen={setShowBurgerMenu}/>
         
-        <BurgerMenu links={navLinks} show={showBurgerMenu}/>
+        <BurgerMenu links={navLinks} show={showBurgerMenu} handleTouch={onTouchBurgerLink}/>
+
         <Routes>
           <Route exact path="/" element={<Home/>}/>
           <Route exact path="/Home" element={<Home/>}/>

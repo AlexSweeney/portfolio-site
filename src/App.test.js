@@ -25,8 +25,6 @@ let contact;
 let topicBar;
 let topics;
 
-let homeLink;
-
 // ==================================== Mock ======================================= //
 // matches = used by media query
 Object.defineProperty(window, 'matchMedia', {
@@ -48,6 +46,7 @@ function renderDesktop() {
 	isDesktop = true;
 
   render(<App/>)
+  fireEvent.click(screen.getByText('Home'))
 	getParts()
 }
 
@@ -55,6 +54,7 @@ function renderPhone() {
 	isDesktop = false;
 
   render(<App/>)
+  fireEvent.touchStart(screen.getByText('ASWD')) 
 	getParts()
 }
 
@@ -65,8 +65,7 @@ function getParts() {
   textLogo = header && header.querySelector('.text-logo');
   links = header && header.querySelectorAll('.nav-link');
   burger = header && header.querySelector('.burger');
-  
-
+   
   home = document.querySelector('.home'); 
   technicalSkills = document.querySelector('.technical-skills'); 
   projects = document.querySelector('.projects'); 
@@ -75,8 +74,6 @@ function getParts() {
 
   topicBar = document.querySelector('.topic-bar');
   topics = document.querySelectorAll('.topic');
-
-  homeLink = document.querySelector('.burger-menu-link-Home');
 }
 
 function resetParts() {
@@ -93,11 +90,9 @@ function resetParts() {
 
   topicBar = null;
   topics = null;
-
-  homeLink = null;
 }
 
-afterEach(() => {
+afterEach(() => {   
   cleanup(<App/>)
   resetParts()
 })
@@ -161,6 +156,21 @@ describe('<App/>', () => {
     })
 
     describe('on click', () => {
+      describe('logo', () => {
+        it('should only show home page', () => {
+          renderDesktop()
+
+          userEvent.click(screen.getByText('Projects')) 
+          userEvent.click(screen.getByText('ASWD')) 
+          getParts()
+
+          expect(home).toBeTruthy()
+          expect(technicalSkills).toBeFalsy()
+          expect(projects).toBeFalsy()
+          expect(contact).toBeFalsy()
+        })
+      })
+
       describe('nav links', () => {
         describe('on click Home', () => {
           it('should only show Home page', () => {
@@ -283,7 +293,7 @@ describe('<App/>', () => {
     })
   })
 
-  describe.only('phone', () => {
+  describe('phone', () => {
     describe('on render', () => {
       describe('render', () => {
         it('should render', () => {
@@ -299,7 +309,8 @@ describe('<App/>', () => {
         })
   
         it('should render Home', () => {
-          renderPhone() 
+          renderPhone()  
+          console.log(window.location.href)
           expect(home).toBeTruthy()
         })
       })
@@ -334,7 +345,23 @@ describe('<App/>', () => {
     })
 
     describe('on touch', () => {
-      describe('touch burger', () => {
+      describe('logo', () => {
+        it('should only show Home page', () => {
+          renderPhone()
+
+          fireEvent.touchStart(burger)
+          fireEvent.touchStart(screen.getByText('Projects'))  
+          fireEvent.touchStart(screen.getByText('ASWD')) 
+          getParts()
+
+          expect(home).toBeTruthy()
+          expect(technicalSkills).toBeFalsy()
+          expect(projects).toBeFalsy()
+          expect(contact).toBeFalsy()
+        })
+      })
+
+      describe('burger', () => {
         describe('on first touch', () => {
           it('should show burger-menu', () => {
             renderPhone()
@@ -360,54 +387,107 @@ describe('<App/>', () => {
       })
 
       describe('on touch burger menu options', () => {
-        describe.only('on touch home', () => {
+        describe('on touch home', () => {
           it('should hide burger menu', () => {
             renderPhone()
 
             fireEvent.touchStart(burger)
             getParts()
  
-            
-            fireEvent.touchStart(homeLink)
+            fireEvent.touchStart(screen.getByText('Home'))
             getParts()
 
-            screen.debug()
-
-            // expect(burgerMenu).toBeFalsy()
+            expect(burgerMenu).toBeFalsy()
           })
 
           it('should show home', () => {
+            renderPhone()
 
+            fireEvent.touchStart(burger)
+            getParts()
+ 
+            fireEvent.touchStart(screen.getByText('Home'))
+            getParts()
+
+            expect(home).toBeTruthy()
           })
         })
 
         describe('on touch technical skills', () => {
           it('should hide burger menu', () => {
+            renderPhone()
 
+            fireEvent.touchStart(burger)
+            getParts()
+             
+            fireEvent.touchStart(screen.getByText('Technical Skills'))
+            getParts()
+
+            expect(burgerMenu).toBeFalsy()
           })
 
           it('should show technical skills', () => {
+            renderPhone()
+
+            fireEvent.touchStart(burger)
+            getParts()
             
+            fireEvent.touchStart(screen.getByText('Technical Skills'))
+            getParts()
+
+            expect(technicalSkills).toBeTruthy()
           })
         })
 
-        describe('on touch projects', () => {
+        describe('on touch Projects', () => {
           it('should hide burger menu', () => {
+            renderPhone()
 
+            fireEvent.touchStart(burger)
+            getParts()
+             
+            fireEvent.touchStart(screen.getByText('Projects'))
+            getParts()
+
+            expect(burgerMenu).toBeFalsy()
           })
 
-          it('should show projects', () => {
+          it('should show Projects', () => {
+            renderPhone()
+
+            fireEvent.touchStart(burger)
+            getParts()
             
+            fireEvent.touchStart(screen.getByText('Projects'))
+            getParts()
+
+            expect(projects).toBeTruthy()
           })
         })
 
-        describe('on touch contact', () => {
+        describe('on touch Contact', () => {
           it('should hide burger menu', () => {
+            renderPhone()
 
+            fireEvent.touchStart(burger)
+            getParts()
+             
+            fireEvent.touchStart(screen.getByText('Contact'))
+            getParts()
+
+            expect(burgerMenu).toBeFalsy()
           })
 
           it('should show contact', () => {
+            renderPhone()
+
+            fireEvent.touchStart(burger)
+            getParts()
             
+            fireEvent.touchStart(screen.getByText('Contact'))
+            getParts()
+
+            expect(contact).toBeTruthy()
           })
         })
       }) 

@@ -67,6 +67,11 @@ export default function Header({
 		setBurgerClass(newClass)
 	}
 
+	function onTouchLogo() {
+		const target = document.querySelector('.text-logo'); 
+    target.click()
+	}
+
 	// ====================================================== Listen / Trigger ============================================= //
 	useEffect(() => {
 		updateBurgerClass(burgerIsSelected)
@@ -75,9 +80,9 @@ export default function Header({
 	// ====================================================== Output  ====================================================== //
 	return (
 		<header className="header" style={headerStyle}>
-			<div className="text-logo" style={logoStyle}>
+			<Link to="/" className="text-logo" style={logoStyle} onTouchStart={onTouchLogo}>
 				{logoChars}
-			</div>
+			</Link>
 
 			{
 				desktopMatch &&

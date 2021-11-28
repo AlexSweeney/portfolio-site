@@ -1,5 +1,6 @@
 import React from 'react';
-import { colors, fonts } from './../../styles/styles.js';
+import { colors, fonts } from './../../styles/styles.js'; 
+import { Link } from 'react-router-dom';
 
 export default function BurgerMenu({ links, show, handleTouch }) { 
   const burgerMenuStyle = {
@@ -9,7 +10,7 @@ export default function BurgerMenu({ links, show, handleTouch }) {
     height: '100vh',
   };
 
-  const burgerMenuLink = {
+  const burgerMenuLinkStyle = {
     fontFamily: fonts.body,
     color: colors.font.darker,
     display: 'flex',
@@ -19,23 +20,33 @@ export default function BurgerMenu({ links, show, handleTouch }) {
     fontSize: '36px',
   };
 
-  function onTouchStartHandler(link) {
+  function onTouchStartHandler(link) {  
     handleTouch(link)
+
+    // trigger click on link
+    const target = document.querySelector(`.burger-menu-link-${getDisplayLink(link)}`) 
+    target.click()
+  }
+
+  function getDisplayLink(link) {
+    return link.toLowerCase().replace(' ', '-');
   }
 
   if(show) return (
     <section className="burger-menu" style={burgerMenuStyle}>
       {
-        links.map((link, i) => {
-          return <h3  
-            className={`burger-menu-link burger-menu-link-${link}`}
-            style={burgerMenuLink}
+        links.map((thisLink, i) => {
+          return <Link 
+            to={thisLink}
+            onTouchStart={() => onTouchStartHandler(thisLink)}
+            className={`burger-menu-link burger-menu-link-${getDisplayLink(thisLink)}`} 
+            style={burgerMenuLinkStyle}
             key={`buger-menu-link-${i}`}
-            onTouchStart={() => onTouchStartHandler(link)}>{link}</h3>
+          >{thisLink}</Link>
         })
       }
     </section>
   )
 
   if(!show) return null;
-}
+} 
