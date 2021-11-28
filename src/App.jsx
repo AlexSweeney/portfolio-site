@@ -6,6 +6,7 @@ import TechnicalSkills from './pages/TechnicalSkills/TechnicalSkills.jsx';
 import Projects  from "./pages/Projects/Projects.jsx";
 import Contact from './pages/Contact/Contact.jsx';
 import BurgerMenu from "./components/BurgerMenu/BurgerMenu.jsx";
+import { useState } from "react/cjs/react.development";
 
 export default function App() {
   const logoChars = 'ASWD';
@@ -31,13 +32,15 @@ export default function App() {
   };
 
   const myProjects = [<div className="project" key="project-1">Project-1</div>, <div className="project" key="project-2">Project-2</div>];
+  
+  const [showBurgerMenu, setShowBurgerMenu] = useState(false);
 
   return (
     <section className="app">
       <BrowserRouter>
-        <Header logoChars={logoChars} navLinks={navLinks}/>
+        <Header logoChars={logoChars} navLinks={navLinks} setBurgerIsOpen={setShowBurgerMenu}/>
         
-        <BurgerMenu links={navLinks}/>
+        <BurgerMenu links={navLinks} show={showBurgerMenu}/>
         <Routes>
           <Route exact path="/" element={<Home/>}/>
           <Route exact path="/Home" element={<Home/>}/>

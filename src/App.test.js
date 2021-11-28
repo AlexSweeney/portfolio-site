@@ -1,7 +1,7 @@
 import React from "react";
 import { render, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { screen } from '@testing-library/dom';
+import { fireEvent, screen } from '@testing-library/dom';
 import App from './App.jsx';
 
 // ==================================== Consts & Vars ================================ //
@@ -24,6 +24,8 @@ let contact;
 
 let topicBar;
 let topics;
+
+let homeLink;
 
 // ==================================== Mock ======================================= //
 // matches = used by media query
@@ -73,6 +75,8 @@ function getParts() {
 
   topicBar = document.querySelector('.topic-bar');
   topics = document.querySelectorAll('.topic');
+
+  homeLink = document.querySelector('.burger-menu-link-Home');
 }
 
 function resetParts() {
@@ -89,6 +93,8 @@ function resetParts() {
 
   topicBar = null;
   topics = null;
+
+  homeLink = null;
 }
 
 afterEach(() => {
@@ -333,7 +339,8 @@ describe('<App/>', () => {
           it('should show burger-menu', () => {
             renderPhone()
 
-            userEvent.click(burger)
+            fireEvent.touchStart(burger)
+            getParts()
 
             expect(burgerMenu).toBeTruthy()
           })
@@ -343,8 +350,9 @@ describe('<App/>', () => {
           it('should hide burger-menu', () => {
             renderPhone()
 
-            userEvent.click(burger)
-            userEvent.click(burger)
+            fireEvent.touchStart(burger)
+            fireEvent.touchStart(burger)
+            getParts()
 
             expect(burgerMenu).toBeFalsy()
           })
@@ -352,8 +360,57 @@ describe('<App/>', () => {
       })
 
       describe('on touch burger menu options', () => {
+        describe.only('on touch home', () => {
+          it('should hide burger menu', () => {
+            renderPhone()
 
+            fireEvent.touchStart(burger)
+            getParts()
+ 
+            
+            fireEvent.touchStart(homeLink)
+            getParts()
+
+            screen.debug()
+
+            // expect(burgerMenu).toBeFalsy()
+          })
+
+          it('should show home', () => {
+
+          })
+        })
+
+        describe('on touch technical skills', () => {
+          it('should hide burger menu', () => {
+
+          })
+
+          it('should show technical skills', () => {
+            
+          })
+        })
+
+        describe('on touch projects', () => {
+          it('should hide burger menu', () => {
+
+          })
+
+          it('should show projects', () => {
+            
+          })
+        })
+
+        describe('on touch contact', () => {
+          it('should hide burger menu', () => {
+
+          })
+
+          it('should show contact', () => {
+            
+          })
+        })
       }) 
     })
   })
-})
+}) 

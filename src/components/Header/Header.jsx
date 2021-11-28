@@ -55,8 +55,8 @@ export default function Header({
 	};
 
 	// ====================================================== Event Handlers =============================================== //
-	function onTouchBurger() {
-		const selected = !burgerIsSelected;
+	function onTouchBurger() { 
+		const selected = !burgerIsSelected; 
 		setBurgerIsSelected(selected)
 		setBurgerIsOpen(selected)
 	}

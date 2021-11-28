@@ -28,7 +28,7 @@ export default function BurgerMenu({ links, show, handleTouch }) {
       {
         links.map((link, i) => {
           return <h3  
-            className="burger-menu-link"  
+            className={`burger-menu-link burger-menu-link-${link}`}
             style={burgerMenuLink}
             key={`buger-menu-link-${i}`}
             onTouchStart={() => onTouchStartHandler(link)}>{link}</h3>
