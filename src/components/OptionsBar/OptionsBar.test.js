@@ -168,21 +168,7 @@ describe('<OptionsBar/>', () => {
     })
     
     describe('on click', () => {
-      // it('should add class `selected-${className}` to clicked option, and remove from all other options', () => {
-      //   renderDesktop()
-
-      //   userEvent.click(options[1])
-
-      //   options.forEach((option, i) => {
-      //     if(i === 1) {
-      //       expect(option.className).toContain(`selected-${thisClassName}`)
-      //     } else {
-      //       expect(option.className).not.toContain(`selected-${thisClassName}`)
-      //     }
-      //   }) 
-      // })
-
-      it.only('should class props.handleClick with option text', () => {
+      it('should class props.handleClick with option text', () => {
         renderDesktop()
 
         userEvent.click(options[1])

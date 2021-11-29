@@ -97,9 +97,7 @@ afterEach(() => {
   resetParts()
 })
 
-describe('<App/>', () => {
-  test.todo('resetParts() for all tests') 
-
+describe('<App/>', () => { 
   describe('desktop', () => {
     describe('on render', () => {
       describe('render', () => {
@@ -309,8 +307,8 @@ describe('<App/>', () => {
         })
   
         it('should render Home', () => {
-          renderPhone()  
-          console.log(window.location.href)
+          renderPhone()   
+          
           expect(home).toBeTruthy()
         })
       })
