@@ -31,7 +31,7 @@ function OptionsBarWithWrapper() {
   return (
     <OptionsBar 
       options={thisOptions} 
-      setSelectedOption={setSelectedOption}
+      selectedOption={thisOptions[0]}
       handleClick={handleClick} 
       className={thisClassName}
       style={thisStyle}
@@ -279,21 +279,21 @@ describe('<OptionsBar/>', () => {
       })
       
       describe('on second touch', () => {
-        it('should add selected class "`selected-${className}`" to touched option and hide all other options', () => {
+        it('should only show selectedOption', () => {
           renderPhone() 
-  
-          // open menu
+           
+          // first touch
           fireEvent.touchStart(options[0])
           
-          // select new option
+          // second touch
           getParts()
           const newOption = options[1];
           fireEvent.touchStart(newOption)
   
           // test
           getParts()
-          expect(options.length).toEqual(1)
-          expect(options[0]).toEqual(newOption)
+          expect(options.length).toEqual(1) 
+          expect(options[0].textContent).toEqual(selectedOption)
         })
       }) 
     }) 
