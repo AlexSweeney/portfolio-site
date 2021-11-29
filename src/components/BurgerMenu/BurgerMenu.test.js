@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { render, cleanup } from '@testing-library/react';
 import { fireEvent } from '@testing-library/dom';
 import BurgerMenu from './BurgerMenu.jsx';
@@ -16,7 +17,10 @@ let handleTouch = jest.fn();
 
 // ============================================== Setup and teardown ========================================= //
 function renderBurgerMenu() {
-  render(<BurgerMenu links={linkNames} show={showBurgerMenu} handleTouch={handleTouch}/>)
+  render(
+  <BrowserRouter>
+    <BurgerMenu links={linkNames} show={showBurgerMenu} handleTouch={handleTouch}/>
+  </BrowserRouter>)
   
   burgerMenu = document.querySelector('.burger-menu');
   links = document.querySelectorAll('.burger-menu-link');
