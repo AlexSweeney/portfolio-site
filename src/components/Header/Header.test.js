@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { render, cleanup } from '@testing-library/react';
 import { fireEvent } from '@testing-library/dom'; 
 import { colors, fonts } from './../../styles/styles.js';
@@ -25,7 +26,11 @@ function renderDesktop() {
 	setBurgerIsOpen = () => {return 'test'};
 	
 
-  render(<Header logoChars={logoChars} navLinks={navLinkNames} setBurgerIsOpen={setBurgerIsOpen}/>)
+  render(
+		<BrowserRouter>
+			<Header logoChars={logoChars} navLinks={navLinkNames} setBurgerIsOpen={setBurgerIsOpen}/>
+		</BrowserRouter>
+	)
 	getParts()
 }
 
@@ -33,7 +38,11 @@ function renderPhone() {
 	isDesktop = false;
 	setBurgerIsOpen = jest.fn();
 
-  render(<Header logoChars={logoChars} navLinks={navLinkNames} setBurgerIsOpen={setBurgerIsOpen}/>)
+  render(
+		<BrowserRouter>
+			<Header logoChars={logoChars} navLinks={navLinkNames} setBurgerIsOpen={setBurgerIsOpen}/>
+		</BrowserRouter>
+	)
 	getParts()
 }
 
