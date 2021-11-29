@@ -5,7 +5,7 @@ import Contact from './Contact.jsx';
 import { hexToRGB } from '../../utils/testUtils.js'; 
 
 // ============================================ Vars ============================================ //
-let home;
+let contact;
 let heading;
 let subheading; 
 let githubLink;
@@ -15,7 +15,7 @@ let links;
 // ============================================ Setup / teardown ================================ //
 beforeEach(() => {
   render(<Contact/>)
-  home = document.querySelector('.home');
+  contact = document.querySelector('.contact');
   heading = document.querySelector('.heading');
   subheading = document.querySelector('.subheading'); 
   links = document.querySelectorAll('.link');
@@ -28,10 +28,10 @@ afterEach(() => {
 })
 
 // ============================================ tests ========================================== //
-describe('<Home/>', () => {
+describe('<Contact/>', () => {
   describe('render', () => {
     it('should render', () => {
-      expect(home).toBeTruthy()
+      expect(contact).toBeTruthy()
     })
   })
 
@@ -86,7 +86,7 @@ describe('<Home/>', () => {
   })
 
   describe('layout', () => {
-    describe('home', () => {
+    describe('contact', () => {
       it(`should have style: {
         display: flex,
         flexDirection: column,
@@ -94,11 +94,11 @@ describe('<Home/>', () => {
         align-items: center,
         height: 100vh,
       }`, () => {
-        expect(home.style.display).toEqual('flex')
-        expect(home.style.flexDirection).toEqual('column')
-        expect(home.style.justifyContent).toEqual('center')
-        expect(home.style.alignItems).toEqual('center')
-        expect(home.style.height).toEqual('100vh')
+        expect(contact.style.display).toEqual('flex')
+        expect(contact.style.flexDirection).toEqual('column')
+        expect(contact.style.justifyContent).toEqual('center')
+        expect(contact.style.alignItems).toEqual('center')
+        expect(contact.style.height).toEqual('100vh')
       })
     })
 
@@ -118,11 +118,11 @@ describe('<Home/>', () => {
   })
 
   describe('style', () => {
-    describe('.home', () => {
+    describe('.contact', () => {
       it('should have background: styles.colors.background.darker', () => {
         const res = hexToRGB(colors.background.darker);
 
-        expect(home.style.background).toEqual(res)
+        expect(contact.style.background).toEqual(res)
       })
     })
 
