@@ -4,7 +4,7 @@ import { fireEvent } from "@testing-library/dom";
 import PictureBar from './PictureBar.jsx';
 
 // ==================================== Consts / Vars ================================ //
-const thisPictures = [<div className="picture-1"></div>, <div className="picture-2"></div>, <div className="picture-3"></div>];
+const thisPictures = [<div className="picture-1">picture 1</div>, <div className="picture-2">picture 2</div>, <div className="picture-3">picture 3</div>];
 const thisStyle = {
   color: 'red',
   background: 'yellow',
@@ -12,6 +12,7 @@ const thisStyle = {
 
 let selectedPicture;
 let setSelectedPicture;
+let handleClick;
 
 let isDesktop;
 let pictureBar;
@@ -20,12 +21,14 @@ let pictures;
 // ==================================== Util fns ==================================== //
 function PictureBarWrapper() {
   [selectedPicture, setSelectedPicture] = useState(thisPictures[0]);
+  handleClick = jest.fn()
 
   return (
     <PictureBar 
       pictures={thisPictures} 
       selectedPicture={selectedPicture} 
       setSelectedPicture={setSelectedPicture}
+      handleClick={handleClick}
       style={thisStyle}/>
   )
 }
@@ -49,6 +52,13 @@ function getParts() {
   pictures = document.querySelectorAll('.picture-container');
 }
 
+function resetVals() {
+  handleClick = null;
+  isDesktop = null;
+  pictureBar = null;
+  pictures = null;
+}
+
 // ==================================== Mock ======================================= //
 // matches = used by media query
 Object.defineProperty(window, 'matchMedia', {
@@ -68,6 +78,7 @@ Object.defineProperty(window, 'matchMedia', {
 // ==================================== Teardown ==================================== //
 afterEach(() => {
   cleanup()
+  resetVals()
 })
 
 // ==================================== Tests ======================================= //
@@ -138,58 +149,20 @@ describe('<PictureBar/>', () => {
           expect(pictures[0].className).toContain('picture-container') 
           expect(pictures[0].children[0].className).toEqual(selectedPicture.props.className)
         })
-      }) 
-
-      describe('on touch', () => {
-        describe('first touch', () => {
-          it('should render .pictureContainer for each picture in props.pictures', () => {
-            renderPhone()
-
-            fireEvent.touchStart(pictures[0])
-            pictures = document.querySelectorAll('.picture-container');
-
-            expect(pictures.length).toEqual(thisPictures.length)
-
-            pictures.forEach((picture, i) => {   
-              expect(picture.className).toContain('picture-container')
-              expect(picture.children[0].className).toEqual(thisPictures[i].props.className)
-            })
-          })
-        })
-
-        describe('second touch', () => {
-          it('should change props.selectedPicture to touched image', () => {
-            renderPhone()
-            
-            // open menu
-            fireEvent.touchStart(pictures[0])
-
-            // select new pic
-            pictures = document.querySelectorAll('.picture-container');
-            fireEvent.touchStart(pictures[1])
-
-            expect(selectedPicture.props.className).toEqual(thisPictures[1].props.className)
-          })
-
-          it('should only render props.selectedImage', () => {
-            renderPhone()
-            
-            // open menu
-            fireEvent.touchStart(pictures[0])
-
-            // select new pic
-            pictures = document.querySelectorAll('.picture-container');
-            fireEvent.touchStart(pictures[1])
-
-            // check 
-            pictures = document.querySelectorAll('.picture-container');
-            expect(pictures.length).toEqual(1) 
-          })
-        })
-      })
+      })  
     })
 
     describe('on touch', () => {
+      it('should call props.handleClick with touched picture', () => {
+        renderPhone()
+
+        // touch
+        fireEvent.touchStart(pictures[0])
+ 
+        expect(handleClick).toHaveBeenCalledTimes(1)
+        expect(handleClick).toHaveBeenCalledWith(thisPictures[0])
+      })
+
       describe('on first touch', () => { 
         it('should show all pictures', () => {
           renderPhone()
@@ -207,23 +180,8 @@ describe('<PictureBar/>', () => {
         }) 
       }) 
       
-      describe('on second touch', () => {
-        it('should add "selected-picture-container" class to touched picture container', () => {
-          renderPhone()
-
-          // open
-          fireEvent.touchStart(pictures[0])
-
-          // touch
-          pictures = document.querySelectorAll('.picture-container');
-          const newPic = pictures[1];
-          fireEvent.touchStart(newPic)
-
-          // check
-          expect(pictures[0].className).toContain('selected-picture-container')
-        })
-
-        it('should show touched picture and hide other pics', () => {
+      describe('on second touch', () => { 
+        it('should only show picture that matches props.selectedPicture', () => {
           renderPhone()
 
           // open
@@ -238,7 +196,8 @@ describe('<PictureBar/>', () => {
           pictures = document.querySelectorAll('.picture-container');
           expect(pictures.length).toEqual(1)
 
-          expect(pictures[0]).toEqual(newPic)
+          // console.log(pictures[0]) 
+          expect(pictures[0].children[0].className).toEqual("picture-1")
         }) 
       })
     })

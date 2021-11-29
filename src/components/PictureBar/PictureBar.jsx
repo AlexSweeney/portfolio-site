@@ -4,7 +4,7 @@ export default function PictureBar({
   pictures, 
   selectedPicture, 
   setSelectedPicture, 
-  handleClick,
+  handleClick = () => {},
   style,
 }) {
   // ==================================== Consts / Vars =============================== //
