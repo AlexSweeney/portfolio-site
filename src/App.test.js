@@ -98,7 +98,7 @@ afterEach(() => {
 })
 
 describe('<App/>', () => { 
-  describe('desktop', () => {
+  describe.only('desktop', () => {
     describe('on render', () => {
       describe('render', () => {
         it('should render', () => {
@@ -117,6 +117,20 @@ describe('<App/>', () => {
           renderDesktop()
 
           expect(home).toBeTruthy()
+        })
+      })
+
+      describe('style', () => {
+        describe('layout', () => {
+          it(`it should have style = {
+            height: 100vh;
+            min-width: 530px;
+          }`, () => {
+            renderDesktop()
+
+            expect(app.style.height).toEqual('100vh')
+            expect(app.style.minWidth).toEqual('530px')
+          })
         })
       })
 
@@ -143,10 +157,10 @@ describe('<App/>', () => {
           })
 
           describe('burger', () => {
-            it('should not render', () => {
+            it('should render', () => {
               renderDesktop()
 
-              expect(burger).toBeFalsy()
+              expect(burger).toBeTruthy()
             })
           })
         })

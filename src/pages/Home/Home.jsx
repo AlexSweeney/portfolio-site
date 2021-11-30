@@ -1,5 +1,6 @@
 import React from "react";
 import { colors, fonts } from '../../styles/styles.js';
+import './Home.css';
 
 export default function Home() {
   const homeStyle = {
@@ -8,7 +9,7 @@ export default function Home() {
     justifyContent: 'center',
     alignItems: 'center',
     background: colors.background.darker,
-    height: '100vh',
+    height: '100%',
   };
 
   const headingStyle = {
@@ -18,7 +19,7 @@ export default function Home() {
 
   const subheadingStyle = {
     color: colors.font.highlight,
-    fontFamily: fonts.body,
+    fontFamily: fonts.head,
   };
 
   return (

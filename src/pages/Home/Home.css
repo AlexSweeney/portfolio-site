@@ -1,0 +1,22 @@
+
+/* Tablet */
+@media only screen and (min-width: 426px) { 
+  .heading {
+    font-size: 54px; 
+    margin: 0;
+  } 
+}
+
+/* Desktop */
+@media only screen and (min-width: 769px)  {
+  .heading {
+    font-size: 80px;
+    letter-spacing: 3px;
+    margin: 20px;
+  }
+
+  .subheading {
+    font-size: 34px; 
+    letter-spacing: 0.5px;
+  }
+}

@@ -24,9 +24,7 @@ export default function Header({
 		padding: '32px',
     boxSizing: 'border-box',
 		background: colors.background.dark,
-		position: 'absolute',
-		width: '100%',
-		minWidth: '530px',
+		width: '100%', 
 	};
 
 	const logoStyle = {

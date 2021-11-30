@@ -35,6 +35,13 @@ export default function App() {
   
   const [showBurgerMenu, setShowBurgerMenu] = useState(false);
 
+  const appStyle = {
+    height: '100vh',
+    minWidth: '530px',
+    display: 'flex',
+    flexDirection: 'column',
+  };
+
   function onTouchBurgerLink(link) {
     setShowBurgerMenu(false) 
   }
@@ -45,12 +52,13 @@ export default function App() {
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
       <link href="https://fonts.googleapis.com/css2?family=Medula+One&display=swap" rel="stylesheet"/> 
       <link href="https://fonts.googleapis.com/css2?family=Medula+One&display=swap" rel="stylesheet"/>
+      <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500&display=swap" rel="stylesheet"/>
 
-      <section className="app">
+      <section className="app" style={appStyle}>
         <BrowserRouter>
           <Header logoChars={logoChars} navLinks={navLinks} setBurgerIsOpen={setShowBurgerMenu}/>
           
-          {/* <BurgerMenu links={navLinks} show={showBurgerMenu} handleTouch={onTouchBurgerLink}/>
+          {/* <BurgerMenu links={navLinks} show={showBurgerMenu} handleTouch={onTouchBurgerLink}/> */}
 
           <Routes>
             <Route exact path="/" element={<Home/>}/>
@@ -58,7 +66,7 @@ export default function App() {
             <Route exact path="/Technical%20Skills" element={<TechnicalSkills data={data}/>}/>
             <Route exact path="/Projects" element={<Projects projs={myProjects}/>}/>
             <Route exact path="/Contact" element={<Contact/>}/>
-          </Routes>  */}
+          </Routes> 
         </BrowserRouter>
       </section>
     </div>
