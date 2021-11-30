@@ -58,15 +58,19 @@ export default function App() {
         <BrowserRouter>
           <Header logoChars={logoChars} navLinks={navLinks} setBurgerIsOpen={setShowBurgerMenu}/>
           
-          {/* <BurgerMenu links={navLinks} show={showBurgerMenu} handleTouch={onTouchBurgerLink}/> */}
+          <BurgerMenu links={navLinks} show={showBurgerMenu} handleTouch={onTouchBurgerLink}/>
 
-          <Routes>
-            <Route exact path="/" element={<Home/>}/>
-            <Route exact path="/Home" element={<Home/>}/>
-            <Route exact path="/Technical%20Skills" element={<TechnicalSkills data={data}/>}/>
-            <Route exact path="/Projects" element={<Projects projs={myProjects}/>}/>
-            <Route exact path="/Contact" element={<Contact/>}/>
-          </Routes> 
+          {
+            !showBurgerMenu && 
+            <Routes>
+              <Route exact path="/" element={<Home/>}/>
+              <Route exact path="/Home" element={<Home/>}/>
+              <Route exact path="/Technical%20Skills" element={<TechnicalSkills data={data}/>}/>
+              <Route exact path="/Projects" element={<Projects projs={myProjects}/>}/>
+              <Route exact path="/Contact" element={<Contact/>}/>
+            </Routes> 
+          }
+          
         </BrowserRouter>
       </section>
     </div>
