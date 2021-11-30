@@ -109,10 +109,10 @@ describe('<Header/>', () => {
 					expect(navLinks.length).toEqual(navLinkNames.length)
 				})
 
-				it('should not render burger', () => {
+				it('should render burger', () => {
 					renderDesktop()
 
-					expect(burger).toBeFalsy()
+					expect(burger).toBeTruthy()
 				})
 			})
 
@@ -147,7 +147,7 @@ describe('<Header/>', () => {
 							box-sizing: border-box,
 							position: absolute,
 							width: 100%,
-							min-width: 500px,
+							min-width: 530px,
 						}`, () => {
 							renderDesktop()
 			
@@ -158,48 +158,30 @@ describe('<Header/>', () => {
 							expect(header.style.boxSizing).toEqual('border-box')
 							expect(header.style.position).toEqual('absolute')
 							expect(header.style.width).toEqual('100%')
-							expect(header.style.minWidth).toEqual('570px')
+							expect(header.style.minWidth).toEqual('530px')
 						})
 					})
 					
 					describe('nav links', () => {
-						it(`should have style = {
-							display: flex,
+						it(`should have style = { 
 							justifyContent: 'flex-end',
 							width: '100%',
 						}`, () => {
 							renderDesktop()
-
-							expect(nav.style.display).toEqual('flex')
+ 
 							expect(nav.style.justifyContent).toEqual('flex-end')
 							expect(nav.style.width).toEqual('100%')
 						})
 					})
 
 					describe('.nav-link', () => {
-						it('should have marginLeft: 80px', () => {
-							renderDesktop()
-			
-							navLinks.forEach(navLink => {
-								expect(navLink.style.marginLeft).toEqual('80px')
-							})
-						})
-
 						it('should have white-space: no-wrap', () => {
 							renderDesktop()
 			
 							navLinks.forEach(navLink => {
 								expect(navLink.style.whiteSpace).toEqual('nowrap')
 							})
-						})
-
-						it('should have font-size: 1.2rem', () => {
-							renderDesktop()
-			
-							navLinks.forEach(navLink => {
-								expect(navLink.style.fontSize).toEqual('1.2rem')
-							})
-						})
+						}) 
 					})
 				})
 
@@ -228,13 +210,7 @@ describe('<Header/>', () => {
 								renderDesktop()
 				
 								expect(textLogo.style.fontFamily).toEqual(fonts.logo)
-							})
-
-							it('should have fontsize: 4.5625rem', () => {
-								renderDesktop()
-								 
-								expect(textLogo.style.fontSize).toEqual('4.5625rem')
-							})
+							}) 
 
 							it('should have textDecoration: none', () => {
 								renderDesktop()
@@ -295,10 +271,10 @@ describe('<Header/>', () => {
 					expect(textLogo).toBeTruthy()
 				})
 
-				it('should not render nav links', () => {
+				it('should render nav links', () => {
 					renderPhone()
 
-					expect(navLinks).toBeFalsy()
+					expect(navLinks).toBeTruthy()
 				})
 
 				it('should render burger', () => {
@@ -329,16 +305,14 @@ describe('<Header/>', () => {
 			describe('style', () => {
 				describe('layout', () => {
 					describe('burger', () => {
-						it(`should have style = {
-								display: flex;
+						it(`should have style = { 
 								flexDirection: column; 
 								justifyContent: space-between; 
 								width: 100px;
 								height: 75px;
 							}`, () => {
 							renderPhone()
-			
-							expect(burger.style.display).toEqual('flex')
+			 
 							expect(burger.style.flexDirection).toEqual('column')
 							expect(burger.style.justifyContent).toEqual('space-between')
 							expect(burger.style.width).toEqual('100px')
