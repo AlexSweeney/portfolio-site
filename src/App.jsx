@@ -40,20 +40,27 @@ export default function App() {
   }
 
   return (
-    <section className="app">
-      <BrowserRouter>
-        <Header logoChars={logoChars} navLinks={navLinks} setBurgerIsOpen={setShowBurgerMenu}/>
-        
-        <BurgerMenu links={navLinks} show={showBurgerMenu} handleTouch={onTouchBurgerLink}/>
+    <div>
+      <link rel="preconnect" href="https://fonts.googleapis.com"/>
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+      <link href="https://fonts.googleapis.com/css2?family=Medula+One&display=swap" rel="stylesheet"/> 
+      <link href="https://fonts.googleapis.com/css2?family=Medula+One&display=swap" rel="stylesheet"/>
 
-        <Routes>
-          <Route exact path="/" element={<Home/>}/>
-          <Route exact path="/Home" element={<Home/>}/>
-          <Route exact path="/Technical%20Skills" element={<TechnicalSkills data={data}/>}/>
-          <Route exact path="/Projects" element={<Projects projs={myProjects}/>}/>
-          <Route exact path="/Contact" element={<Contact/>}/>
-        </Routes> 
-      </BrowserRouter>
-    </section>
+      <section className="app">
+        <BrowserRouter>
+          <Header logoChars={logoChars} navLinks={navLinks} setBurgerIsOpen={setShowBurgerMenu}/>
+          
+          {/* <BurgerMenu links={navLinks} show={showBurgerMenu} handleTouch={onTouchBurgerLink}/>
+
+          <Routes>
+            <Route exact path="/" element={<Home/>}/>
+            <Route exact path="/Home" element={<Home/>}/>
+            <Route exact path="/Technical%20Skills" element={<TechnicalSkills data={data}/>}/>
+            <Route exact path="/Projects" element={<Projects projs={myProjects}/>}/>
+            <Route exact path="/Contact" element={<Contact/>}/>
+          </Routes>  */}
+        </BrowserRouter>
+      </section>
+    </div>
   )
 }

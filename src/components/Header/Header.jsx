@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';  
 import { Link } from 'react-router-dom';
 import { colors, fonts } from './../../styles/styles.js';
+import './Header.css';
 
 export default function Header({
 	logoChars = "", 
@@ -12,7 +13,7 @@ export default function Header({
 	const [burgerClass, setBurgerClass] = useState('');
 
 	// gets value on first render => for testing in console must refresh page
-	const desktopMatch = window.matchMedia('(min-width: 426px)').matches;
+	const desktopMatch = window.matchMedia('(min-width: 426px)').matches; 
 	const phoneMatch = !desktopMatch;
 
 	// ====================================================== Styles ======================================================== //
@@ -23,30 +24,34 @@ export default function Header({
 		padding: '32px',
     boxSizing: 'border-box',
 		background: colors.background.dark,
+		position: 'absolute',
+		width: '100%',
+		minWidth: '530px',
 	};
 
 	const logoStyle = {
 		color: colors.font.light,
-		fontFamily: fonts.logo,
+		fontFamily: fonts.logo, 
+		textDecoration: 'none',
 	};
 
-	const navStyle = {
-		display: 'flex', 
+	const navStyle = { 
     width: '100%',
     justifyContent: 'flex-end',
 	};
 
 	const navLinkStyle = {
 		color: colors.font.light,
-		fontFamily: fonts.body,
-		marginLeft: '32px',
+		fontFamily: fonts.body, 
 		textDecoration: 'none',
+		whiteSpace: 'nowrap', 
 	};
 
-	const burgerStyle = { 
-		display: 'flex',
+	const burgerStyle = {  
 		flexDirection: 'column', 
 		justifyContent: 'space-between',
+		width: '100px',
+		height: '75px',
 	};
 
 	const burgerBarStyle = {
@@ -84,25 +89,19 @@ export default function Header({
 				{logoChars}
 			</Link>
 
-			{
-				desktopMatch &&
-				<nav className="header-nav" style={navStyle}>
-					{
-						navLinks.map((navLink, i) => {
-							return <Link to={navLink} className="nav-link" key={`nav-link-${i}`} style={navLinkStyle}>{navLink}</Link>
-						})
-					}
-				</nav>
-			}
-			 
-			{
-				phoneMatch &&
-				<div className={`burger ${burgerClass}`} style={burgerStyle} onTouchStart={onTouchBurger}>
-					<div className="burger-bar" style={burgerBarStyle}></div>
-					<div className="burger-bar" style={burgerBarStyle}></div>
-					<div className="burger-bar" style={burgerBarStyle}></div>
-				</div>
-			}
+			<nav className="header-nav" style={navStyle}>
+				{
+					navLinks.map((navLink, i) => {
+						return <Link to={navLink} className="nav-link" key={`nav-link-${i}`} style={navLinkStyle}>{navLink}</Link>
+					})
+				}
+			</nav>
+		
+			<div className={`burger ${burgerClass}`} style={burgerStyle} onTouchStart={onTouchBurger}>
+				<div className="burger-bar" style={burgerBarStyle}></div>
+				<div className="burger-bar" style={burgerBarStyle}></div>
+				<div className="burger-bar" style={burgerBarStyle}></div>
+			</div> 
 		</header>
 	)
 }

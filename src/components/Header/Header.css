@@ -1,0 +1,72 @@
+/* Colors */
+ .text-logo:hover {
+  color: #64eaff !important;
+}
+
+.text-logo:active {
+  color: #56cee0 !important;
+}
+
+.nav-link:hover {
+  color: #64eaff !important;
+}
+
+.nav-link:active {
+  color: #56cee0 !important;
+}
+
+
+/* Mobile */
+.text-logo {
+  font-size: 3.4375rem;
+}
+
+.header-nav {
+  display: none;
+}
+
+.burger {
+  display: flex;
+}
+
+/* Tablet */
+@media only screen and (min-width: 426px) {
+  .text-logo {
+    font-size: 3.75rem;
+  }
+
+  .nav-link {
+    font-size: 1rem;
+    margin-left: 33px;
+  } 
+
+  .header-nav {
+    display: flex;
+  }
+
+  .burger {
+    display: none;
+  }
+}
+
+/* Desktop */
+@media only screen and (min-width: 769px)  {
+  .text-logo {
+    font-size: 4.5625rem;
+  }
+ 
+  .nav-link {
+    font-size: 1rem;
+    margin-left: 80px;
+  } 
+
+  .header-nav {
+    display: flex;
+  }
+
+  .burger {
+    display: none;
+  }
+}
+
+

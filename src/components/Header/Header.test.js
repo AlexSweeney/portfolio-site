@@ -87,7 +87,7 @@ afterEach(() => {
 })
 
 // ==================================== Tests ======================================= //
-describe('<Header/>', () => {
+describe('<Header/>', () => { 
 	describe('desktop', () => {
 		describe('on render', () => {
 			describe('render', () => {
@@ -144,7 +144,10 @@ describe('<Header/>', () => {
 							justify-content: space-between, 
 							align-items: center,
 							padding: 32px,
-							box-sizing: border-box 
+							box-sizing: border-box,
+							position: absolute,
+							width: 100%,
+							min-width: 500px,
 						}`, () => {
 							renderDesktop()
 			
@@ -153,6 +156,9 @@ describe('<Header/>', () => {
 							expect(header.style.alignItems).toEqual('center')
 							expect(header.style.padding).toEqual('32px')
 							expect(header.style.boxSizing).toEqual('border-box')
+							expect(header.style.position).toEqual('absolute')
+							expect(header.style.width).toEqual('100%')
+							expect(header.style.minWidth).toEqual('570px')
 						})
 					})
 					
@@ -171,11 +177,27 @@ describe('<Header/>', () => {
 					})
 
 					describe('.nav-link', () => {
-						it('should have marginLeft: 32px', () => {
+						it('should have marginLeft: 80px', () => {
 							renderDesktop()
 			
 							navLinks.forEach(navLink => {
-								expect(navLink.style.marginLeft).toEqual('32px')
+								expect(navLink.style.marginLeft).toEqual('80px')
+							})
+						})
+
+						it('should have white-space: no-wrap', () => {
+							renderDesktop()
+			
+							navLinks.forEach(navLink => {
+								expect(navLink.style.whiteSpace).toEqual('nowrap')
+							})
+						})
+
+						it('should have font-size: 1.2rem', () => {
+							renderDesktop()
+			
+							navLinks.forEach(navLink => {
+								expect(navLink.style.fontSize).toEqual('1.2rem')
 							})
 						})
 					})
@@ -206,6 +228,18 @@ describe('<Header/>', () => {
 								renderDesktop()
 				
 								expect(textLogo.style.fontFamily).toEqual(fonts.logo)
+							})
+
+							it('should have fontsize: 4.5625rem', () => {
+								renderDesktop()
+								 
+								expect(textLogo.style.fontSize).toEqual('4.5625rem')
+							})
+
+							it('should have textDecoration: none', () => {
+								renderDesktop()
+								 
+								expect(textLogo.style.textDecoration).toEqual('none')
 							})
 						})
 					})
@@ -298,13 +332,17 @@ describe('<Header/>', () => {
 						it(`should have style = {
 								display: flex;
 								flexDirection: column; 
-								justifyContent: spaceBetween; 
+								justifyContent: space-between; 
+								width: 100px;
+								height: 75px;
 							}`, () => {
 							renderPhone()
 			
 							expect(burger.style.display).toEqual('flex')
 							expect(burger.style.flexDirection).toEqual('column')
-							expect(burger.style.flexDirection).toEqual('column')
+							expect(burger.style.justifyContent).toEqual('space-between')
+							expect(burger.style.width).toEqual('100px')
+							expect(burger.style.height).toEqual('75px')
 						}) 
 					}) 
 
