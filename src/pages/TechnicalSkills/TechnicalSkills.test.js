@@ -121,7 +121,7 @@ describe('<TechnicalSkills data={data}/>', () => {
         it(`should have style = {
           background: colors.background.dark,
           display: flex;
-          justify-content: space-between;
+          justify-content: space-between; 
         }`, () => {
           renderDesktop()
 
