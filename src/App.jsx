@@ -21,7 +21,7 @@ export default function App() {
     minHeight: '100vh',
     minWidth: '530px',
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column', 
   };
 
   function onTouchBurgerLink(link) {
