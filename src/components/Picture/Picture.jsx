@@ -4,7 +4,8 @@ import { colors, fonts } from './../../styles/styles.js';
 export default function Picture({image, title, appAddress, sourceAddress}) {
   const pictureContainerStyle = {
     position: 'relative',
-    
+    margin: '16px',
+    marginTop: '0px',
   };
 
   const pictureTextContainerStyle = {
@@ -22,7 +23,7 @@ export default function Picture({image, title, appAddress, sourceAddress}) {
   const pictureStyle = { 
     backgroundSize: '90%',
     backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
+    backgroundPosition: 'center 10px',
     backgroundImage: `url(${image})`, 
     backgroundColor: 'white',
     opacity: '0.2',

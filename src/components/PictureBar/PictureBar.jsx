@@ -14,9 +14,9 @@ export default function PictureBar({
   // ==================================== Styles ====================================== //
   const pictureBarStyle = {
     display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',
+    flexDirection: 'column', 
     height: '100%',
+    marginTop: '16px',
     ...style,
   };
 

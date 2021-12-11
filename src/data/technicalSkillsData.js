@@ -3,26 +3,32 @@ import { colors, fonts } from '../styles/styles.js';
 import Picture from '../components/Picture/Picture.jsx';
 import ReactPianoImage from './imgs/react-piano.jpg';
 import MetronomeImage from './imgs/metronome.jpg';
+import FlexQuestImage from './imgs/flex-quest.jpg';
+import KairosImage from './imgs/kairos.png';
+import PortfolioSiteImage from './imgs/portfolio-site.jpg';
 
 const reactPiano = <Picture image={ReactPianoImage} title="React Piano"/>;
 const metronome = <Picture image={MetronomeImage} title="Metronome"/>;
+const flexQuest = <Picture image={FlexQuestImage} title="Flex Quest"/>; 
+const kairos = <Picture image={KairosImage} title="Kairos Project"/>;
+const portfolioSite = <Picture image={PortfolioSiteImage} title="Portfolio Site"/>; 
 
 export const data = {
   'React' : { 
-    'hooks': [reactPiano, metronome, 'flex-quest', 'kairos-project', 'portfolio-site'],
-    'functional components': [reactPiano, metronome, 'flex-quest', 'kairos-project', 'portfolio-site'],
-    'react router': ['flex-quest', 'kairos-project', 'portfolio-site'], 
-    'unit tests': [reactPiano, metronome, 'flex-quest', 'kairos-project', 'portfolio-site'],
+    'hooks': [reactPiano, metronome, flexQuest, kairos, portfolioSite],
+    'functional components': [reactPiano, metronome, flexQuest, kairos, portfolioSite],
+    'react router': [flexQuest, kairos, portfolioSite], 
+    'unit tests': [reactPiano, metronome, flexQuest, kairos, portfolioSite],
   },
   'javascript' : { 
-    'async / await': ['flex-quest', 'kairos-project'],
-    'session storage': ['kairos-project'],
-    'promises': ['flex-quest', 'kairos-project'], 
+    'async / await': [flexQuest, kairos],
+    'session storage': [kairos],
+    'promises': [flexQuest, kairos], 
     'audio' : [reactPiano, metronome],
   },
   'design patterns' : { 
-    'test driven development': ['portfolio-site'],
-    'functional programming': [reactPiano, metronome, 'flex-quest', 'kairos-project', 'portfolio-site'], 
+    'test driven development': [portfolioSite],
+    'functional programming': [reactPiano, metronome, flexQuest, kairos, portfolioSite], 
   },
 }; 
 

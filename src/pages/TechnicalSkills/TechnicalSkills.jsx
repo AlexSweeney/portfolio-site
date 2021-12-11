@@ -44,7 +44,7 @@ export default function TechnicalSkills({data}) {
   };
 
   const pictureBarStyle = {
-    justifyContent: desktopMatch ? 'space-evenly' : 'center',
+    justifyContent: desktopMatch ? 'flex-start' : 'center',
     alignItems: desktopMatch ? '' : 'center',
   };
 
