@@ -120,8 +120,9 @@ describe('<TechnicalSkills data={data}/>', () => {
       describe('layout', () => {
         it(`should have style = {
           background: colors.background.dark,
-          display: flex;
-          justify-content: space-between; 
+          display: flex,
+          justify-content: space-between,
+          height: 100%,
         }`, () => {
           renderDesktop()
 
@@ -130,6 +131,7 @@ describe('<TechnicalSkills data={data}/>', () => {
           expect(technicalSkills.style.background).toEqual(res)
           expect(technicalSkills.style.display).toEqual('flex')
           expect(technicalSkills.style.justifyContent).toEqual('space-between')
+          expect(technicalSkills.style.height).toEqual('100%')
         })
       })  
     })

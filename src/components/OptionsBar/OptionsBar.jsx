@@ -16,7 +16,7 @@ export default function OptionsBar({
   const optionsBarStyle = {
     display: 'flex',
     flexDirection: 'column',
-    height: desktopMatch ? '100%' : '',
+    // height: desktopMatch ? '100%' : '',
     ...style,
   };
 

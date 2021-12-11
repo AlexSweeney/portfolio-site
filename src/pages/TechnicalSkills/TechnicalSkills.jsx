@@ -24,6 +24,7 @@ export default function TechnicalSkills({data}) {
     justifyContent:  desktopMatch ? 'space-between' : 'space-evenly',
     flexDirection: desktopMatch ? '' : 'column',
     background: colors.background.darker,
+    flexGrow: '1',
   };
 
   const subjectsBarStyle = {

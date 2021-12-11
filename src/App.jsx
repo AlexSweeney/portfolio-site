@@ -18,7 +18,7 @@ export default function App() {
   const [showBurgerMenu, setShowBurgerMenu] = useState(false);
 
   const appStyle = {
-    height: '100vh',
+    minHeight: '100vh',
     minWidth: '530px',
     display: 'flex',
     flexDirection: 'column',
