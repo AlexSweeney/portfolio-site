@@ -77,11 +77,15 @@ describe('<Picture/>', () => {
             backgroundSize: '90%',
             backgroundRepeat: 'no-repeat',  
             backgroundImage: url(props.image), 
+            width: 100%,
+            height: 100%,
           }`, () => { 
             console.log(picture.style.backgroundPosition)
             expect(picture.style.backgroundSize).toEqual('90%')
             expect(picture.style.backgroundRepeat).toEqual('no-repeat') 
             expect(picture.style.backgroundImage).toEqual(`url(${image})`)
+            expect(picture.style.width).toEqual('100%')
+            expect(picture.style.height).toEqual('100%')
           })
         }) 
 

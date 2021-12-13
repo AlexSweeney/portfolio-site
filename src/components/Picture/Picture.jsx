@@ -6,6 +6,9 @@ export default function Picture({image, title, appAddress, sourceAddress}) {
     position: 'relative',
     margin: '16px',
     marginTop: '0px',
+
+    height: '200px',
+    width: '200px',
   };
 
   const pictureTextContainerStyle = {
@@ -28,9 +31,8 @@ export default function Picture({image, title, appAddress, sourceAddress}) {
     backgroundColor: 'white',
     opacity: '0.2',
     borderRadius: '4%',
-
-    height: '200px',
-    width: '200px',
+    width: '100%',
+    height: '100%',
   };
 
   const headingStyle = {
