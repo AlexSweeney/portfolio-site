@@ -9,7 +9,7 @@ export default function Home() {
     justifyContent: 'center',
     alignItems: 'center',
     background: colors.background.darker,
-    height: '100%',
+    flexGrow: '1',
   };
 
   const headingStyle = {

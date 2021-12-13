@@ -51,12 +51,14 @@ describe('<Home/>', () => {
         justify-content: center,
         align-items: center,
         height: 100vh,
+        flexGrow: 1,
       }`, () => {
         expect(home.style.display).toEqual('flex')
         expect(home.style.flexDirection).toEqual('column')
         expect(home.style.justifyContent).toEqual('center')
         expect(home.style.alignItems).toEqual('center')
         expect(home.style.height).toEqual('100vh')
+        expect(home.style.flexGrow).toEqual('1')
       })
     })
   })

@@ -17,44 +17,42 @@ export default function App() {
   
   const [showBurgerMenu, setShowBurgerMenu] = useState(false);
 
-  const appStyle = {
-    minHeight: '100vh',
-    minWidth: '530px',
+  const appStyle = { 
     display: 'flex',
-    flexDirection: 'column', 
+    flexDirection: 'column',
+    width: '100%', 
+    height: '100%', 
   };
 
   function onTouchBurgerLink(link) {
     setShowBurgerMenu(false) 
-  }
+  } 
 
-  return (
-    <div>
+  return ( 
+    <section className="app" style={appStyle}>
       <link rel="preconnect" href="https://fonts.googleapis.com"/>
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
       <link href="https://fonts.googleapis.com/css2?family=Medula+One&display=swap" rel="stylesheet"/> 
       <link href="https://fonts.googleapis.com/css2?family=Medula+One&display=swap" rel="stylesheet"/>
       <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500&display=swap" rel="stylesheet"/>
 
-      <section className="app" style={appStyle}>
-        <BrowserRouter>
-          <Header logoChars={logoChars} navLinks={navLinks} setBurgerIsOpen={setShowBurgerMenu}/>
-          
-          <BurgerMenu links={navLinks} show={showBurgerMenu} handleTouch={onTouchBurgerLink}/>
+      <BrowserRouter>
+        <Header logoChars={logoChars} navLinks={navLinks} setBurgerIsOpen={setShowBurgerMenu}/>
+        
+        <BurgerMenu links={navLinks} show={showBurgerMenu} handleTouch={onTouchBurgerLink}/>
 
-          {
-            !showBurgerMenu && 
-            <Routes>
-              <Route exact path="/" element={<Home/>}/>
-              <Route exact path="/Home" element={<Home/>}/>
-              <Route exact path="/Technical%20Skills" element={<TechnicalSkills data={data}/>}/>
-              <Route exact path="/Projects" element={<Projects projs={myProjects}/>}/>
-              <Route exact path="/Contact" element={<Contact/>}/>
-            </Routes> 
-          }
-          
-        </BrowserRouter>
-      </section>
-    </div>
+        {
+          !showBurgerMenu && 
+          <Routes>
+            <Route exact path="/" element={<Home/>}/>
+            <Route exact path="/Home" element={<Home/>}/>
+            <Route exact path="/Technical%20Skills" element={<TechnicalSkills data={data}/>}/>
+            <Route exact path="/Projects" element={<Projects projs={myProjects}/>}/>
+            <Route exact path="/Contact" element={<Contact/>}/>
+          </Routes> 
+        }
+        
+      </BrowserRouter>
+    </section>
   )
 }
