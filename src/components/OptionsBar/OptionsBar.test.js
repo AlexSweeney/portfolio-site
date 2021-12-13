@@ -126,14 +126,12 @@ describe('<OptionsBar/>', () => {
           describe('layout', () => {
             it(`should have style = {
               display: 'flex',
-              flexDirection: 'column',
-              height: '100vh',
+              flexDirection: 'column', 
             }`, () => {
               renderDesktop()
 
               expect(optionsBar.style.display).toEqual('flex')
-              expect(optionsBar.style.flexDirection).toEqual('column')
-              expect(optionsBar.style.height).toEqual('100vh')
+              expect(optionsBar.style.flexDirection).toEqual('column') 
             }) 
           })
         }) 
@@ -143,6 +141,7 @@ describe('<OptionsBar/>', () => {
             fontFamily = fonts.head,
             color: colors.font.light,
             textDecoration: 'none',
+            cursor: pointer,
           }`, () => {
             renderDesktop()
             const res = hexToRGB(colors.font.light);
@@ -151,6 +150,7 @@ describe('<OptionsBar/>', () => {
               expect(option.style.fontFamily).toEqual(fonts.head)
               expect(option.style.color).toEqual(res)
               expect(option.style.textDecoration).toEqual('none')
+              expect(option.style.cursor).toEqual('pointer')
             }) 
           }) 
 

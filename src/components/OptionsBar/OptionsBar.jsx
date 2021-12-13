@@ -1,5 +1,6 @@
 import React, { useState } from "react"; 
 import { colors, fonts } from "../../styles/styles";
+import './OptionsBar.css';
 
 export default function OptionsBar({ 
   options, 
@@ -15,8 +16,7 @@ export default function OptionsBar({
   // ====================================================== Styles ======================================================== //
   const optionsBarStyle = {
     display: 'flex',
-    flexDirection: 'column',
-    // height: desktopMatch ? '100%' : '',
+    flexDirection: 'column', 
     ...style,
   };
 
@@ -25,6 +25,7 @@ export default function OptionsBar({
     padding: '32px',
     color: colors.font.light,
     textDecoration: 'none',
+    cursor: 'pointer',
   };
 
   // ====================================================== Fns ========================================================= //
@@ -35,7 +36,7 @@ export default function OptionsBar({
 
   function getSelectedClass(option) {
     if(option === selectedOption) {
-      return `selected-${className}`;
+      return `selected-${className} selected-option`;
     } else {
       return '';
     }
@@ -49,7 +50,7 @@ export default function OptionsBar({
           if((option === selectedOption) || showAll || desktopMatch) {
             return <h3
             key={`option-${i}`} 
-            className={`${className} ${getSelectedClass(option)}`}
+            className={`${className} option ${getSelectedClass(option)}`}
             style={optionStyle} 
             onClick={() => { onSelectOption(option) }}
             onTouchStart={() => { onSelectOption(option) }}

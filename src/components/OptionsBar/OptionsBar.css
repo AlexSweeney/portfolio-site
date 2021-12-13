@@ -1,0 +1,11 @@
+.option:hover {
+  color: #64eaff !important;
+}
+
+.option:active {
+  color: #56cee0 !important;
+}
+
+.selected-option {
+  color: #56cee0 !important;
+}

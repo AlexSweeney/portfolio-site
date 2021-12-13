@@ -30,7 +30,6 @@ export default function TechnicalSkills({data}) {
   const subjectsBarStyle = {
     width: '33.33%',
     background: colors.background.highlight,
-    opacity: '0.9',
     fontFamily: fonts.head,
     color: colors.font.light,
     justifyContent: desktopMatch ? '' : 'center',
@@ -45,6 +44,7 @@ export default function TechnicalSkills({data}) {
   };
 
   const pictureBarStyle = {
+    width: '33.33%',
     justifyContent: desktopMatch ? 'flex-start' : 'center',
     alignItems: desktopMatch ? '' : 'center',
   };
