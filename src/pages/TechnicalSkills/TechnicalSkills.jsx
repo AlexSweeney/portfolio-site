@@ -46,7 +46,7 @@ export default function TechnicalSkills({data}) {
   const pictureBarStyle = {
     width: '33.33%',
     justifyContent: desktopMatch ? 'flex-start' : 'center',
-    alignItems: desktopMatch ? '' : 'center',
+    alignItems: desktopMatch ? 'flex-end' : 'center',
   };
 
   // ========================================= Event Handlers =============================== // 
