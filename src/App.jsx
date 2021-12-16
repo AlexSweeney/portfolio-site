@@ -26,7 +26,8 @@ export default function App() {
     background: 'red',
     position: 'absolute',
     width: '100%',
-    height: '100%',
+    height: '100vh',
+    minWidth: '250px', 
   };
 
   function onTouchBurgerLink(link) {
@@ -44,7 +45,7 @@ export default function App() {
       <BrowserRouter>
         <Header logoChars={logoChars} navLinks={navLinks} setBurgerIsOpen={setShowBurgerMenu}/>
         
-        {/* <BurgerMenu links={navLinks} show={showBurgerMenu} handleTouch={onTouchBurgerLink}/>
+        {/*<BurgerMenu links={navLinks} show={showBurgerMenu} handleTouch={onTouchBurgerLink}/>
 
         {
           !showBurgerMenu && 

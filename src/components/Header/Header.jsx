@@ -21,8 +21,12 @@ export default function Header({
 		display: 'flex',
 		justifyContent: 'space-between',
 		alignItems: 'center', 
-		padding: '32px',
-    boxSizing: 'border-box',
+		
+		padding: '45px 32px',
+		height: '64px',
+		position: 'relative',
+    
+		boxSizing: 'border-box',
 		background: colors.background.dark,
 		width: '100%', 
 	};
@@ -48,8 +52,8 @@ export default function Header({
 	const burgerStyle = {  
 		flexDirection: 'column', 
 		justifyContent: 'space-between',
-		width: '100px',
-		height: '75px',
+		width: '75px',
+    height: '53px',
 	};
 
 	const burgerBarStyle = {

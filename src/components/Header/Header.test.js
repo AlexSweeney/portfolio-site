@@ -148,17 +148,20 @@ describe('<Header/>', () => {
 							position: absolute,
 							width: 100%,
 							min-width: 530px,
+							padding: 45px 32px,
+							height: '64px',
+							position: 'relative',
 						}`, () => {
 							renderDesktop()
 			
 							expect(header.style.display).toEqual('flex')
 							expect(header.style.justifyContent).toEqual('space-between')
-							expect(header.style.alignItems).toEqual('center')
-							expect(header.style.padding).toEqual('32px')
+							expect(header.style.alignItems).toEqual('center') 
 							expect(header.style.boxSizing).toEqual('border-box')
-							expect(header.style.position).toEqual('absolute')
-							expect(header.style.width).toEqual('100%')
-							expect(header.style.minWidth).toEqual('530px')
+							expect(header.style.position).toEqual('absolute')  
+							expect(header.style.padding).toEqual('45px 32px')
+							expect(header.style.height).toEqual('64px') 
+							expect(header.style.position).toEqual('relative') 
 						})
 					})
 					
