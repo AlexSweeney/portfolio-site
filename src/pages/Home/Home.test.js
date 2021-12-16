@@ -49,15 +49,13 @@ describe('<Home/>', () => {
         display: flex,
         flexDirection: column,
         justify-content: center,
-        align-items: center,
-        height: 100vh,
+        align-items: center, 
         flexGrow: 1,
       }`, () => {
         expect(home.style.display).toEqual('flex')
         expect(home.style.flexDirection).toEqual('column')
         expect(home.style.justifyContent).toEqual('center')
-        expect(home.style.alignItems).toEqual('center')
-        expect(home.style.height).toEqual('100vh')
+        expect(home.style.alignItems).toEqual('center') 
         expect(home.style.flexGrow).toEqual('1')
       })
     })
@@ -82,6 +80,10 @@ describe('<Home/>', () => {
       it('should have fontFamily: styles.fonts.head', () => { 
         expect(heading.style.fontFamily).toEqual(fonts.head)
       })
+
+      it('should have textAlign: center', () => { 
+        expect(heading.style.textAlign).toEqual('center')
+      })
     })
 
     describe('.sub-heading', () => {
@@ -91,8 +93,12 @@ describe('<Home/>', () => {
         expect(subheading.style.color).toEqual(res)
       })
 
-      it('should have fontFamily: styles.fonts.body', () => { 
-        expect(subheading.style.fontFamily).toEqual(fonts.body)
+      it('should have fontFamily: styles.fonts.head', () => { 
+        expect(subheading.style.fontFamily).toEqual(fonts.head)
+      })
+
+      it('should have textAlign: center', () => { 
+        expect(subheading.style.textAlign).toEqual('center')
       })
     })
   })

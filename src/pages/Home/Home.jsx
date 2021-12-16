@@ -15,11 +15,13 @@ export default function Home() {
   const headingStyle = {
     color: colors.font.dark,
     fontFamily: fonts.head,
+    textAlign: 'center',
   };
 
   const subheadingStyle = {
     color: colors.font.highlight,
     fontFamily: fonts.head,
+    textAlign: 'center',
   };
 
   return (
