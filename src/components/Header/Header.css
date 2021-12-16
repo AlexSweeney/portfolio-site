@@ -15,7 +15,7 @@
   color: #56cee0 !important;
 }
 
-/* Mobile */
+/* Mobile */ 
 .text-logo {
   font-size: 3.4375rem;
 }
@@ -29,7 +29,7 @@
 }
 
 /* Tablet */
-@media only screen and (min-width: 426px) {
+@media only screen and (min-width: 550px) {
   .text-logo {
     font-size: 3.75rem;
   }

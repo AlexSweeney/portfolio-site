@@ -20,12 +20,10 @@ export default function Header({
 	const headerStyle = {
 		display: 'flex',
 		justifyContent: 'space-between',
-		alignItems: 'center', 
-		
+		alignItems: 'center',  
 		padding: '45px 32px',
 		height: '64px',
-		position: 'relative',
-    
+		position: 'relative', 
 		boxSizing: 'border-box',
 		background: colors.background.dark,
 		width: '100%', 
