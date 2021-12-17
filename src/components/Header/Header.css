@@ -29,14 +29,14 @@
 }
 
 /* Tablet */
-@media only screen and (min-width: 550px) {
+@media only screen and (min-width: 426px) {
   .text-logo {
     font-size: 3.75rem;
   }
 
   .nav-link {
-    font-size: 1rem;
-    margin-left: 33px;
+    font-size: 13px;
+    margin-left: 21px;
   } 
 
   .header-nav {
@@ -46,6 +46,13 @@
   .burger {
     display: none;
   }
+}
+
+@media only screen and (min-width: 525px) { 
+  .nav-link {
+    font-size: 1rem;
+    margin-left: 33px;
+  }  
 }
 
 /* Desktop */
