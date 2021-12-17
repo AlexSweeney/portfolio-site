@@ -17,17 +17,13 @@ export default function App() {
   
   const [showBurgerMenu, setShowBurgerMenu] = useState(false);
 
-  const appStyle = { 
-    // display: 'flex',
-    // flexDirection: 'column',
-    // width: '100%', 
-    // height: '100%', 
-    // minWidth: '530px',
-    background: 'red',
+  const appStyle = {  
     position: 'absolute',
     width: '100%',
     height: '100vh',
     minWidth: '250px', 
+    display: 'flex',
+    flexDirection: 'column',
   };
 
   function onTouchBurgerLink(link) {
@@ -45,7 +41,7 @@ export default function App() {
       <BrowserRouter>
         <Header logoChars={logoChars} navLinks={navLinks} setBurgerIsOpen={setShowBurgerMenu}/>
         
-        {/*<BurgerMenu links={navLinks} show={showBurgerMenu} handleTouch={onTouchBurgerLink}/>
+        <BurgerMenu links={navLinks} show={showBurgerMenu} handleTouch={onTouchBurgerLink}/>
 
         {
           !showBurgerMenu && 
@@ -57,7 +53,7 @@ export default function App() {
             <Route exact path="/Contact" element={<Contact/>}/>
           </Routes> 
         }
-         */}
+        
       </BrowserRouter>
     </section>
   )

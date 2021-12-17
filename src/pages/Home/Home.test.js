@@ -50,7 +50,7 @@ describe('<Home/>', () => {
         flexDirection: column,
         justify-content: center,
         align-items: center, 
-        flexGrow: 1,
+        flexGrow: 1
       }`, () => {
         expect(home.style.display).toEqual('flex')
         expect(home.style.flexDirection).toEqual('column')
