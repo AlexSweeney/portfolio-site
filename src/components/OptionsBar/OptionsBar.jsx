@@ -4,13 +4,15 @@ import './OptionsBar.css';
 
 export default function OptionsBar({ 
   options, 
+  open = true,
   selectedOption,
   handleClick,
   className, 
   style 
 }) {  
+  console.log('open', open)
   // ====================================================== Consts ======================================================== //
-  const desktopMatch = window.matchMedia('(min-width: 426px)').matches;
+  // const desktopMatch = window.matchMedia('(min-width: 426px)').matches;
   const [showAll, setShowAll] = useState(false); 
 
   // ====================================================== Styles ======================================================== //
@@ -47,7 +49,7 @@ export default function OptionsBar({
     <section className={`${className}-bar`} style={optionsBarStyle}>
       {
         options.map((option, i) => { 
-          if((option === selectedOption) || showAll || desktopMatch) {
+          if((option === selectedOption) || showAll || open) {
             return <h3
             key={`option-${i}`} 
             className={`${className} option ${getSelectedClass(option)}`}

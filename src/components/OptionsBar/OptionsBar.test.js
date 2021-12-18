@@ -22,10 +22,10 @@ let options;
 let selectedOption;
 let setSelectedOption;
 
-let handleClick;
+let handleClick; 
 
 // ==================================== Utils Fns ==================================== //
-function OptionsBarWithWrapper() {
+function OptionsBarWithWrapper({open}) {
   [selectedOption, setSelectedOption] = useState(thisOptions[0]);
 
   return (
@@ -35,15 +35,16 @@ function OptionsBarWithWrapper() {
       handleClick={handleClick} 
       className={thisClassName}
       style={thisStyle}
+      open={open}
     />
   )
 } 
 
-function renderDesktop() { 
+function renderDesktop(open) { 
 	isDesktop = true;  
   handleClick = jest.fn()
 
-  render(<OptionsBarWithWrapper/>) 
+  render(<OptionsBarWithWrapper open={open}/>) 
 	getParts()
 }
 
@@ -97,15 +98,28 @@ describe('<OptionsBar/>', () => {
       
       describe('content', () => {
         describe('.options', () => {
-          it('should show text for each option in props.option, with className = `${props.className}`', () => {
-            renderDesktop()
+          describe('open === true', () => {
+            it('should show text for each option in props.option, with className = `${props.className}`', () => {
+              renderDesktop(true)
+  
+              const thisOptionElements = document.querySelectorAll(`.${thisClassName}`);
+  
+              expect(thisOptionElements.length).toEqual(thisOptions.length)
+  
+              thisOptionElements.forEach((option, i) => {
+                expect(option.textContent).toEqual(thisOptions[i])
+              })
+            })
+          })
 
-            const thisOptionElements = document.querySelectorAll(`.${thisClassName}`);
+          describe.only('open === false', () => {
+            it.only('should only show selected option', () => {
+              renderDesktop(false)
+  
+              const thisOptionElements = document.querySelectorAll(`.${thisClassName}`);
+  
+              expect(thisOptionElements.length).toEqual(1)
 
-            expect(thisOptionElements.length).toEqual(thisOptions.length)
-
-            thisOptionElements.forEach((option, i) => {
-              expect(option.textContent).toEqual(thisOptions[i])
             })
           })
         }) 
