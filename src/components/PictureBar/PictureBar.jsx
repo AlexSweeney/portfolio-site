@@ -20,6 +20,15 @@ export default function PictureBar({
     ...style,
   };
 
+  const pictureContainerStyle = {
+    position: 'relative',
+    margin: '16px',
+    marginTop: '0px', 
+    width: '100%',
+    maxWidth: '200px',
+    height: '200px',
+  };
+
   // ==================================== Event Handlers ============================== //
   function onSelectPicture(picture) { 
     setShowAll(oldVal => !oldVal)
@@ -38,6 +47,7 @@ export default function PictureBar({
           if(desktopMatch || picture === selectedPicture || showAll === true)  {
             return <div 
               className={`picture-container ${getSelectedClass(picture)}`} 
+              style={pictureContainerStyle}
               key={`picture-container-${i}`}
               onTouchStart={() => onSelectPicture(picture)}
             >{picture}</div>

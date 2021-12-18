@@ -170,13 +170,7 @@ describe('<TechnicalSkills data={data}/>', () => {
 
             const res = hexToRGB(colors.background.highlight)
             expect(subjectBar.style.background).toEqual(res)
-          })
-
-          it('should have style.opacity = 0.9', () => {
-            renderDesktop()
- 
-            expect(subjectBar.style.opacity).toEqual('0.9')
-          })
+          }) 
         })
         
         describe('font', () => {
@@ -331,7 +325,7 @@ describe('<TechnicalSkills data={data}/>', () => {
       describe('layout', () => {
         it(`should have style = {
           display: flex;
-          flexDirection: column; 
+          flexDirection: column;  
         }`, () => {
           renderDesktop()
 
@@ -414,12 +408,14 @@ describe('<TechnicalSkills data={data}/>', () => {
           display: flex;
           justify-content: center;
           align-items: center;
+          width: 100%;
         }`, () => {
           renderPhone()
 
           expect(subjectBar.style.display).toEqual('flex')
           expect(subjectBar.style.justifyContent).toEqual('center')
           expect(subjectBar.style.alignItems).toEqual('center')
+          expect(subjectBar.style.width).toEqual('100%')
         })
       })
 
@@ -430,13 +426,7 @@ describe('<TechnicalSkills data={data}/>', () => {
             const res = hexToRGB(colors.background.highlight);
 
             expect(subjectBar.style.background).toEqual(res)
-          })  
-
-          it('should have opacity: 0.9', () => {
-            renderPhone()
-            
-            expect(subjectBar.style.opacity).toEqual('0.9')
-          })
+          })   
         })
 
         describe('text', () => {
@@ -612,14 +602,16 @@ describe('<TechnicalSkills data={data}/>', () => {
       describe('layout', () => {
         it(`should have style = {
           display: flex;
-          justify-content: center;
+          justify-content: flex-start;
           align-items: center;
+          width: 100%;
         }`, () => {
           renderPhone()
 
           expect(pictureBar.style.display).toEqual('flex')
-          expect(pictureBar.style.justifyContent).toEqual('center')
+          expect(pictureBar.style.justifyContent).toEqual('flex-start')
           expect(pictureBar.style.alignItems).toEqual('center')
+          expect(pictureBar.style.width).toEqual('100%')
         })
       }) 
 

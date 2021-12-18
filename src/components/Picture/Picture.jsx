@@ -7,8 +7,19 @@ export default function Picture({image, title, appAddress, sourceAddress}) {
     margin: '16px',
     marginTop: '0px',
 
+    // height: '200px',
+    // width: '200px',
+
+    // position: relative;
+    // margin: 0px 16px 16px;
+    // width: '100%',
+    // height: '100%',
+    // maxWidth: '200px',
+    // maxHeight: '200px',
+
+    width: '100%',
+    maxWidth: '200px',
     height: '200px',
-    width: '200px',
   };
 
   const pictureTextContainerStyle = {
@@ -58,7 +69,7 @@ export default function Picture({image, title, appAddress, sourceAddress}) {
   };
 
   return (
-    <div className="picture-container" style={pictureContainerStyle}>
+    <>
       <div className="picture" style={pictureStyle}>
       </div>
       
@@ -70,6 +81,9 @@ export default function Picture({image, title, appAddress, sourceAddress}) {
           <a className="link" href={sourceAddress} style={linkStyle}>Source</a>
         </div>
       </div> 
-    </div>
+    </>
   )
 }
+
+ // <div className="picture-container" style={pictureContainerStyle}>
+ // </div>

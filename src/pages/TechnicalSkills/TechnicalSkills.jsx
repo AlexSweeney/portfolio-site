@@ -4,7 +4,7 @@ import PictureBar from '../../components/PictureBar/PictureBar.jsx';
 import { colors, fonts } from '../../styles/styles.js'; 
 
 export default function TechnicalSkills({data}) {
-  const desktopMatch = window.matchMedia('(min-width: 426px)').matches;
+  const [desktopMatch, setDesktopMatch] = useState(getIsDesktop())
 
   // ========================================= data ========================================= // 
   const [subjects, setSubjects] = useState(Object.keys(data));
@@ -28,7 +28,7 @@ export default function TechnicalSkills({data}) {
   };
 
   const subjectsBarStyle = {
-    width: '33.33%',
+    width: desktopMatch ? '33.33%' : '100%',
     background: colors.background.highlight,
     fontFamily: fonts.head,
     color: colors.font.light,
@@ -37,6 +37,8 @@ export default function TechnicalSkills({data}) {
   };
 
   const topicsBarStyle = {
+    width: desktopMatch ? '33.33%' : '100%',
+
     fontFamily: fonts.head,
     color: colors.font.light, 
     justifyContent: desktopMatch ? '' : 'center',
@@ -44,8 +46,8 @@ export default function TechnicalSkills({data}) {
   };
 
   const pictureBarStyle = {
-    width: '33.33%',
-    justifyContent: desktopMatch ? 'flex-start' : 'center',
+    width: desktopMatch ? '33.33%' : '100%',
+    justifyContent: 'flex-start',
     alignItems: desktopMatch ? 'flex-end' : 'center',
   };
 
@@ -60,6 +62,10 @@ export default function TechnicalSkills({data}) {
 
   function onClickPicture(picture) {
     setSelectedPicture(picture)
+  }
+
+  function onSizeChange() {
+    setDesktopMatch(getIsDesktop())
   }
 
   // ========================================= fns ========================================== // 
@@ -90,6 +96,14 @@ export default function TechnicalSkills({data}) {
     return data[selectedSubject][selectedTopic];
   }
 
+  function triggerOnSizeChange(fn) {
+    window.addEventListener('resize', fn);
+  }
+
+  function getIsDesktop() {
+    return window.matchMedia('(min-width: 540px)').matches;
+  }
+
   // ========================================= listen / trigger ============================== // 
   useEffect(() => {
     updateSubject(selectedSubject)
@@ -98,6 +112,10 @@ export default function TechnicalSkills({data}) {
   useEffect(() => {
     updateTopic(selectedTopic)
   }, [selectedTopic])
+
+  useEffect(() => {
+    triggerOnSizeChange(onSizeChange)
+  }, [])
 
   // ========================================= output ======================================= // 
   return (
