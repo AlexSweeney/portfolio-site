@@ -9,10 +9,12 @@ export default function TechnicalSkills({data}) {
   // ========================================= data ========================================= // 
   const [subjects, setSubjects] = useState(Object.keys(data));
   const [selectedSubject, setSelectedSubject] = useState(subjects[0]);
+  const [subjectsOpen, setSubjectsOpen] = useState(desktopMatch);
 
   const thisTopics = getTopics(selectedSubject);
   const [topics, setTopics] = useState(thisTopics);
   const [selectedTopic, setSelectedTopic] = useState(thisTopics[0]); 
+  const [topicsOpen, setTopicsOpen] = useState(desktopMatch);
 
   const thisPictures = getPictures(selectedSubject, thisTopics[0]);
   const [pictures, setPictures] = useState(thisPictures);
@@ -65,7 +67,11 @@ export default function TechnicalSkills({data}) {
   }
 
   function onSizeChange() {
-    setDesktopMatch(getIsDesktop())
+    const isDesktop = getIsDesktop();
+
+    setDesktopMatch(isDesktop)
+    setSubjectsOpen(isDesktop)
+    setTopicsOpen(isDesktop)
   }
 
   // ========================================= fns ========================================== // 
@@ -122,12 +128,14 @@ export default function TechnicalSkills({data}) {
     <section className="technical-skills" style={technicalSkillsStyle}>
       <OptionsBar 
         className="subject" 
+        open={subjectsOpen}
         options={subjects} 
         selectedOption={selectedSubject}
         handleClick={onClickSubject}  
         style={subjectsBarStyle}/>
       <OptionsBar 
         className="topic"
+        open={topicsOpen}
         options={topics}
         selectedOption={selectedTopic}
         handleClick={onClickTopic}

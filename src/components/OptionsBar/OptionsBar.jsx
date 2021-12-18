@@ -9,10 +9,8 @@ export default function OptionsBar({
   handleClick,
   className, 
   style 
-}) {  
-  console.log('open', open)
+}) {   
   // ====================================================== Consts ======================================================== //
-  // const desktopMatch = window.matchMedia('(min-width: 426px)').matches;
   const [showAll, setShowAll] = useState(false); 
 
   // ====================================================== Styles ======================================================== //
