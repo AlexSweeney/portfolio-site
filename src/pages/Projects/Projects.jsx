@@ -5,6 +5,7 @@ import ReactPianoImg from './../../data/imgs/react-piano.jpg';
 import MetronomeImg from './../../data/imgs/metronome.jpg';
 import FlexQuestImg from './../../data/imgs/flex-quest.jpg';
 import { useEffect, useState } from "react/cjs/react.development";
+import './Projects.css';
 
 export default function Projects() {
   const desktopSize = '426px';
@@ -38,12 +39,14 @@ export default function Projects() {
     display: 'flex',
     justifyContent: isDesktop ? '' : 'center',
     marginBottom: '30px',
+    cursor: 'default',
   };
 
   const projectBodyStyle = {
     fontSize: isDesktop ? '29px' : '21px',
     color: colors.font.light,
     fontFamily: fonts.body,
+    cursor: 'default',
   };
 
   const imageContainerStyle = (image, imageLeft, imageTop) => {
@@ -76,11 +79,11 @@ export default function Projects() {
     };
   };
 
-  function ProjectDisplay({title, image, text, textLeft, textTop, imageLeft, imageTop}) {
+  function ProjectDisplay({title, link, image, text, textLeft, textTop, imageLeft, imageTop}) {
     return (
       <div className="project" style={projectStyle}>
-        <div className="image-container" style={imageContainerStyle(image, imageLeft, imageTop)}> 
-        </div>
+        <a href={link} className="image-container" style={imageContainerStyle(image, imageLeft, imageTop)}> 
+        </a>
         <div className="text-container" style={textContainerStyle(textLeft, textTop)}>
           <h3 style={projectHeaderStyle}>{title}</h3>
           <p style={projectBodyStyle}>{text}</p>
@@ -102,6 +105,7 @@ export default function Projects() {
       <ProjectDisplay
         title="React Piano"
         image={ReactPianoImg}
+        link="https://alexsweeney.github.io/react-piano/"
         text="App for learning piano keys and ear training."
         textLeft="42%"
         textTop="22%"
@@ -111,6 +115,7 @@ export default function Projects() {
       <ProjectDisplay
         title="Metronome"
         image={MetronomeImg}
+        link="https://alexsweeney.github.io/metronome/"
         text="Metronome with built in timer."
         textLeft="18%"
         textTop="11%"
@@ -121,6 +126,7 @@ export default function Projects() {
       <ProjectDisplay
         title="Flex Quest"
         image={FlexQuestImg}
+        link="https://alexsweeney.github.io/flex-quest/"
         text="Site for learning flex-box for css"
         textLeft="36%"
         imageTop="9%"
