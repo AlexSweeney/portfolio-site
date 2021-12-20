@@ -52,7 +52,7 @@ afterEach(() => {
 })
 
 // ==================================== Tests ======================================= //
-describe('<Projects projs={[]}/>', () => {
+describe('<Projects/>', () => {
   describe('desktop', () => {
     describe('render', () => {
       it('should render', () => {
@@ -76,10 +76,10 @@ describe('<Projects projs={[]}/>', () => {
 
     describe('style', () => {
       describe('background', () => {
-        it('should have background = colors.background.dark', () => {
+        it('should have background = colors.background.darker', () => {
           renderDesktop()
 
-          const res = hexToRGB(colors.background.dark);
+          const res = hexToRGB(colors.background.darker);
           expect(projectView.style.background).toEqual(res)
         })
       })
@@ -88,11 +88,13 @@ describe('<Projects projs={[]}/>', () => {
         it(`should have style = {
           display: flex;
           flex-direction: column;
+          flex-grow: 1;
         }`, () => {
           renderDesktop()
 
           expect(projectView.style.display).toEqual('flex')
           expect(projectView.style.flexDirection).toEqual('column')
+          expect(projectView.style.flexGrow).toEqual('1')
         })
       })
     })
@@ -121,10 +123,10 @@ describe('<Projects projs={[]}/>', () => {
 
     describe('style', () => {
       describe('background', () => {
-        it('should have background = colors.background.dark', () => {
+        it('should have background = colors.background.darker', () => {
           renderPhone()
 
-          const res = hexToRGB(colors.background.dark);
+          const res = hexToRGB(colors.background.darker);
           expect(projectView.style.background).toEqual(res)
         })
       })
