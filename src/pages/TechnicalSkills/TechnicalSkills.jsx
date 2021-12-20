@@ -23,7 +23,7 @@ export default function TechnicalSkills({data}) {
   // ========================================= styles ======================================= // 
   const technicalSkillsStyle = {
     display: 'flex',
-    justifyContent:  desktopMatch ? 'space-between' : 'space-evenly',
+    justifyContent:  desktopMatch ? 'space-between' : 'flex-start',
     flexDirection: desktopMatch ? '' : 'column',
     background: colors.background.darker,
     flexGrow: '1',
