@@ -19,6 +19,7 @@ export default function Contact() {
     fontFamily: fonts.head,
     textAlign: 'center',
     cursor: 'default',
+    marginTop: '1em',
   };
 
   const subheadingStyle = {
@@ -29,6 +30,7 @@ export default function Contact() {
 
   const linksStyle = {
     margin: '3em',
+    textAlign: 'center',
   };
  
   const iconStyle = {
@@ -36,6 +38,7 @@ export default function Contact() {
     width: '96px',
     height: '96px', 
     opacity: '0.6',
+    marginBottom: '2em',
   };
 
   return (
