@@ -30,15 +30,19 @@ export default function TechnicalSkills({data}) {
   };
 
   const subjectsBarStyle = {
+    textAlign: desktopMatch ? '' : 'center',
+
     width: desktopMatch ? '33.33%' : '100%',
     background: colors.background.highlight,
     fontFamily: fonts.head,
     color: colors.font.light,
     justifyContent: desktopMatch ? '' : 'center',
+    
     alignItems: desktopMatch ? '' : 'center',
   };
 
   const topicsBarStyle = {
+    textAlign: desktopMatch ? '' : 'center',
     width: desktopMatch ? '33.33%' : '100%',
 
     fontFamily: fonts.head,

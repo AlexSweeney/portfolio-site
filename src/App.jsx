@@ -20,7 +20,7 @@ export default function App() {
   const appStyle = {  
     position: 'absolute',
     width: '100%',
-    height: '100vh',
+    minHeight: '100%',
     minWidth: '250px', 
     display: 'flex',
     flexDirection: 'column',
