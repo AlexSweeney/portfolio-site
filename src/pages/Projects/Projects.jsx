@@ -5,11 +5,22 @@ import MetronomeImg from './../../data/imgs/metronome.jpg';
 import FlexQuestImg from './../../data/imgs/flex-quest.jpg';
 
 export default function Projects() {
+  const projectsStyle = {
+    background: colors.background.darker,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    flexGrow: '1',
+    padding: '2em',
+  };
+
   const projectStyle = {
     display: 'flex',
     position: 'relative',
     marginBottom: '5em',
     height: '395px',
+    width: '100%',
+    maxWidth: '1400px',
   };
 
   const projectHeaderStyle = {
@@ -28,18 +39,13 @@ export default function Projects() {
     fontFamily: fonts.body,
   };
 
-  const projectsStyle = {
-    background: colors.background.darker,
-    display: 'flex',
-    flexDirection: 'column',
-    flexGrow: '1',
-    padding: '2em',
-  };
+  
 
   const imageContainerStyle = (image, imageLeft, imageTop) => {
     return {
       height: '390px',
       width: '645px',
+      maxWidth: '50%',
       backgroundImage: `url(${image})`,
       backgroundSize: '106%',
       opacity: '0.15',
@@ -102,7 +108,7 @@ export default function Projects() {
         image={FlexQuestImg}
         link="https://alexsweeney.github.io/flex-quest/"
         text="Site for learning flex-box for css"
-        textLeft="50%"
+        textLeft="36%"
         imageTop="9%"
       />
     </section>
