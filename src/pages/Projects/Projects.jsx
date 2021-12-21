@@ -64,8 +64,7 @@ export default function Projects() {
       backgroundColor: 'white',
       position: 'absolute',
       left: isDesktop ? imageLeft : '0',
-      top: isDesktop ? imageTop : '0', 
-      
+      top: isDesktop ? imageTop : '0',  
     };
   };
 
