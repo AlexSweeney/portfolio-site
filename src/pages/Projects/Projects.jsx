@@ -23,7 +23,7 @@ export default function Projects() {
   const projectStyle = {
     display: 'flex',
     position: 'relative',
-    marginBottom: '5em',
+    marginBottom: '9em',
     height: isDesktop ? '395px' : '230px',
     width: '100%',
     maxWidth: isDesktop ? '1400px' : '100%', 
@@ -49,13 +49,15 @@ export default function Projects() {
     cursor: 'default',
   };
 
-  const imageContainerStyle = (image, imageLeft, imageTop) => {
+  const imageContainerStyle = (image, imageLeft, imageTop, backgroundPosition = 'left') => {
     return { 
       height: isDesktop ? '390px' : '100%',
       width: '645px',
       maxWidth: isDesktop ? '50%' : '100%',
       backgroundImage: `url(${image})`,
-      backgroundSize: '106%',
+      backgroundSize: '50%',
+      backgroundAttachment: 'fixed',
+      backgroundPosition: backgroundPosition,
       opacity: '0.15',
       backgroundRepeat: 'no-repeat',
       borderRadius: '1%',
@@ -63,6 +65,7 @@ export default function Projects() {
       position: 'absolute',
       left: isDesktop ? imageLeft : '0',
       top: isDesktop ? imageTop : '0', 
+      
     };
   };
 
@@ -79,10 +82,10 @@ export default function Projects() {
     };
   };
 
-  function ProjectDisplay({title, link, image, text, textLeft, textTop, imageLeft, imageTop}) {
+  function ProjectDisplay({title, link, image, text, textLeft, textTop, imageLeft, imageTop, backgroundPosition}) {
     return (
       <div className="project" style={projectStyle}>
-        <a href={link} className="image-container" style={imageContainerStyle(image, imageLeft, imageTop)}> 
+        <a href={link} className="image-container" style={imageContainerStyle(image, imageLeft, imageTop, backgroundPosition)}> 
         </a>
         <div className="text-container" style={textContainerStyle(textLeft, textTop)}>
           <h3 style={projectHeaderStyle}>{title}</h3>
@@ -109,7 +112,8 @@ export default function Projects() {
         text="App for learning piano keys and ear training."
         textLeft="42%"
         textTop="22%"
-        imageLeft="0"
+        imageLeft="4%"
+        imageTop="8%"
       />
 
       <ProjectDisplay
@@ -120,7 +124,8 @@ export default function Projects() {
         textLeft="18%"
         textTop="11%"
         imageLeft="38%"
-        imageTop="4%"
+        imageTop="13%"
+        backgroundPosition="center"
       />
 
       <ProjectDisplay
@@ -128,8 +133,10 @@ export default function Projects() {
         image={FlexQuestImg}
         link="https://alexsweeney.github.io/flex-quest/"
         text="Site for learning flex-box for css"
-        textLeft="36%"
+        textLeft="50%"
+        textTop="50%"
         imageTop="9%"
+        backgroundPosition="left bottom"
       />
     </section>
   )
