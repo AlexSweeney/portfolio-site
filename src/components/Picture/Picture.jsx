@@ -1,12 +1,12 @@
 import React from "react";
 import { colors, fonts } from './../../styles/styles.js';
+import './Picture.css';
 
 export default function Picture({image, title, appAddress, sourceAddress}) {
   const pictureContainerStyle = {
     position: 'relative',
     margin: '16px',
-    marginTop: '0px',
-
+    marginTop: '0px', 
     width: '100%',
     maxWidth: '200px',
     height: '200px',
@@ -50,12 +50,14 @@ export default function Picture({image, title, appAddress, sourceAddress}) {
   const linksStyle = {
     display: 'flex',
     justifyContent: 'space-around',
-    fontFamily: fonts.body,
-    color: colors.font.light,
+    fontFamily: fonts.head,
+    color: colors.font.light, 
+    fontSize: '20px',
   };
 
   const linkStyle = {
-    cursor: 'pointer',
+    cursor: 'pointer', 
+    textDecoration: 'none',
   };
 
   return (

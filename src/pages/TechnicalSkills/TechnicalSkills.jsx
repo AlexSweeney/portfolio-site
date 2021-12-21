@@ -3,11 +3,6 @@ import OptionsBar from './../../components/OptionsBar/OptionsBar.jsx';
 import PictureBar from '../../components/PictureBar/PictureBar.jsx';
 import { colors, fonts } from '../../styles/styles.js'; 
 
-/*
-  add links
-  scroll
-*/
-
 export default function TechnicalSkills({data}) {
   const [desktopMatch, setDesktopMatch] = useState(getIsDesktop())
 
