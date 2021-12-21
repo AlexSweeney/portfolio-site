@@ -56,7 +56,7 @@ export default function Projects() {
       maxWidth: isDesktop ? '50%' : '100%',
       backgroundImage: `url(${image})`,
       backgroundSize: '50%',
-      backgroundAttachment: 'fixed',
+      backgroundAttachment: isDesktop ? 'fixed' : 'initial',
       backgroundPosition: backgroundPosition,
       opacity: '0.15',
       backgroundRepeat: 'no-repeat',
