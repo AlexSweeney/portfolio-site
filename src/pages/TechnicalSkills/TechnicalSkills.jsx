@@ -27,6 +27,7 @@ export default function TechnicalSkills({data}) {
     flexDirection: desktopMatch ? '' : 'column',
     background: colors.background.darker,
     flexGrow: '1',
+    paddingRight: '1em',
   };
 
   const subjectsBarStyle = {
