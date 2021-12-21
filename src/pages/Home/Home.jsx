@@ -16,12 +16,14 @@ export default function Home() {
     color: colors.font.dark,
     fontFamily: fonts.head,
     textAlign: 'center',
+    cursor: 'default',
   };
 
   const subheadingStyle = {
     color: colors.font.highlight,
     fontFamily: fonts.head,
     textAlign: 'center',
+    cursor: 'default',
   };
 
   return (
