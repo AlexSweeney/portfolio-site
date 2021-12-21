@@ -7,3 +7,26 @@ export function hexToRGB(hex) {
 
   return `rgb(${a}, ${b}, ${c})`;
 }
+
+export function setLocation(location) {
+	const oldWindowLocation = window.location;
+	delete window.location;
+
+	window.location = Object.defineProperties(
+		// start with an empty object on which to define properties
+		{},
+		{
+			// grab all of the property descriptors for the
+			// `jsdom` `Location` object
+			...Object.getOwnPropertyDescriptors(oldWindowLocation),
+			href: {
+				configurable: true,
+				value: location,
+			},
+			pathname: {
+				configurable: true,
+				value: location.slice(location.lastIndexOf('/'))
+			}
+		},
+	) 
+}

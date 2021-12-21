@@ -18,5 +18,6 @@ export const colors = {
     dark: '#DBD9D9',
     darker: '#4D4D4D',
     highlight: '#FF5050',
+    selected: '#0edfff',
   }
 };

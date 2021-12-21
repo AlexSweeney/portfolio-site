@@ -11,10 +11,25 @@ export default function Header({
 	// ====================================================== Consts ======================================================== //
 	const [burgerIsSelected, setBurgerIsSelected] = useState(false);
 	const [burgerClass, setBurgerClass] = useState('');
-
-	// gets value on first render => for testing in console must refresh page
+ 
 	const desktopMatch = window.matchMedia('(min-width: 426px)').matches; 
 	const phoneMatch = !desktopMatch;
+ 
+	const pathName = window.location.pathname.slice(1).replace('%20', ' '); 
+
+	let initialSelectedLink;
+
+	if(pathName === '') {
+		initialSelectedLink = navLinks[0];
+	}
+
+	navLinks.forEach(navLink => { 
+		if(pathName === navLink) {
+			initialSelectedLink = navLink;
+		}
+	})
+
+	const [selectedLink, setSelectedLink] = useState(initialSelectedLink); 
 
 	// ====================================================== Styles ======================================================== //
 	const headerStyle = {
@@ -47,6 +62,11 @@ export default function Header({
 		whiteSpace: 'nowrap', 
 	};
 
+	const selectedNavLinkStyle = {
+		...navLinkStyle,
+		color: colors.font.selected,
+	};
+
 	const burgerStyle = {  
 		flexDirection: 'column', 
 		justifyContent: 'space-between',
@@ -74,7 +94,16 @@ export default function Header({
 
 	function onTouchLogo() {
 		const target = document.querySelector('.text-logo'); 
+		
     target.click()
+	}
+
+	function onClickLogo() {
+		setSelectedLink(navLinks[0])
+	}
+
+	function onClickLink(link) { 
+		setSelectedLink(link)
 	}
 
 	// ====================================================== Listen / Trigger ============================================= //
@@ -85,14 +114,24 @@ export default function Header({
 	// ====================================================== Output  ====================================================== //
 	return (
 		<header className="header" style={headerStyle}>
-			<Link to="/" className="text-logo" style={logoStyle} onTouchStart={onTouchLogo}>
-				{logoChars}
-			</Link>
+			<Link 
+				to="/" 
+				className="text-logo" 
+				style={logoStyle} 
+				onClick={onClickLogo}
+				onTouchStart={onTouchLogo}>{logoChars}</Link>
 
 			<nav className="header-nav" style={navStyle}>
 				{
 					navLinks.map((navLink, i) => {
-						return <Link to={navLink} className="nav-link" key={`nav-link-${i}`} style={navLinkStyle}>{navLink}</Link>
+						const thisStyle = (navLink === selectedLink) ? selectedNavLinkStyle : navLinkStyle; 
+
+						return <Link 
+							to={navLink} 
+							className="nav-link" 
+							key={`nav-link-${i}`} 
+							style={thisStyle}
+							onClick={() => onClickLink(navLink)}>{navLink}</Link>
 					})
 				}
 			</nav>

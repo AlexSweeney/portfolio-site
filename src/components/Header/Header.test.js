@@ -4,7 +4,7 @@ import { render, cleanup } from '@testing-library/react';
 import { fireEvent } from '@testing-library/dom'; 
 import { colors, fonts } from './../../styles/styles.js';
 import Header from './Header.jsx'; 
-import { hexToRGB } from '../../utils/testUtils.js';
+import { hexToRGB, setLocation } from '../../utils/testUtils.js';
 
 // ==================================== Consts & vars ==================================== //
 const logoChars = 'ASWD';
@@ -225,6 +225,54 @@ describe('<Header/>', () => {
 
 					describe('.nav-link', () => {
 						describe('color', () => {
+							describe('path = /', () => {
+								it('only Home have color: style.colors.font.selected', () => {
+									renderDesktop()
+									
+									const res = hexToRGB(colors.font.selected)
+
+									navLinks.forEach(navLink => {
+										if(navLink.textContent === 'link-1') {
+											expect(navLink.style.color).toEqual(res)
+										} else {
+											expect(navLink.style.color).not.toEqual(res)
+										} 
+									})
+								}) 
+							})
+
+							describe('path = /link-1', () => {
+								it('only link-1 should have color: style.colors.font.selected', () => {
+									setLocation('http://localhost/link-1')
+									renderDesktop() 
+									const res = hexToRGB(colors.font.selected) 
+
+									navLinks.forEach(navLink => {
+										if(navLink.textContent === 'link-1') {
+											expect(navLink.style.color).toEqual(res)
+										} else {
+											expect(navLink.style.color).not.toEqual(res)
+										} 
+									}) 
+								}) 
+							})
+
+							describe('path = /link-2', () => {
+								it('only link-2 should have color: style.colors.font.selected', () => {
+									setLocation('http://localhost/link-2')
+									renderDesktop() 
+									const res = hexToRGB(colors.font.selected) 
+
+									navLinks.forEach(navLink => {
+										if(navLink.textContent === 'link-2') {
+											expect(navLink.style.color).toEqual(res)
+										} else {
+											expect(navLink.style.color).not.toEqual(res)
+										} 
+									}) 
+								}) 
+							})
+							
 							it('should have color: styles.colors.font.light', () => {
 								renderDesktop()
 				
@@ -257,6 +305,60 @@ describe('<Header/>', () => {
 				}) 
 			})
 		}) 
+
+		describe.only('on click', () => {
+			describe('logo', () => {
+				it('only first nav link should have color = colors.font.selected', () => {
+					renderDesktop()
+
+					fireEvent.click(navLinks[navLinks.length - 1])
+					fireEvent.click(textLogo)
+
+					const res = hexToRGB(colors.font.selected) 
+
+					navLinks.forEach(navLink => {
+						if(navLink.textContent === 'link-1') {
+							expect(navLink.style.color).toEqual(res)
+						} else {
+							expect(navLink.style.color).not.toEqual(res)
+						} 
+					})
+				})
+			})
+
+			describe('link-1', () => {
+				renderDesktop()
+
+				fireEvent.click(navLinks[navLinks.length - 1])
+				fireEvent.click(navLinks[0])
+
+				const res = hexToRGB(colors.font.selected) 
+
+				navLinks.forEach(navLink => {
+					if(navLink.textContent === 'link-1') {
+						expect(navLink.style.color).toEqual(res)
+					} else {
+						expect(navLink.style.color).not.toEqual(res)
+					} 
+				})
+			})
+
+			describe('link-2', () => {
+				renderDesktop()
+
+				fireEvent.click(navLinks[1]) 
+
+				const res = hexToRGB(colors.font.selected) 
+
+				navLinks.forEach(navLink => {
+					if(navLink.textContent === 'link-2') {
+						expect(navLink.style.color).toEqual(res)
+					} else {
+						expect(navLink.style.color).not.toEqual(res)
+					} 
+				})
+			})
+		})
 	})
 
 	describe('phone', () => {
