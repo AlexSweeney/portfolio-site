@@ -74,6 +74,3 @@ export default function Picture({image, title, appAddress, sourceAddress}) {
     </>
   )
 }
-
- // <div className="picture-container" style={pictureContainerStyle}>
- // </div>
