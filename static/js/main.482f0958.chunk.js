@@ -1,0 +1,2 @@
+(this["webpackJsonpportfolio-site"]=this["webpackJsonpportfolio-site"]||[]).push([[0],[,,,function(e,o,t){e.exports=t(4)},function(e,o,t){"use strict";t.r(o);var l=t(0),n=t.n(l),r=t(2),s=t.n(r);console.log("loaded index.js");var a=document.querySelector("#root");s.a.render(n.a.createElement("div",null,n.a.createElement("p",null,"Hello world - App loaded")),a)}],[[3,1,2]]]);
+//# sourceMappingURL=main.482f0958.chunk.js.map
