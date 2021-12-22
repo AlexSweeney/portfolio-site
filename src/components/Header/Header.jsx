@@ -19,7 +19,7 @@ export default function Header({
 
 	let initialSelectedLink;
 
-	if(pathName === '') {
+	if(pathName === '' || pathName === 'portfolio-site/') {
 		initialSelectedLink = navLinks[0];
 	}
 
@@ -111,6 +111,8 @@ export default function Header({
 		updateBurgerClass(burgerIsSelected)
 	}, [burgerIsSelected])
 
+	console.log('header link')
+
 	// ====================================================== Output  ====================================================== //
 	return (
 		<header className="header" style={headerStyle}>
@@ -140,7 +142,7 @@ export default function Header({
 				<div className="burger-bar" style={burgerBarStyle}></div>
 				<div className="burger-bar" style={burgerBarStyle}></div>
 				<div className="burger-bar" style={burgerBarStyle}></div>
-			</div> 
+			</div>  
 		</header>
 	)
 }
