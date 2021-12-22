@@ -1,0 +1,2 @@
+(this["webpackJsonpportfolio-site"]=this["webpackJsonpportfolio-site"]||[]).push([[0],[,,,function(e,o,t){e.exports=t(4)},function(e,o,t){"use strict";t.r(o);var n=t(0),r=t.n(n),l=t(2),p=t.n(l),i=document.querySelector("#root");p.a.render(r.a.createElement("div",null,r.a.createElement("p",null,"Hello world - App loaded")),i)}],[[3,1,2]]]);
+//# sourceMappingURL=main.cadebf2e.chunk.js.map
