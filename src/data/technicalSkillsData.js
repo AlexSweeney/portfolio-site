@@ -30,7 +30,7 @@ const kairos = <Picture
 const portfolioSite = <Picture 
   image={PortfolioSiteImage} 
   title="Portfolio Site"
-  appAddress="https://github.com/AlexSweeney/portfolio-site" 
+  appAddress="https://alexsweeney.github.io/portfolio-site/" 
   sourceAddress="https://github.com/AlexSweeney/portfolio-site"/>;
 
 export const data = {
