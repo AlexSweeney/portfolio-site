@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { colors, fonts } from "../../styles/styles";
 import { getIsDesktop, triggerOnSizeChange } from "../../utils/utils";
 import ReactPianoImg from './../../data/imgs/react-piano.jpg';
 import MetronomeImg from './../../data/imgs/metronome.jpg';
-import FlexQuestImg from './../../data/imgs/flex-quest.jpg';
-import { useEffect, useState } from "react/cjs/react.development";
+import FlexQuestImg from './../../data/imgs/flex-quest.jpg'; 
 import './Projects.css';
 
 export default function Projects() {
+  console.log('projects - add style')
   const desktopSize = '426px';
-  const [isDesktop, setIsDesktop] = useState(getIsDesktop(desktopSize));
+  const initialValue = getIsDesktop(desktopSize);
+ 
+  const [isDesktop, setIsDesktop] = useState(initialValue); 
 
   const projectsStyle = {
     background: colors.background.darker,

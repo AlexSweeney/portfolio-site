@@ -109,9 +109,7 @@ export default function Header({
 	// ====================================================== Listen / Trigger ============================================= //
 	useEffect(() => {
 		updateBurgerClass(burgerIsSelected)
-	}, [burgerIsSelected])
-
-	console.log('header link')
+	}, [burgerIsSelected]) 
 
 	// ====================================================== Output  ====================================================== //
 	return (
