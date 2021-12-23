@@ -4,6 +4,7 @@ import PictureBar from '../../components/PictureBar/PictureBar.jsx';
 import { colors, fonts } from '../../styles/styles.js'; 
 
 export default function TechnicalSkills({data}) {
+  console.log('add technical skills')
   const [desktopMatch, setDesktopMatch] = useState(getIsDesktop())
 
   // ========================================= data ========================================= // 
